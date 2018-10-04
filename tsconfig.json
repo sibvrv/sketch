@@ -1,0 +1,36 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "jsx": "react",
+    "jsxFactory": "h",
+    "target": "es5",
+    "alwaysStrict": true,
+    "noImplicitAny": true,
+    "noImplicitReturns": true,
+    "strictNullChecks": true,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "baseUrl": "src",
+    "rootDir": "./src/",
+    "paths": {
+      "@root/*": [
+        "*"
+      ],
+      "@core/*": [
+        "core/*"
+      ],
+      "@editor/*": [
+        "editor/*"
+      ],
+      "@plugins/*": [
+        "plugins/*"
+      ],
+      "@store/*": [
+        "store/*"
+      ],
+      "@ui/*": [
+        "ui/*"
+      ]
+    }
+  }
+}

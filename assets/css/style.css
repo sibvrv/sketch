@@ -1,0 +1,535 @@
+body {
+  padding: 0;
+  margin: 0;
+  font-weight: bold;
+  overflow: hidden;
+}
+
+.hidden {
+  display: none;
+}
+
+.draw_2d {
+  padding: 0;
+  margin: 0;
+  overflow: hidden;
+  position: absolute;
+  top: 0;
+  right: 250px;
+  left: 0;
+  bottom: 0;
+}
+
+#zoom {
+  position: absolute;
+  left: 20px;
+  bottom: 20px;
+}
+
+.export_panel {
+  background: #eee;
+  border: solid 1px #666;
+
+  padding: 16px;
+  margin: 0;
+  overflow: hidden;
+  position: absolute;
+  right: 300px;
+  left: 5%;
+  bottom: 5%;
+  top: 5%;
+}
+
+.export_data {
+  display: block;
+  position: absolute;
+  left: 0;
+  width: 100%;
+  top: 64px;
+  bottom: 0;
+}
+
+input[type="checkbox"] {
+  position: absolute;
+}
+
+input[type="checkbox"] + label {
+  position: relative;
+
+  padding-left: 18px;
+
+  cursor: pointer;
+  display: block;
+}
+
+input {
+  color: #fff;
+  background: rgba(0, 0, 0, .3);
+  border: 1px solid rgba(0, 0, 0, .2);
+  padding: 3px 5px;
+}
+
+input:focus {
+  border-color: #2098f5;
+  outline: 0;
+}
+
+::-webkit-inner-spin-button,
+::-webkit-outer-spin-button {
+
+}
+
+input[type="color"] {
+  padding: 0 !important;
+  width: 32px;
+  height: 32px;
+  background: none !important;
+  border: none !important;
+}
+
+.window {
+  background: #323438;
+  border-radius: 4px;
+  position: absolute;
+
+  color: #fff;
+  font: 12px sans-serif;
+}
+
+#tools {
+  font-size: 0;
+  padding: 2px 0;
+  text-align: center;
+  top: 8px;
+  left: 8px;
+}
+
+#tools button {
+  color: #bbb;
+  font-size: 0;
+  background: linear-gradient(rgba(0, 0, 0, .2), rgba(0, 0, 0, .4));
+  border: 1px solid #181818;
+  margin: 6px 8px;
+  padding: 6px;
+  display: none;
+}
+
+#tools:hover button {
+  display: block;
+}
+
+#tools button:hover {
+  color: #fff;
+  background: linear-gradient(rgba(0, 0, 0, .4), rgba(0, 0, 0, .2));
+}
+
+#tools button:focus {
+  border-color: #2098f5;
+  outline: 0;
+}
+
+#tools button.selected {
+  color: #fff;
+  background: #2098f5;
+  border-color: transparent;
+  display: block;
+}
+
+#tools button.selected:focus {
+  outline: 1px solid;
+  outline-offset: -2px;
+}
+
+#tools svg {
+  width: 18px;
+  height: 18px;
+  pointer-events: none;
+}
+
+#tools svg.fill {
+  fill: currentColor;
+}
+
+#tools svg.stroke {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+}
+
+#tools hr {
+  border: 0;
+  border-top: 1px solid #222;
+  margin: 6px 0;
+}
+
+#tools .color {
+  background: currentColor;
+  border: 0;
+  width: 32px;
+  height: 32px;
+}
+
+#options {
+  top: 8px;
+  right: 8px;
+  padding: 0 0 8px 0;
+}
+
+#options p {
+  white-space: nowrap;
+  margin: 10px 15px;
+}
+
+#options input {
+  font-size: 11px;
+  width: 60px;
+  margin-left: 5px;
+  padding: 5px 8px;
+}
+
+#options input[type="text"] {
+  width: 120px;
+  display: block;
+  margin: 0;
+  margin-top: 5px;
+}
+
+#status {
+  background: rgba(0, 0, 0, 0.5);
+  color: #fff;
+  font-size: 12px;
+  height: 18px;
+  line-height: 18px;
+  padding: 0 20px;
+  position: absolute;
+  right: 250px;
+  bottom: 0;
+  left: 0;
+  overflow: hidden;
+}
+
+/* Menu */
+
+.accordion {
+  color: #FFF;
+  width: 100%;
+}
+
+.accordion .section {
+  width: 100%;
+  position: relative;
+}
+
+.accordion .section > input[type='radio'],
+.accordion .section > input[type='checkbox'] {
+  display: none;
+}
+
+.accordion .section > input[type='radio']:checked + label,
+.accordion .section > input[type='checkbox']:checked + label {
+  background: #363636;
+}
+
+.accordion .section > input[type='radio']:checked + label:before,
+.accordion .section > input[type='checkbox']:checked + label:before {
+  content: " ";
+  position: absolute;
+  border-left: 3px solid #21CCFC;
+  height: 100%;
+  left: 0;
+}
+
+.accordion .section > input[type='radio']:checked ~ .content,
+.accordion .section > input[type='checkbox']:checked ~ .content {
+  max-height: 300px;
+  opacity: 1;
+  z-index: 10;
+  overflow-y: auto;
+}
+
+.accordion .section > input[type='checkbox'] + label:after {
+  content: "";
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-top: 10px solid #444;
+  position: absolute;
+  right: 10px;
+  top: 13px;
+  z-index: 999;
+  transform: rotate(-90deg);
+  -webkit-transform: rotate(-90deg);
+
+  -moz-transition: -moz-transform 0.4s;
+  -o-transition: -o-transform 0.4s;
+  -webkit-transition: -webkit-transform 0.4s;
+  transition: transform 0.4s;
+}
+
+.accordion .section > input[type='checkbox']:checked + label:after {
+  border-top: 10px solid #777;
+  transform: rotate(0deg);
+  -webkit-transform: rotate(0deg);
+}
+
+.accordion .section > label {
+  position: relative;
+  cursor: pointer;
+  padding: 10px 20px;
+  display: table;
+  background: #222;
+  width: 100%;
+  -webkit-transition: background 0.3s ease-in-out;
+  -moz-transition: background 0.3s ease-in-out;
+  -ms-transition: background 0.3s ease-in-out;
+  transition: background 0.3s ease-in-out;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -o-user-select: none;
+  user-select: none;
+}
+
+.accordion .section > label:before {
+  content: " ";
+  width: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 1px;
+  border-top: 1px solid #363636;
+}
+
+.accordion .section > label:hover {
+  background: #363636;
+}
+
+.accordion .section > label > span {
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.accordion .section:last-of-type {
+  border-bottom: 1px solid #363636;
+}
+
+.accordion .section .content {
+  max-height: 0;
+  -webkit-transition: all 0.4s;
+  -moz-transition: all 0.4s;
+  -ms-transition: all 0.4s;
+  transition: all 0.4s;
+  opacity: 0;
+  position: relative;
+  overflow-y: hidden;
+}
+
+*,
+*:before,
+*:after {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.left-menu {
+  background: #222;
+  width: 250px;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+}
+
+.right-menu {
+  background: #222;
+  width: 250px;
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+}
+
+.accordion {
+  font-size: 14px;
+}
+
+.accordion .section .content {
+  padding: 0 15px;
+}
+
+.accordion .section > input[type='radio'],
+.accordion .section > input[type='checkbox'] {
+  display: none;
+}
+
+.accordion .section > input[type='radio']:checked ~ .content,
+.accordion .section > input[type='checkbox']:checked ~ .content {
+  padding: 15px;
+}
+
+ul {
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+ul li {
+  padding: 10px;
+}
+
+ul li i {
+  font-size: 13px;
+  width: 15px;
+  margin-right: 15px;
+}
+
+ul li:hover {
+  cursor: pointer;
+}
+
+ul li:hover i {
+  color: #21CCFC;
+}
+
+/* Virtual List  */
+#vlist-layouts {
+  margin: 0;
+  padding: 0;
+}
+
+#vlist-layers {
+  margin: 0;
+  padding: 0;
+}
+
+.virtual-list {
+  padding: 0;
+  margin: 0;
+  height: 100%;
+}
+
+.virtual-list .selected {
+  color: #21CCFC;
+}
+
+.vrow {
+  position: absolute;
+  right: 0;
+  left: 0;
+
+  line-height: 30px;
+  height: 30px;
+  max-height: 30px;
+
+  margin: 0;
+
+  padding: 0;
+  padding-left: 10px;
+
+  cursor: pointer;
+
+  border-left: 3px solid #333;
+}
+
+.vrow:hover {
+  border-left: 3px solid #21CCFC;
+}
+
+.vrow p {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  border: none;
+  margin: 0;
+}
+
+.vrow i {
+  position: absolute;
+  right: 20px;
+  line-height: 30px;
+  color: #666;
+}
+
+.vrow i:hover {
+  color: #FFF;
+}
+
+.noselect {
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Chrome/Safari/Opera */
+  -khtml-user-select: none; /* Konqueror */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none; /* Non-prefixed version, currently not supported by any browser */
+}
+
+.error_message {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  font-weight: bold;
+  background: #fff;
+  border: #f00 4px solid;
+  color: #000;
+  padding: 100px;
+}
+
+.virtual-list .virtual-list-inner {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  min-height: 100%;
+}
+
+.virtual-list .virtual-list-content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  overflow: visible;
+}
+
+.layers-list .virtual-list {
+  height: 200px;
+  overflow: auto;
+}
+
+.layer-row {
+  line-height: 30px;
+  height: 30px;
+  max-height: 30px;
+
+  margin: 0;
+  padding: 0 0 0 10px;
+
+  cursor: pointer;
+
+  border-left: 3px solid #333;
+  position: relative;
+}
+
+.layer-row:hover {
+  border-left: 3px solid #21CCFC;
+}
+
+.layer-row p {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  border: none;
+  margin: 0;
+}
+
+.layer-row i {
+  position: absolute;
+  top: 0;
+  right: 20px;
+  line-height: 30px;
+  color: #666;
+}
+
+.layer-row i:hover {
+  color: #FFF;
+}

@@ -1,0 +1,42 @@
+{
+  "name": "sketch",
+  "version": "1.0.0",
+  "description": "Embedded Vector Graphics Editor",
+  "main": "app.tsx",
+  "scripts": {
+    "start": "npm run start:dev ---  --open",
+    "start:dev": "webpack-dev-server --env.build=dev --mode development",
+    "start:prod": "webpack-dev-server --env.build=prod --mode production",
+    "build:dev": "nwebpack-cli --env.build=dev  --mode development",
+    "build:prod": "webpack-cli --env.build=prod --mode production",
+    "lint": "tslint -p .",
+    "test": "mocha --opts test/mocha.opts"
+  },
+  "author": "Vereshchagin Roman",
+  "devDependencies": {
+    "@types/chai": "^4.1.5",
+    "@types/mocha": "^5.2.5",
+    "chai": "^4.1.2",
+    "clean-webpack-plugin": "^0.1.19",
+    "co-mocha": "^1.2.2",
+    "html-webpack-plugin": "^3.2.0",
+    "mocha": "^5.2.0",
+    "raw-loader": "^0.5.1",
+    "script-loader": "^0.7.2",
+    "style-loader": "^0.21.0",
+    "ts-loader": "^4.4.1",
+    "ts-node": "^7.0.1",
+    "tsconfig-paths": "^3.6.0",
+    "tsconfig-paths-webpack-plugin": "^3.2.0",
+    "tslint": "^5.11.0",
+    "typescript": "^3.0.3",
+    "webpack": "^4.12.0",
+    "webpack-cli": "^3.0.8",
+    "webpack-dev-server": "^3.1.4",
+    "webpack-merge": "^4.1.0"
+  },
+  "dependencies": {
+    "preact": "^8.1.0",
+    "unistore": "^3.0.6"
+  }
+}
