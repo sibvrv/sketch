@@ -14,6 +14,10 @@ export class Plugins {
    */
   private static globalInstance: Plugins;
 
+  /**
+   * Plugins List
+   * @type {{}}
+   */
   plugins: PluginsList = {};
 
   /**
@@ -24,11 +28,18 @@ export class Plugins {
     return this.globalInstance = this.globalInstance || new this();
   }
 
+  /**
+   * Register Plugin
+   * @param {PluginBase} plugin
+   */
   register(plugin: PluginBase) {
     this.plugins[plugin.name] = plugin;
     plugin.loaded = false;
   }
 
+  /**
+   * Init Plugins
+   */
   init() {
     for (const i in this.plugins) {
       const it = this.plugins[i];
@@ -38,6 +49,11 @@ export class Plugins {
     }
   }
 
+  /**
+   * Run Plugin
+   * @param {string} name
+   * @param options
+   */
   run(name: string, options: any) {
     const it = this.plugins[name];
     if (it.onRun) {

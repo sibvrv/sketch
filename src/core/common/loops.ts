@@ -20,10 +20,10 @@ export function loop(from: number, to: number, callback: (index: number) => any)
 /**
  * Loop over elements
  * @param {any[] | object} list
- * @param {(item: any, key: (string | number), inext: number) => any[]} callback
+ * @param {(item: any, key: (string | number), index: number) => any[]} callback
  * @returns {any[]}
  */
-export function loopv<T>(list: T[] | { [key: number]: T } | { [key: string]: T }, callback: (item: T, key: string | number, inext: number) => any) {
+export function loopv<T>(list: T[] | { [key: number]: T } | { [key: string]: T }, callback: (item: T, key: string | number, index: number) => any) {
   const ret = [];
   if (Array.isArray(list) || typeof list === 'object') {
     let index = 0;

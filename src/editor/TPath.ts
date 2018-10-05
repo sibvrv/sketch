@@ -1,6 +1,6 @@
 import {TPoint} from './TPoint';
 import {Vec2} from '@core/math/Vec2';
-import {distLine} from '@core/math/distLine';
+import {distToLineSegment} from '@core/math/distLine';
 import {isClockwise} from '@core/path/isClockwise';
 import {getArea} from '@core/path/getArea';
 
@@ -151,7 +151,7 @@ export class TPath {
     for (let i = 0; i < len; i++) {
       const a = path[i];
       const b = path[(i + 1) % len];
-      const d = distLine(a, b, pt);
+      const d = distToLineSegment(pt, a, b);
       if (d > tr) {
         continue;
       }
@@ -190,7 +190,7 @@ export class TPath {
     for (let i = 0; i < len; i++) {
       const a = path[i];
       const b = path[(i + 1) % len];
-      const d = distLine(a, b, pt);
+      const d = distToLineSegment(pt, a, b);
       if (d > tr) {
         continue;
       }

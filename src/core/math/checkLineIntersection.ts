@@ -1,6 +1,27 @@
 import {Vec2} from 'core/math/Vec2';
 
-export function checkLineIntersection(x1: number, y1: number, x2: number, y2: number, x3: number, y3: number, x4: number, y4: number) {
+declare global {
+  interface LineLineIntersectionResult {
+    has: boolean;
+    point: Vec2;
+    onLine1: boolean;
+    onLine2: boolean;
+  }
+}
+
+/**
+ * Test if two lines intersect
+ * @param {number} x1
+ * @param {number} y1
+ * @param {number} x2
+ * @param {number} y2
+ * @param {number} x3
+ * @param {number} y3
+ * @param {number} x4
+ * @param {number} y4
+ * @returns {LineLineIntersectionResult}
+ */
+export function checkLineIntersection(x1: number, y1: number, x2: number, y2: number, x3: number, y3: number, x4: number, y4: number): LineLineIntersectionResult {
   const result: {
     has: boolean;
     point: Vec2;

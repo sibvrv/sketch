@@ -121,10 +121,16 @@ export class Vec2 {
     return Math.sqrt(x * x + y * y);
   }
 
-  distance(v: Vec2) {
+  dist(v: Vec2) {
     const x = this.x - v.x;
     const y = this.y - v.y;
     return Math.sqrt(x * x + y * y);
+  }
+
+  squareDist(v: Vec2) {
+    const x = this.x - v.x;
+    const y = this.y - v.y;
+    return x * x + y * y;
   }
 
   fromAngle(a: number) {

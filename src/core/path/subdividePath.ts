@@ -7,7 +7,7 @@ export function subdividePath(points: Vec2[], maxdist: number) {
   for (let i = 0; i < len; i++) {
     const p = points[i];
     const p1 = points[(i + 1) % len];
-    let cnt = Math.floor(p.distance(p1) / maxdist);
+    let cnt = Math.floor(p.dist(p1) / maxdist);
 
     rpoints.push(p);
 
