@@ -57,22 +57,6 @@ function EllipseCurve(aX: number, aY: number, xRadius: number, yRadius: number, 
   return new TPoint(x, y);
 }
 
-function moveTowardsLength(movingPoint: TPoint, targetPoint: TPoint, amount: number) {
-  const width = (targetPoint.x - movingPoint.x);
-  const height = (targetPoint.y - movingPoint.y);
-
-  const distance = Math.sqrt(width * width + height * height);
-
-  return moveTowardsFractional(movingPoint, targetPoint, Math.min(1, amount / distance));
-}
-
-function moveTowardsFractional(movingPoint: TPoint, targetPoint: TPoint, fraction: number) {
-  return {
-    x: movingPoint.x + (targetPoint.x - movingPoint.x) * fraction,
-    y: movingPoint.y + (targetPoint.y - movingPoint.y) * fraction
-  };
-}
-
 interface TPathProperties {
   [key: string]: string | number | boolean;
 }
@@ -97,14 +81,27 @@ export class TPath {
     }
   }
 
+  /**
+   * Set Property
+   * @param {TPathProperties} props
+   */
   setProps(props: TPathProperties) {
     this.properties = {...this.properties, ...props};
   }
 
+  /**
+   * Get Property
+   * @param {string} key
+   * @returns {any}
+   */
   getProp(key: string): any {
     return key in this.properties ? this.properties[key] : null;
   }
 
+  /**
+   * Clone Path
+   * @returns {TPath}
+   */
   clone() {
     const ret = new TPath();
     ret.properties = {...this.properties};
@@ -115,20 +112,46 @@ export class TPath {
     return ret;
   }
 
+  /**
+   * Get Area
+   * @returns {number}
+   */
   getArea() {
     return getArea(this.path);
   }
 
+  /**
+   * Add Point
+   * @param {number} x
+   * @param {number} y
+   * @returns {this}
+   * @constructor
+   */
   Point(x: number, y: number) {
     const p = new TPoint(x, y);
     this.path.push(p);
     return this;
   }
 
+  /**
+   * Make Rect
+   * @param {number} x
+   * @param {number} y
+   * @param {number} w
+   * @param {number} h
+   * @constructor
+   */
   Rect(x: number, y: number, w: number, h: number) {
     this.Point(x, y).Point(x + w, y).Point(x + w, y + h).Point(x, y + h);
   }
 
+  /**
+   * Get Point At
+   * @param {number} x
+   * @param {number} y
+   * @param {number} tr
+   * @returns {any}
+   */
   getPointAt(x: number, y: number, tr: number) {
     const pt = this.path;
     for (let i = pt.length; --i >= 0;) {
@@ -140,6 +163,13 @@ export class TPath {
     return null;
   }
 
+  /**
+   * Get Line At
+   * @param {number} x
+   * @param {number} y
+   * @param {number} tr
+   * @returns {TLine}
+   */
   getLineAt(x: number, y: number, tr: number): TLine {
     const path = this.path;
     const len = path.length;
@@ -171,6 +201,10 @@ export class TPath {
     };
   }
 
+  /**
+   * Delete Point
+   * @param {TPoint} pt
+   */
   deletePoint(pt: TPoint) {
     const p = this.path;
     const index = p.indexOf(pt);
@@ -179,6 +213,13 @@ export class TPath {
     }
   }
 
+  /**
+   * Split At
+   * @param {number} x
+   * @param {number} y
+   * @param {number} tr
+   * @returns {any}
+   */
   splitAt(x: number, y: number, tr: number) {
     const path = this.path;
     const len = path.length;
@@ -213,6 +254,11 @@ export class TPath {
     return np;
   }
 
+  /**
+   * Translate
+   * @param {number} x
+   * @param {number} y
+   */
   translate(x: number, y: number) {
     const path = this.path;
     for (let i = path.length; --i >= 0;) {
@@ -222,10 +268,17 @@ export class TPath {
     }
   }
 
+  /**
+   * Is Clockwise
+   * @returns {boolean}
+   */
   isClockwise() {
     return isClockwise(this.path);
   }
 
+  /**
+   * Fix Winding
+   */
   fixWinding() {
     if (this.isClockwise()) {
       this.path.reverse();

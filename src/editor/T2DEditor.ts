@@ -52,6 +52,11 @@ export class T2DEditor {
     this.selectLayout(0);
   }
 
+  /**
+   * Select Layout
+   * @param {number} index
+   * @returns {TLayers}
+   */
   selectLayout(index: number) {
     if (!this.layout[index]) {
       this.layout[index] = [];
@@ -62,6 +67,11 @@ export class T2DEditor {
     return this.layers;
   }
 
+  /**
+   * Select Layer
+   * @param {number} index
+   * @returns {Layer}
+   */
   selectLayer(index: number) {
     if (!this.layers[index]) {
       this.layers[index] = {
@@ -78,6 +88,10 @@ export class T2DEditor {
     return this.layer;
   }
 
+  /**
+   * Remove Layout
+   * @param {number} index
+   */
   removeLayout(index: number) {
     if (!this.layout[index]) {
       return;
@@ -86,6 +100,10 @@ export class T2DEditor {
     this.selectLayout(Math.max(0, index - 1));
   }
 
+  /**
+   * Remove Layer
+   * @param {number} index
+   */
   removeLayer(index: number) {
     if (!this.layers[index]) {
       return;
@@ -95,11 +113,20 @@ export class T2DEditor {
     this.selectLayer(Math.max(0, index - 1));
   }
 
+  /**
+   * Clear Layer
+   */
   clearLayer() {
     this.selected.reset();
     this.layer.shape.clear();
   }
 
+  /**
+   * Select Path, Point, Line and etc...
+   * @param {number} in_x
+   * @param {number} in_y
+   * @param {number} t
+   */
   select(in_x: number, in_y: number, t?: number) {
     const shapeItems = this.graphics.items;
     t = t || 5;
@@ -163,6 +190,9 @@ export class T2DEditor {
     }
   }
 
+  /**
+   * Delete Selected
+   */
   delete_selected() {
     const sel = this.selected;
     if (sel.line) {
@@ -182,6 +212,13 @@ export class T2DEditor {
     this.selected.reset();
   }
 
+  /**
+   * Split Line At
+   * @param {number} in_x
+   * @param {number} in_y
+   * @param {number} tr
+   * @returns {any}
+   */
   splitAt(in_x: number, in_y: number, tr?: number) {
     const x = in_x / this.view.zoom - this.view.position.x;
     const y = in_y / this.view.zoom - this.view.position.y;
@@ -193,10 +230,18 @@ export class T2DEditor {
     return null;
   }
 
+  /**
+   * Export to Text
+   * @returns {string}
+   */
   doExport() {
     return JSON.stringify(this.doSave(), null, '\t');
   }
 
+  /**
+   * Convert To Object
+   * @returns {any[]}
+   */
   doSave() {
     const layout: any[] = [];
 
@@ -220,6 +265,10 @@ export class T2DEditor {
     return layout;
   }
 
+  /**
+   * Load From Object
+   * @param data
+   */
   doLoad(data: any) {
     this.selected.reset();
     this.layout = [];
