@@ -16,7 +16,7 @@ interface ToolsBarState {
 interface ToolButtonProps {
   name?: string;
   title?: string;
-  children?: JSX.Element[];
+  children?: JSX.Element | JSX.Element[];
 }
 
 const ToolButton = ({name, title, children}: ToolButtonProps, {selected, onClick}: { selected: string, onClick: JSX.MouseEventHandler }) =>

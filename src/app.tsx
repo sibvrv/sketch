@@ -1,4 +1,4 @@
-import '@root/polyfills/math-polyfills';
+import '@root/polyfills';
 import {h, render} from 'preact';
 import PageEditor from './ui/pages/PageEditor';
 import '@ui/preactHooks';

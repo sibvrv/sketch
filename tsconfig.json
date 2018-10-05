@@ -12,6 +12,9 @@
     "emitDecoratorMetadata": true,
     "baseUrl": "src",
     "rootDir": "./src/",
+    "typeRoots": [
+      "./node_modules/@types"
+    ],
     "paths": {
       "@root/*": [
         "*"
