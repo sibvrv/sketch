@@ -275,7 +275,7 @@ export function initEditorApplication(canvas: HTMLCanvasElement, ctx: CanvasRend
     }
 
   }, false);
-  window.addEventListener('handleResize', redraw, false);
+  window.addEventListener('resize', redraw, false);
 
   /* Load */
   editor.doLoad(JSON.parse(localStorage.editor2d || '{}'));
