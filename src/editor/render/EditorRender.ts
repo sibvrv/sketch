@@ -5,6 +5,7 @@ import {shapeRender} from '@editor/render/ShapeRender';
 import {controlsRender} from '@editor/render/ControlsRender';
 import {color_fill, color_stroke, disk, line} from '@editor/render/canvas';
 import {Vec2, vec2_normalize} from '@core/math/Vec2';
+import {DrawGrid} from '@editor/render/Grid';
 
 export function editorRender(ctx: CanvasRenderingContext2D, editor: T2DEditor, width: number, height: number) {
   const {view, selected} = editor;
@@ -12,7 +13,12 @@ export function editorRender(ctx: CanvasRenderingContext2D, editor: T2DEditor, w
   ctx.fillStyle = 'white';
   ctx.fillRect(0, 0, width, height);
 
-  DrawBackground(editor, ctx, width, height);
+  if (GLOB.img_background) {
+    DrawBackground(editor, ctx, width, height);
+  }
+  if (GLOB.drawGrid) {
+    DrawGrid(editor, ctx, width, height);
+  }
 
   const dx = view.position.x;
   const dy = view.position.y;
