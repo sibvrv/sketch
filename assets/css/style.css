@@ -391,69 +391,6 @@ ul li:hover i {
   color: #21CCFC;
 }
 
-/* Virtual List  */
-#vlist-layouts {
-  margin: 0;
-  padding: 0;
-}
-
-#vlist-layers {
-  margin: 0;
-  padding: 0;
-}
-
-.virtual-list {
-  padding: 0;
-  margin: 0;
-  height: 100%;
-}
-
-.virtual-list .selected {
-  color: #21CCFC;
-}
-
-.vrow {
-  position: absolute;
-  right: 0;
-  left: 0;
-
-  line-height: 30px;
-  height: 30px;
-  max-height: 30px;
-
-  margin: 0;
-
-  padding: 0;
-  padding-left: 10px;
-
-  cursor: pointer;
-
-  border-left: 3px solid #333;
-}
-
-.vrow:hover {
-  border-left: 3px solid #21CCFC;
-}
-
-.vrow p {
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  border: none;
-  margin: 0;
-}
-
-.vrow i {
-  position: absolute;
-  right: 20px;
-  line-height: 30px;
-  color: #666;
-}
-
-.vrow i:hover {
-  color: #FFF;
-}
-
 .noselect {
   -webkit-touch-callout: none; /* iOS Safari */
   -webkit-user-select: none; /* Chrome/Safari/Opera */
@@ -473,6 +410,28 @@ ul li:hover i {
   border: #f00 4px solid;
   color: #000;
   padding: 100px;
+}
+
+/* Virtual List  */
+
+#vlist-layouts {
+  margin: 0;
+  padding: 0;
+}
+
+#vlist-layers {
+  margin: 0;
+  padding: 0;
+}
+
+.virtual-list {
+  padding: 0;
+  margin: 0;
+  height: 100%;
+}
+
+.virtual-list .selected {
+  color: #21CCFC;
 }
 
 .virtual-list .virtual-list-inner {
