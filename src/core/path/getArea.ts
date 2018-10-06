@@ -1,5 +1,10 @@
 import {Vec2} from '@core/math/Vec2';
 
+/**
+ * Calculating Polygon Area
+ * @param {Vec2[]} path
+ * @returns {number}
+ */
 export function getArea(path: Vec2[]) {
   let sum = 0.0;
   const len = path.length;

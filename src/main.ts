@@ -193,20 +193,20 @@ function doMouseWheel(event: MouseEvent) {
 }
 
 function selected_info() {
-  let status: string;
+  const status: string[] = [];
 
   const {selected} = editor;
   const visible = Boolean(selected.sector || selected.point || selected.line);
 
   if (selected.sector) {
-    status = 'Площадь: ' + selected.sector.getArea().toFixed(2);
-    status += ' Вершин: ' + selected.sector.path.length;
+    status.push(`Area: ${selected.sector.getArea().toFixed(2)}`);
+    status.push(`Vertex: ${selected.sector.path.length}`);
   } else {
-    status = 'Объектов: ' + editor.graphics.items.length;
+    status.push(`Items: ${editor.graphics.items.length}`);
   }
 
   defaultStorage.setState({
-    status,
+    status: status.join(' '),
     selectedChange: Math.random(),
     shapeOptionsVisible: visible
   });
