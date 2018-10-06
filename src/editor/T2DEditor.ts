@@ -4,6 +4,7 @@ import {TVectorGraphics} from './TVectorGraphics';
 import {TControllerList} from './TController';
 import {TPath} from './TPath';
 import {isPointInPoly} from '@core/math/isPointInPoly';
+import {loopv} from '@core/common/loops';
 
 declare global {
   interface Layer {
@@ -21,12 +22,10 @@ declare global {
   }
 
   type TLayers = Layer[];
-  type TLayerList = TLayers[];
 }
 
 export class T2DEditor {
-  layout: TLayerList = [];
-  layers: TLayers = null!;
+  layers: TLayers = [];
 
   layer: Layer = null!;
   graphics: TVectorGraphics = null!;
@@ -49,22 +48,8 @@ export class T2DEditor {
    * T2DEditor Constructor
    */
   constructor() {
-    this.selectLayout(0);
-  }
-
-  /**
-   * Select Layout
-   * @param {number} index
-   * @returns {TLayers}
-   */
-  selectLayout(index: number) {
-    if (!this.layout[index]) {
-      this.layout[index] = [];
-    }
-    this.layers = this.layout[index];
     this.selectLayer(0);
     this.selected.reset();
-    return this.layers;
   }
 
   /**
@@ -86,18 +71,6 @@ export class T2DEditor {
 
     this.selected.reset();
     return this.layer;
-  }
-
-  /**
-   * Remove Layout
-   * @param {number} index
-   */
-  removeLayout(index: number) {
-    if (!this.layout[index]) {
-      return;
-    }
-    this.layout.splice(index, 1);
-    this.selectLayout(Math.max(0, index - 1));
   }
 
   /**
@@ -243,26 +216,21 @@ export class T2DEditor {
    * @returns {any[]}
    */
   doSave() {
-    const layout: any[] = [];
+    const layers: any[] = [];
 
-    for (const lo in this.layout) {
-      const layer_item = this.layout[lo];
-      const layers = [];
-      for (const key in layer_item) {
-        const layer = layer_item[key];
-        const shape = layer.shape.asText();
+    loopv(this.layers, layer => {
+      const shape = layer.shape.asText();
 
-        if (!shape.length) {
-          continue;
-        }
-
-        layers.push({
-          shape
-        });
+      if (!shape.length) {
+        return;
       }
-      layout[lo] = layers;
-    }
-    return layout;
+
+      layers.push({
+        shape
+      });
+    });
+
+    return layers;
   }
 
   /**
@@ -271,44 +239,38 @@ export class T2DEditor {
    */
   doLoad(data: any) {
     this.selected.reset();
-    this.layout = [];
+    this.layers = [];
 
-    for (const lo in data) {
-      this.layers = this.selectLayout(+lo);
-      const layerData = data[+lo];
+    for (const key in data) {
+      const ld = data[+key];
+      const shape = ld.shape;
+      const layer = this.selectLayer(+key);
 
-      for (const key in layerData) {
-        const ld = layerData[+key];
-        const shape = ld.shape;
-        const layer = this.selectLayer(+key);
+      for (const i in shape) {
+        const it = shape[i];
+        const path = it.path;
+        const p = layer.shape.Path2D();
+        for (const pt in path) {
+          const point = path[+pt];
 
-        for (const i in shape) {
-          const it = shape[i];
-          const path = it.path;
-          const p = layer.shape.Path2D();
-          for (const pt in path) {
-            const point = path[+pt];
+          const newpoint = new TPoint(point.x, point.y);
+          p.path.push(newpoint);
 
-            const newpoint = new TPoint(point.x, point.y);
-            p.path.push(newpoint);
-
-            if (point.r) {
-              newpoint.r = +point.r;
-              newpoint.steps = +(point.s || 0);
-            }
+          if (point.r) {
+            newpoint.r = +point.r;
+            newpoint.steps = +(point.s || 0);
           }
-
-          p.setProps({
-            name: it.name || '',
-            class: it.class || '',
-            tags: it.tags || '',
-            mask: it.mask || false
-          });
         }
+
+        p.setProps({
+          name: it.name || '',
+          class: it.class || '',
+          tags: it.tags || '',
+          mask: it.mask || false
+        });
       }
     }
 
-    this.selectLayout(0);
     this.selectLayer(0);
   }
 }

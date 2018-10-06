@@ -57,17 +57,6 @@ export default class SideBar extends Component<SideBarProps, SideBarState> {
   };
 
   /**
-   * SideBar : NewLayout Handler
-   */
-  handleNewLayout = () => {
-    const {editor} = GLOB;
-
-    editor.selectLayout(editor.layout.length);
-    redraw();
-    this.setState({});
-  };
-
-  /**
    * SideBar : Save Handler
    */
   handleSave = () => {
@@ -102,17 +91,6 @@ export default class SideBar extends Component<SideBarProps, SideBarState> {
   };
 
   /**
-   * SideBar : LayoutClick Handler
-   */
-  handleLayoutClick = (e: Event) => {
-    const id = parseInt((e.currentTarget as HTMLElement).dataset.id || '0');
-    const {editor} = GLOB;
-    editor.selectLayout(id);
-    redraw();
-    this.setState({});
-  };
-
-  /**
    * SideBar : LayerRemove Handler
    */
   handleLayerRemove = (e: Event) => {
@@ -124,6 +102,12 @@ export default class SideBar extends Component<SideBarProps, SideBarState> {
     this.setState({});
   };
 
+  /**
+   * Render Layer Item
+   * @param {Layer} item
+   * @param {number} index
+   * @returns {any}
+   */
   renderLayerItem = (item: Layer, index: number) =>
     <div
       class={['layer-row', item === GLOB.editor.layer && 'selected']}
@@ -137,39 +121,10 @@ export default class SideBar extends Component<SideBarProps, SideBarState> {
     </div>;
 
   /**
-   * SideBar : LayoutRemove Handler
-   */
-  handleLayoutRemove = (e: Event) => {
-    e.preventDefault();
-    const id = parseInt((e.currentTarget as HTMLElement).dataset.id || '0');
-    const {editor} = GLOB;
-    editor.removeLayout(id);
-    redraw();
-    this.setState({});
-  };
-
-  renderLayoutItem = (item: TLayers, index: number) =>
-    <div
-      class={['layer-row', item === GLOB.editor.layers && 'selected']}
-      onClick={this.handleLayoutClick}
-      data-id={index}>
-      <p>Layout {1 + index}</p>
-      <i
-        class="fa fa-trash-alt"
-        onClick={this.handleLayoutRemove}
-      />
-    </div>;
-
-  /**
    * Render SideBar Component
    */
   render({children}: SideBarProps & PreactDOMAttributes, {}: SideBarState) {
     const {editor} = GLOB;
-
-    const data: any = [];
-    for (let i = 500; --i >= 0;) {
-      data.push({i, Text: 'YEs'});
-    }
 
     return (
       <div class="right-menu noselect">
@@ -203,18 +158,6 @@ export default class SideBar extends Component<SideBarProps, SideBarState> {
             </div>
           </div>
 
-          <div class="section">
-            <input type="checkbox" id="sec-layouts" value="toggle"/>
-            <label for="sec-layouts"> <span>Layouts</span></label>
-            <div class="content" id="vlist-layouts">
-              <ul>
-                <li id="new-layout" onClick={this.handleNewLayout}><i class="fa fa-plus"/><span>New</span></li>
-              </ul>
-              <div class="layers-list">
-                <VirtualList itemHeight={30} data={editor.layout} renderItem={this.renderLayoutItem}/>
-              </div>
-            </div>
-          </div>
         </div>
       </div>
     );
