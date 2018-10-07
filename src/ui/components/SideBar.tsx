@@ -14,6 +14,9 @@ interface SideBarProps {
  * SideBar State Interface
  */
 interface SideBarState {
+  accordion: {
+    [item: string]: boolean
+  };
 }
 
 /**
@@ -33,8 +36,23 @@ export default class SideBar extends Component<SideBarProps, SideBarState> {
    */
   constructor(props: SideBarProps) {
     super(props);
-    this.state = {};
+    this.state = {
+      accordion: {
+        sectionFile: true,
+        sectionLayers: true
+      }
+    };
   }
+
+  /**
+   * SideBar : Accordion Handler
+   */
+  handleAccordion = (e: Event) => {
+    const checkBox = e.currentTarget as HTMLInputElement;
+    this.setState({
+      accordion: {...this.state.accordion, [checkBox.id]: checkBox.checked}
+    });
+  };
 
   /**
    * SideBar : ExportAsText Handler
@@ -123,15 +141,16 @@ export default class SideBar extends Component<SideBarProps, SideBarState> {
   /**
    * Render SideBar Component
    */
-  render({children}: SideBarProps & PreactDOMAttributes, {}: SideBarState) {
+  render({children}: SideBarProps & PreactDOMAttributes, {accordion}: SideBarState) {
     const {editor} = GLOB;
 
     return (
-      <div class="right-menu noselect">
-        <div class="accordion">
+      <div class="right-menu noSelect">
+        <div class="accordion flex-vertical">
           <div class="section">
-            <input type="checkbox" id="sec-files" checked/>
-            <label for="sec-files"><span>File</span></label>
+            <input type="checkbox" id="sectionFile"
+                   checked={accordion.sectionFile} onChange={this.handleAccordion}/>
+            <label for="sectionFile"><span>File</span></label>
             <div class="content">
               <ul>
                 <li onClick={this.handleExportAsText}><i class="fa fa-file-export"/><span>Export</span></li>
@@ -145,12 +164,14 @@ export default class SideBar extends Component<SideBarProps, SideBarState> {
             </div>
           </div>
 
-          <div class="section">
-            <input type="checkbox" id="sec-layers" value="toggle" checked/>
-            <label for="sec-layers"> <span>Layer</span></label>
+          <div class="section grow">
+            <input type="checkbox" id="sectionLayers"
+                   checked={accordion.sectionLayers}
+                   onChange={this.handleAccordion}/>
+            <label for="sectionLayers"> <span>Layer</span></label>
             <div class="content" id="vlist-layers">
-              <ul>
-                <li id="new-layer" onClick={this.handleNewLayer}><i class="fa fa-plus"/><span>New</span></li>
+              <ul class="layer-toolbar">
+                <li onClick={this.handleNewLayer}><i class="fa fa-plus"/><span>New</span></li>
               </ul>
               <div class="layers-list">
                 <VirtualList itemHeight={30} data={editor.layers} renderItem={this.renderLayerItem}/>

@@ -64,6 +64,10 @@ export default class VirtualList extends Component<VirtualListProps, VirtualList
     addEventListener('resize', this.handleResize);
   }
 
+  componentDidUpdate() {
+    this.handleResize();
+  }
+
   /**
    * Render VirtualList Component
    */

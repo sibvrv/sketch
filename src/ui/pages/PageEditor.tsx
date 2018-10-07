@@ -65,7 +65,7 @@ export default class PageEditor extends Component<PageEditorProps, PageEditorSta
         <StatusBar/>
 
         {dialog === 'export-as-text' && <ExportAsText/>}
-        {error && <div class="error_message noselect" style="font-weight: bold">{error}</div>}
+        {error && <div class="error_message noSelect" style="font-weight: bold">{error}</div>}
       </VectorEditor>
     );
   }

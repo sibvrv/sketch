@@ -241,7 +241,7 @@ input[type="color"] {
 
 .accordion .section > input[type='radio']:checked ~ .content,
 .accordion .section > input[type='checkbox']:checked ~ .content {
-  max-height: 300px;
+  max-height: 100vh;
   opacity: 1;
   z-index: 10;
   overflow-y: auto;
@@ -391,7 +391,7 @@ ul li:hover i {
   color: #21CCFC;
 }
 
-.noselect {
+.noSelect {
   -webkit-touch-callout: none; /* iOS Safari */
   -webkit-user-select: none; /* Chrome/Safari/Opera */
   -khtml-user-select: none; /* Konqueror */
@@ -486,4 +486,28 @@ ul li:hover i {
 
 .layer-row i:hover {
   color: #FFF;
+}
+
+.layer-toolbar {
+  height: 36px;
+  line-height: 36px;
+}
+
+.layer-toolbar li {
+  margin: 0;
+  padding: 0 10px;
+}
+
+/* Special Classes */
+
+.flex-vertical {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+}
+
+.grow {
+  flex: 1;
 }
