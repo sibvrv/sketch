@@ -25,5 +25,5 @@ const defaultStates: DefaultStorage = {
 /**
  * Default Storage
  */
-const defaultStorage = devtools(createStore(defaultStates));
+const defaultStorage = __DEV__ ? devtools(createStore(defaultStates)) : createStore(defaultStates);
 export default defaultStorage;

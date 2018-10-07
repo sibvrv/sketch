@@ -6,3 +6,6 @@ declare namespace JSX {
     class?: string | any[] | object;
   }
 }
+
+declare var __DEV__: boolean;
+declare var __PROD__: boolean;
