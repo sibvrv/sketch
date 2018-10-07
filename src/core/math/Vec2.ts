@@ -2,15 +2,10 @@
  * Vec2
  */
 export class Vec2 {
-  x: number;
-  y: number;
-
   /**
    * Vec2 Constructor
    */
-  constructor(x: number, y: number) {
-    this.x = x || 0;
-    this.y = y || 0;
+  constructor(public x: number = 0, public y: number = 0) {
   }
 
   clone() {
@@ -159,11 +154,12 @@ export class Vec2 {
 }
 
 export function vec2_normalize(v: Vec2) {
-  const len = Math.sqrt(v.x * v.x + v.y * v.y);
+  let len = v.x * v.x + v.y * v.y;
   if (len === 0) {
     v.x = v.y = 0;
     return len;
   }
+  len = Math.sqrt(len);
   v.x /= len;
   v.y /= len;
   return len;

@@ -8,7 +8,7 @@ export class TPoint extends Vec2 {
    * TPoint Constructor
    */
   constructor(x?: number, y?: number) {
-    super(x!, y!);
+    super(x, y);
 
     this.r = 0;
     this.steps = 0;
