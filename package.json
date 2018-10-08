@@ -2,6 +2,8 @@
   "name": "sketch",
   "version": "1.0.0",
   "description": "Embedded Vector Graphics Editor",
+  "author": "Vereshchagin Roman",
+  "homepage": "https://www.sibvrv.com",
   "main": "app.tsx",
   "scripts": {
     "start": "npm run start:dev ---  --open",
@@ -12,7 +14,6 @@
     "lint": "tslint -p .",
     "test": "mocha --opts test/mocha.opts"
   },
-  "author": "Vereshchagin Roman",
   "devDependencies": {
     "@types/chai": "^4.1.5",
     "@types/mocha": "^5.2.5",
