@@ -445,8 +445,16 @@ ul li:hover i {
   overflow: visible;
 }
 
+.layers-list {
+  position: relative;
+}
+
 .layers-list .virtual-list {
-  height: 200px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
   overflow: auto;
 }
 
@@ -500,12 +508,15 @@ ul li:hover i {
 
 /* Special Classes */
 
-.flex-vertical {
-  display: flex;
-  flex-direction: column;
+.absolute {
   position: absolute;
   top: 0;
   bottom: 0;
+}
+
+.flex-vertical {
+  display: flex;
+  flex-direction: column;
 }
 
 .grow {

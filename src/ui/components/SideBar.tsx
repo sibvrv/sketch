@@ -146,7 +146,7 @@ export default class SideBar extends Component<SideBarProps, SideBarState> {
 
     return (
       <div class="right-menu noSelect">
-        <div class="accordion flex-vertical">
+        <div class="accordion flex-vertical absolute">
           <div class="section">
             <input type="checkbox" id="sectionFile"
                    checked={accordion.sectionFile} onChange={this.handleAccordion}/>
@@ -164,16 +164,16 @@ export default class SideBar extends Component<SideBarProps, SideBarState> {
             </div>
           </div>
 
-          <div class="section grow">
+          <div class="section grow flex-vertical">
             <input type="checkbox" id="sectionLayers"
                    checked={accordion.sectionLayers}
                    onChange={this.handleAccordion}/>
             <label for="sectionLayers"> <span>Layer</span></label>
-            <div class="content" id="vlist-layers">
+            <div class="content grow flex-vertical" id="vlist-layers">
               <ul class="layer-toolbar">
                 <li onClick={this.handleNewLayer}><i class="fa fa-plus"/><span>New</span></li>
               </ul>
-              <div class="layers-list">
+              <div class="layers-list grow">
                 <VirtualList itemHeight={30} data={editor.layers} renderItem={this.renderLayerItem}/>
               </div>
             </div>
