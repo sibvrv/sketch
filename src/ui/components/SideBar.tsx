@@ -3,6 +3,7 @@ import GLOB from '@root/types';
 import {redraw} from '@root/main';
 import defaultStorage from '@store/defaultStorage';
 import VirtualList from '@ui/components/VirtualList/VirtualList';
+import LayerItem from '@ui/components/LayerList/LayerItem';
 
 /**
  * SideBar Props Interface
@@ -100,10 +101,9 @@ export default class SideBar extends Component<SideBarProps, SideBarState> {
   /**
    * SideBar : LayerClick Handler
    */
-  handleLayerClick = (e: Event) => {
-    const id = parseInt((e.currentTarget as HTMLElement).dataset.id || '0');
+  handleLayerClick = (index: number) => {
     const {editor} = GLOB;
-    editor.selectLayer(id);
+    editor.selectLayer(index);
     redraw();
     this.setState({});
   };
@@ -111,11 +111,9 @@ export default class SideBar extends Component<SideBarProps, SideBarState> {
   /**
    * SideBar : LayerRemove Handler
    */
-  handleLayerRemove = (e: Event) => {
-    e.preventDefault();
-    const id = parseInt((e.currentTarget as HTMLElement).dataset.id || '0');
+  handleLayerRemove = (index: number) => {
     const {editor} = GLOB;
-    editor.removeLayer(id);
+    editor.removeLayer(index);
     redraw();
     this.setState({});
   };
@@ -127,16 +125,12 @@ export default class SideBar extends Component<SideBarProps, SideBarState> {
    * @returns {any}
    */
   renderLayerItem = (item: Layer, index: number) =>
-    <div
-      class={['layer-row', item === GLOB.editor.layer && 'selected']}
+    <LayerItem
+      index={index}
+      name={item.name || ''}
+      selected={item === GLOB.editor.layer}
       onClick={this.handleLayerClick}
-      data-id={index}>
-      <p>{item.name ? item.name : `Layer ${1 + index}`}</p>
-      <i
-        class="fa fa-trash-alt"
-        onClick={this.handleLayerRemove}
-      />
-    </div>;
+      onRemove={this.handleLayerRemove}/>;
 
   /**
    * Render SideBar Component

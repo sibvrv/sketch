@@ -486,10 +486,16 @@ ul li:hover i {
 
 .layer-row i {
   position: absolute;
+  opacity: 0;
   top: 0;
   right: 20px;
   line-height: 30px;
   color: #666;
+  transition: all 0.3s ease-in-out;
+}
+
+.layer-row:hover i {
+  opacity: 1;
 }
 
 .layer-row i:hover {
