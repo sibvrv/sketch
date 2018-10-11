@@ -1,6 +1,11 @@
 import {Component, h} from 'preact';
 import {noop} from '@core/common/noop';
 
+const enum EDITABLE {
+  FALSE = 'false',
+  PLAIN = 'plaintext-only'
+}
+
 /**
  * LayerItem Props Interface
  */
@@ -9,6 +14,8 @@ interface LayerItemProps {
   name: string;
   selected?: boolean;
   onClick?: (index: number) => void;
+  onDblClick?: (index: number) => void;
+  onChange?: (index: number, name: string) => void;
   onRemove?: (index: number) => void;
 }
 
@@ -30,8 +37,14 @@ export default class LayerItem extends Component<LayerItemProps, LayerItemState>
   static defaultProps: LayerItemProps = {
     index: 0,
     name: '',
-    onClick: noop
+    onClick: noop,
+    onDblClick: noop,
+    onChange: noop,
+    onRemove: noop
   };
+
+  input: HTMLElement;
+  refInput = (el: HTMLElement) => this.input = el;
 
   /**
    * LayerItem Component Constructor
@@ -46,7 +59,9 @@ export default class LayerItem extends Component<LayerItemProps, LayerItemState>
    * LayerItem : Click Handler
    */
   handleClick = (e: Event) => {
-    this.props.onClick!(this.props.index);
+    if (this.input.contentEditable !== EDITABLE.PLAIN) {
+      this.props.onClick!(this.props.index);
+    }
   };
 
   /**
@@ -58,6 +73,23 @@ export default class LayerItem extends Component<LayerItemProps, LayerItemState>
   };
 
   /**
+   * LayerItem : DblClick Handler
+   */
+  handleDblClick = () => {
+    this.input.contentEditable = EDITABLE.PLAIN;
+    this.input.focus();
+    this.props.onDblClick!(this.props.index);
+  };
+
+  /**
+   * LayerItem : Blur Handler
+   */
+  handleBlur = () => {
+    this.input.contentEditable = EDITABLE.FALSE;
+    this.props.onChange!(this.props.index, (this.input.textContent || '').trim());
+  };
+
+  /**
    * Render LayerItem Component
    */
   render({index, name, selected}: LayerItemProps, {}: LayerItemState) {
@@ -66,7 +98,11 @@ export default class LayerItem extends Component<LayerItemProps, LayerItemState>
         class={['layer-row', selected && 'selected']}
         onClick={this.handleClick}
         data-id={index}>
-        <p>{name ? name : `Layer ${1 + index}`}</p>
+        <p
+          onDblClick={this.handleDblClick}
+          onBlur={this.handleBlur}
+          ref={this.refInput}
+        >{name || `Layer ${1 + index}`}</p>
         <i
           class="fa fa-trash-alt"
           onClick={this.handleRemove}
