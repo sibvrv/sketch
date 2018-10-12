@@ -1,11 +1,5 @@
 import {Component, h} from 'preact';
 import {noop} from '@core/common/noop';
-import {setCaretPosition} from '@ui/helpers/setCaretPosition';
-
-const enum EDITABLE {
-  FALSE = 'false',
-  PLAIN = 'plaintext-only'
-}
 
 /**
  * LayerItem Props Interface
@@ -24,6 +18,7 @@ interface LayerItemProps {
  * LayerItem State Interface
  */
 interface LayerItemState {
+  inEdit: boolean;
 }
 
 /**
@@ -53,14 +48,16 @@ export default class LayerItem extends Component<LayerItemProps, LayerItemState>
    */
   constructor(props: LayerItemProps) {
     super(props);
-    this.state = {};
+    this.state = {
+      inEdit: false
+    };
   }
 
   /**
    * LayerItem : Click Handler
    */
   handleClick = (e: Event) => {
-    if (this.input.contentEditable !== EDITABLE.PLAIN) {
+    if (!this.state.inEdit) {
       this.props.onClick!(this.props.index);
     }
   };
@@ -77,9 +74,11 @@ export default class LayerItem extends Component<LayerItemProps, LayerItemState>
    * LayerItem : DblClick Handler
    */
   handleDblClick = () => {
-    this.input.contentEditable = EDITABLE.PLAIN;
-    this.input.className = 'inEdit';
-    this.input.focus();
+    this.setState({
+      inEdit: true
+    }, () => {
+      this.input.focus();
+    });
     this.props.onDblClick!(this.props.index);
   };
 
@@ -87,9 +86,10 @@ export default class LayerItem extends Component<LayerItemProps, LayerItemState>
    * LayerItem : Blur Handler
    */
   handleBlur = () => {
-    setCaretPosition(this.input, 0);
-    this.input.contentEditable = EDITABLE.FALSE;
-    this.input.className = '';
+    this.setState({
+      inEdit: false
+    });
+    this.input.scrollLeft = 0;
     this.props.onChange!(this.props.index, (this.input.textContent || '').trim());
   };
 
@@ -106,7 +106,7 @@ export default class LayerItem extends Component<LayerItemProps, LayerItemState>
   /**
    * Render LayerItem Component
    */
-  render({index, name, selected}: LayerItemProps, {}: LayerItemState) {
+  render({index, name, selected}: LayerItemProps, {inEdit}: LayerItemState) {
     return (
       <div
         class={['layer-row', selected && 'selected']}
@@ -116,12 +116,16 @@ export default class LayerItem extends Component<LayerItemProps, LayerItemState>
           onDblClick={this.handleDblClick}
           onBlur={this.handleBlur}
           onKeyDown={this.handleKeyDown}
+          contentEditable={inEdit}
+          class={inEdit ? 'inEdit' : ''}
           ref={this.refInput}
         >{name || `Layer ${1 + index}`}</p>
-        <i
-          class="fa fa-trash-alt"
-          onClick={this.handleRemove}
-        />
+        {
+          !inEdit && <i
+            class="fa fa-trash-alt"
+            onClick={this.handleRemove}
+          />
+        }
       </div>
     );
   }
