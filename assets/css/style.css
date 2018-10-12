@@ -528,3 +528,7 @@ ul li:hover i {
 .grow {
   flex: 1;
 }
+
+.inEdit {
+  text-overflow: initial !important;
+}

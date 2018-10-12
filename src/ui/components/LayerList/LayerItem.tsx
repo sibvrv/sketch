@@ -1,5 +1,6 @@
 import {Component, h} from 'preact';
 import {noop} from '@core/common/noop';
+import {setCaretPosition} from '@ui/helpers/setCaretPosition';
 
 const enum EDITABLE {
   FALSE = 'false',
@@ -77,6 +78,7 @@ export default class LayerItem extends Component<LayerItemProps, LayerItemState>
    */
   handleDblClick = () => {
     this.input.contentEditable = EDITABLE.PLAIN;
+    this.input.className = 'inEdit';
     this.input.focus();
     this.props.onDblClick!(this.props.index);
   };
@@ -85,8 +87,20 @@ export default class LayerItem extends Component<LayerItemProps, LayerItemState>
    * LayerItem : Blur Handler
    */
   handleBlur = () => {
+    setCaretPosition(this.input, 0);
     this.input.contentEditable = EDITABLE.FALSE;
+    this.input.className = '';
     this.props.onChange!(this.props.index, (this.input.textContent || '').trim());
+  };
+
+  /**
+   * LayerItem : KeyDown Handler
+   */
+  handleKeyDown = (e: KeyboardEvent) => {
+    if (e.key && ['Escape', 'Enter'].indexOf(e.key) >= 0) {
+      this.handleBlur();
+      e.preventDefault();
+    }
   };
 
   /**
@@ -101,6 +115,7 @@ export default class LayerItem extends Component<LayerItemProps, LayerItemState>
         <p
           onDblClick={this.handleDblClick}
           onBlur={this.handleBlur}
+          onKeyDown={this.handleKeyDown}
           ref={this.refInput}
         >{name || `Layer ${1 + index}`}</p>
         <i

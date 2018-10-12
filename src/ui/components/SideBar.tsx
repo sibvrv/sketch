@@ -47,6 +47,7 @@ export default class SideBar extends Component<SideBarProps, SideBarState> {
 
   /**
    * SideBar : Accordion Handler
+   * @param {Event} e
    */
   handleAccordion = (e: Event) => {
     const checkBox = e.currentTarget as HTMLInputElement;
@@ -84,6 +85,7 @@ export default class SideBar extends Component<SideBarProps, SideBarState> {
 
   /**
    * SideBar : GridClick Handler
+   * @param {Event} e
    */
   handleGridClick = (e: Event) => {
     GLOB.drawGrid = (e.currentTarget as HTMLInputElement).checked;
@@ -100,6 +102,7 @@ export default class SideBar extends Component<SideBarProps, SideBarState> {
 
   /**
    * SideBar : LayerClick Handler
+   * @param {number} index
    */
   handleLayerClick = (index: number) => {
     const {editor} = GLOB;
@@ -110,11 +113,23 @@ export default class SideBar extends Component<SideBarProps, SideBarState> {
 
   /**
    * SideBar : LayerRemove Handler
+   * @param {number} index
    */
   handleLayerRemove = (index: number) => {
     const {editor} = GLOB;
     editor.removeLayer(index);
     redraw();
+    this.setState({});
+  };
+
+  /**
+   * SideBar : RenameLayer Handler
+   * @param {number} index
+   * @param {string} name
+   */
+  handleRenameLayer = (index: number, name: string) => {
+    const {editor} = GLOB;
+    editor.renameLayer(index, name);
     this.setState({});
   };
 
@@ -130,7 +145,9 @@ export default class SideBar extends Component<SideBarProps, SideBarState> {
       name={item.name || ''}
       selected={item === GLOB.editor.layer}
       onClick={this.handleLayerClick}
-      onRemove={this.handleLayerRemove}/>;
+      onRemove={this.handleLayerRemove}
+      onChange={this.handleRenameLayer}
+    />;
 
   /**
    * Render SideBar Component

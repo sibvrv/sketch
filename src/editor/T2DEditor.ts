@@ -87,6 +87,17 @@ export class T2DEditor {
   }
 
   /**
+   * Rename Layer
+   * @param {number} index
+   * @param {string} name
+   */
+  renameLayer = (index: number, name: string) => {
+    if (this.layers[index]) {
+      this.layers[index].name = name;
+    }
+  };
+
+  /**
    * Clear Layer
    */
   clearLayer() {
@@ -226,6 +237,7 @@ export class T2DEditor {
       }
 
       layers.push({
+        name: layer.name,
         shape
       });
     });
@@ -245,6 +257,7 @@ export class T2DEditor {
       const ld = data[+key];
       const shape = ld.shape;
       const layer = this.selectLayer(+key);
+      layer.name = ld.name || '';
 
       for (const i in shape) {
         const it = shape[i];

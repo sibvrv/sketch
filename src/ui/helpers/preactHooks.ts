@@ -1,5 +1,5 @@
 import * as preact from 'preact';
-import {cssMerge} from '../core/css/cssMerge';
+import {cssMerge} from '../../core/css/cssMerge';
 
 /**
  * VNode hook
