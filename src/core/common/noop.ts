@@ -1,6 +1,6 @@
 /**
  * No operation
  */
-export function noop(): void {
+export function noop(): any {
 
 }

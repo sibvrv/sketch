@@ -1,13 +1,14 @@
 import {Component, h} from 'preact';
-import {loop_range} from '@core/common/loops';
+import {noop} from '@core/common/noop';
 
 /**
  * VirtualList Props Interface
  */
 interface VirtualListProps {
-  data: any[];
   itemHeight: number;
   cachedItems?: number;
+  onGetItemsCount: () => number;
+  onGetItems: (start: number, end: number) => any[];
   renderItem: (item: any, index: number) => JSX.Element;
 }
 
@@ -31,7 +32,8 @@ export default class VirtualList extends Component<VirtualListProps, VirtualList
   static defaultProps: VirtualListProps = {
     itemHeight: 30,
     cachedItems: 10,
-    data: [],
+    onGetItemsCount: noop,
+    onGetItems: noop,
     renderItem: () => null!
   };
 
@@ -71,7 +73,9 @@ export default class VirtualList extends Component<VirtualListProps, VirtualList
   /**
    * Render VirtualList Component
    */
-  render({cachedItems, itemHeight, renderItem, data, ...props}: VirtualListProps, {offset, height}: VirtualListState) {
+  render({cachedItems, itemHeight, renderItem, onGetItemsCount, onGetItems, ...props}: VirtualListProps, {offset, height}: VirtualListState) {
+    const itemsCount = onGetItemsCount();
+
     let start = (offset / itemHeight) | 0;
     let count = (height / itemHeight) | 0;
 
@@ -80,13 +84,15 @@ export default class VirtualList extends Component<VirtualListProps, VirtualList
       count += cachedItems;
     }
 
-    const end = Math.min(data.length, start + 1 + count);
+    const end = Math.min(itemsCount, start + 1 + count);
+
+    const items = onGetItems(start, end);
 
     return (
       <div class="virtual-list" {...props} onScroll={this.handleScroll}>
-        <div class="virtual-list-inner" style={`height:${data.length * itemHeight}px;`}>
+        <div class="virtual-list-inner" style={`height:${itemsCount * itemHeight}px;`}>
           <div class="virtual-list-content" style={`top:${start * itemHeight}px;`}>
-            {loop_range(data, start, end, renderItem)}
+            {items.map((item) => renderItem(item, start++))}
           </div>
         </div>
       </div>

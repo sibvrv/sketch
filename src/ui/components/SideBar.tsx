@@ -144,17 +144,54 @@ export default class SideBar extends Component<SideBarProps, SideBarState> {
       index={index}
       name={item.name || ''}
       selected={item === GLOB.editor.layer}
+      data={item}
       onClick={this.handleLayerClick}
       onRemove={this.handleLayerRemove}
       onChange={this.handleRenameLayer}
     />;
 
   /**
+   * SideBar : LayerItemsCount Handler
+   */
+  handleLayerItemsCount = () => {
+    const {editor} = GLOB;
+    return editor.layers.length + editor.layer.shape.items.length;
+  };
+
+  /**
+   * SideBar : LayerItems Handler
+   */
+  handleLayerItems = (from: number, to: number) => {
+    const {editor} = GLOB;
+
+    const items = editor.layers;
+    const subItems = editor.layer.shape.items;
+
+    const subItemsStart = 1 + items.indexOf(editor.layer);
+    const subItemsEnd = subItemsStart + subItems.length;
+
+    const ret: any[] = [];
+    for (let i = from; i < to; i++) {
+      if (i >= subItemsStart) {
+        if (i < subItemsEnd) {
+          ret.push(subItems[i - subItemsStart]);
+        } else {
+          ret.push(items[i + 1 - subItemsEnd]);
+        }
+      } else if (i >= subItemsEnd) {
+        ret.push(items[i - subItemsEnd]);
+      } else {
+        ret.push(items[i]);
+      }
+    }
+    console.log(ret);
+    return ret;
+  };
+
+  /**
    * Render SideBar Component
    */
   render({children}: SideBarProps & PreactDOMAttributes, {accordion}: SideBarState) {
-    const {editor} = GLOB;
-
     return (
       <div class="right-menu noSelect">
         <div class="accordion flex-vertical absolute">
@@ -164,9 +201,15 @@ export default class SideBar extends Component<SideBarProps, SideBarState> {
             <label for="sectionFile"><span>File</span></label>
             <div class="content">
               <ul>
-                <li onClick={this.handleExportAsText}><i class="fa fa-file-export"/><span>Export</span></li>
-                <li onClick={this.handleSave}><i class="fa fa-save"/><span>Save</span></li>
-                <li onClick={this.handleClearLayer}><i class="fa fa-trash-alt"/><span>Clear Layer</span></li>
+                <li onClick={this.handleExportAsText}>
+                  <i class="fa fa-file-export"/><span>Export</span>
+                </li>
+                <li onClick={this.handleSave}>
+                  <i class="fa fa-save"/><span>Save</span>
+                </li>
+                <li onClick={this.handleClearLayer}>
+                  <i class="fa fa-trash-alt"/><span>Clear Layer</span>
+                </li>
                 <li>
                   <input onChange={this.handleGridClick} id="opt-grid" type="checkbox" checked/>
                   <label for="opt-grid">Show Grid</label>
@@ -185,7 +228,11 @@ export default class SideBar extends Component<SideBarProps, SideBarState> {
                 <li onClick={this.handleNewLayer}><i class="fa fa-plus"/><span>New</span></li>
               </ul>
               <div class="layers-list grow">
-                <VirtualList itemHeight={30} data={editor.layers} renderItem={this.renderLayerItem}/>
+                <VirtualList
+                  itemHeight={30}
+                  onGetItemsCount={this.handleLayerItemsCount}
+                  onGetItems={this.handleLayerItems}
+                  renderItem={this.renderLayerItem}/>
               </div>
             </div>
           </div>

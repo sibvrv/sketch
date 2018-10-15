@@ -7,6 +7,8 @@ import {noop} from '@core/common/noop';
 interface LayerItemProps {
   index: number;
   name: string;
+  data?: any;
+  collapsible?: boolean;
   selected?: boolean;
   onClick?: (index: number) => void;
   onDblClick?: (index: number) => void;
@@ -33,6 +35,8 @@ export default class LayerItem extends Component<LayerItemProps, LayerItemState>
   static defaultProps: LayerItemProps = {
     index: 0,
     name: '',
+    data: null,
+    collapsible: false,
     onClick: noop,
     onDblClick: noop,
     onChange: noop,
