@@ -1,3 +1,12 @@
+type PropertyValue = string | number | boolean;
+
+/**
+ * Collection Properties Interface
+ */
+interface CollectionProperties {
+  [key: string]: PropertyValue;
+}
+
 /**
  * Collection
  */
@@ -5,12 +14,27 @@ export class Collection {
   private parent: Collection = null!;
   private _items: Collection[] = [];
   private _childrenCount = 0;
+  private properties: CollectionProperties = {};
 
   /**
    * Collection Constructor
    */
   constructor(public type: string, parent?: Collection) {
     this.parent = parent || null!;
+  }
+
+  /**
+   * Set/Get Property
+   * @param name
+   * @param value
+   */
+  props(name: string, value?: PropertyValue): PropertyValue | Collection {
+    if (typeof value !== 'undefined') {
+      this.properties[name] = value;
+      return this;
+    } else {
+      return name in this.properties ? this.properties[name] : null!;
+    }
   }
 
   /**
