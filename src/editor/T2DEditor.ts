@@ -5,6 +5,7 @@ import {TControllerList} from './TController';
 import {TPath} from './TPath';
 import {isPointInPoly} from '@core/math/isPointInPoly';
 import {loopv} from '@core/common/loops';
+import {Collection} from '@core/Collection';
 
 declare global {
   interface Layer {
@@ -24,8 +25,11 @@ declare global {
   type TLayers = Layer[];
 }
 
+class CollectionLayers extends Collection {
+}
+
 export class T2DEditor {
-  layers: TLayers = [];
+  layers: CollectionLayers = new CollectionLayers('layers');
 
   layer: Layer = null!;
   graphics: TVectorGraphics = null!;

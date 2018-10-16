@@ -24,14 +24,24 @@ export class Collection {
   }
 
   /**
+   * Tiny Proxy
+   * @param name
+   */
+  define<T>(name: string) {
+    Object.defineProperty(this, name, {
+      set: (value: T) => (this.props(name, value as any) as any) as T,
+      get: (): T => (this.props(name) as any) as T
+    });
+  }
+
+  /**
    * Set/Get Property
    * @param name
    * @param value
    */
-  props(name: string, value?: PropertyValue): PropertyValue | Collection {
+  props(name: string, value?: PropertyValue): PropertyValue {
     if (typeof value !== 'undefined') {
-      this.properties[name] = value;
-      return this;
+      return this.properties[name] = value;
     } else {
       return name in this.properties ? this.properties[name] : null!;
     }
