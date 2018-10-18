@@ -176,12 +176,12 @@ export default class SideBar extends Component<SideBarProps, SideBarState> {
         if (i < subItemsEnd) {
           ret.push(subItems[i - subItemsStart]);
         } else {
-          ret.push(items[i + 1 - subItemsEnd]);
+          ret.push(items.get(i + 1 - subItemsEnd));
         }
       } else if (i >= subItemsEnd) {
-        ret.push(items[i - subItemsEnd]);
+        ret.push(items.get(i - subItemsEnd));
       } else {
-        ret.push(items[i]);
+        ret.push(items.get(i));
       }
     }
     console.log(ret);

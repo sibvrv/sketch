@@ -86,6 +86,14 @@ export class Collection {
     return this._items;
   }
 
+  get(index: number): Collection {
+    return this._items[index];
+  }
+
+  set(index: number, data: Collection) {
+    return this._items[index] = data;
+  }
+
   /**
    * Push Items
    * @param items
@@ -104,10 +112,28 @@ export class Collection {
     return this._items.pop();
   }
 
+  remove(index: number) {
+    this._items.splice(index, 1);
+    this.childrenCount -= 1;
+  }
+
+  clean() {
+    this.childrenCount -= this._items.length;
+    this._items.length = 0;
+  }
+
+  indexOf(value: any) {
+    return this._items.indexOf(value);
+  }
+
   /**
    * Length
    */
   get length() {
     return this._items.length;
+  }
+
+  each(callback: (value: Collection, index: number, array: Collection[], thisArg?: any) => any) {
+    return this._items.map(callback);
   }
 }

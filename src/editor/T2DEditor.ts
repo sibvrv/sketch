@@ -4,7 +4,6 @@ import {TVectorGraphics} from './TVectorGraphics';
 import {TControllerList} from './TController';
 import {TPath} from './TPath';
 import {isPointInPoly} from '@core/math/isPointInPoly';
-import {loopv} from '@core/common/loops';
 import {Collection} from '@core/Collection';
 
 declare global {
@@ -21,17 +20,29 @@ declare global {
 
     reset(): void;
   }
+}
 
-  type TLayers = Layer[];
+class CollectionLayer extends Collection {
+  name: string;
+  shape = new TVectorGraphics();
+  controls = new TControllerList();
+
+  /**
+   * CollectionLayer Constructor
+   */
+  constructor(parent: Collection) {
+    super('layer', parent);
+    this.define('name');
+  }
 }
 
 class CollectionLayers extends Collection {
 }
 
 export class T2DEditor {
-  layers: CollectionLayers = new CollectionLayers('layers');
+  layers: CollectionLayers = new CollectionLayers('document');
 
-  layer: Layer = null!;
+  layer: CollectionLayer = null!;
   graphics: TVectorGraphics = null!;
   controls: TControllerList = null!;
 
@@ -62,13 +73,10 @@ export class T2DEditor {
    * @returns {Layer}
    */
   selectLayer(index: number) {
-    if (!this.layers[index]) {
-      this.layers[index] = {
-        shape: new TVectorGraphics(),
-        controls: new TControllerList()
-      };
+    if (!this.layers.get(index)) {
+      this.layers.set(index, new CollectionLayer(this.layers));
     }
-    this.layer = this.layers[index];
+    this.layer = this.layers.get(index) as CollectionLayer;
 
     this.graphics = this.layer.shape;
     this.controls = this.layer.controls;
@@ -82,11 +90,12 @@ export class T2DEditor {
    * @param {number} index
    */
   removeLayer(index: number) {
-    if (!this.layers[index]) {
+    const item = this.layers.get(index) as CollectionLayer;
+    if (!item) {
       return;
     }
-    this.layers[index].shape.clear();
-    this.layers.splice(index, 1);
+    item.shape.clear();
+    this.layers.remove(index);
     this.selectLayer(Math.max(0, index - 1));
   }
 
@@ -96,8 +105,9 @@ export class T2DEditor {
    * @param {string} name
    */
   renameLayer = (index: number, name: string) => {
-    if (this.layers[index]) {
-      this.layers[index].name = name;
+    const item = this.layers.get(index);
+    if (item) {
+      item.props('name', name);
     }
   };
 
@@ -233,7 +243,7 @@ export class T2DEditor {
   doSave() {
     const layers: any[] = [];
 
-    loopv(this.layers, layer => {
+    this.layers.each((layer: CollectionLayer) => {
       const shape = layer.shape.asText();
 
       if (!shape.length) {
@@ -255,7 +265,7 @@ export class T2DEditor {
    */
   doLoad(data: any) {
     this.selected.reset();
-    this.layers = [];
+    this.layers.clean();
 
     for (const key in data) {
       const ld = data[+key];
