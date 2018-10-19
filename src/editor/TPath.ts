@@ -3,6 +3,7 @@ import {Vec2} from '@core/math/Vec2';
 import {distToLineSegment} from '@core/math/distLine';
 import {isClockwise} from '@core/path/isClockwise';
 import {getArea} from '@core/path/getArea';
+import {Collection} from '@core/Collection';
 
 declare global {
   interface TLine {
@@ -57,45 +58,22 @@ function EllipseCurve(aX: number, aY: number, xRadius: number, yRadius: number, 
   return new TPoint(x, y);
 }
 
-interface TPathProperties {
-  [key: string]: string | number | boolean;
-}
-
-export class TPath {
-
+export class TPath extends Collection {
   path: TPoint[] = [];
-  properties: TPathProperties = {
-    name: '',
-    class: '',
-
-    tags: '',
-    mask: false
-  };
+  mask: boolean;
 
   /**
    * TPath Constructor
    */
-  constructor(name?: string) {
-    if (name) {
-      this.setProps({name});
-    }
-  }
-
-  /**
-   * Set Property
-   * @param {TPathProperties} props
-   */
-  setProps(props: TPathProperties) {
-    this.properties = {...this.properties, ...props};
-  }
-
-  /**
-   * Get Property
-   * @param {string} key
-   * @returns {any}
-   */
-  getProp(key: string): any {
-    return key in this.properties ? this.properties[key] : null;
+  constructor(parent?: Collection, name?: string) {
+    super('path', parent);
+    this.props({
+      name: name || '',
+      class: '',
+      tags: '',
+      mask: false
+    });
+    this.define<boolean>('mask');
   }
 
   /**
@@ -104,7 +82,7 @@ export class TPath {
    */
   clone() {
     const ret = new TPath();
-    ret.properties = {...this.properties};
+//    ret.properties = {...this.properties}; todo
     ret.path = new Array(this.path.length);
     for (let i = this.path.length; --i >= 0;) {
       ret.path[i] = this.path[i].clone();

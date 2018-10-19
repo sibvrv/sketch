@@ -6,6 +6,7 @@ import {controlsRender} from '@editor/render/ControlsRender';
 import {color_fill, color_stroke, disk, line} from '@editor/render/canvas';
 import {Vec2, vec2_normalize} from '@core/math/Vec2';
 import {DrawGrid} from '@editor/render/Grid';
+import {TPath} from '@editor/TPath';
 
 export function editorRender(ctx: CanvasRenderingContext2D, editor: T2DEditor, width: number, height: number) {
   const {view, selected} = editor;
@@ -24,7 +25,7 @@ export function editorRender(ctx: CanvasRenderingContext2D, editor: T2DEditor, w
   const dy = view.position.y;
   GLOB.canvasScale = view.zoom;
 
-  const sec = editor.graphics.items;
+  const sec = editor.graphics.rawItems as TPath[];
   for (let i = 0; i < sec.length; ++i) {
     shapeRender(ctx, sec[i], view.position);
   }

@@ -55,8 +55,8 @@ export default class ShapeOptions extends Component<ShapeOptionsProps, ShapeOpti
 
     this.setState({
       type,
-      name: selected.sector && selected.sector.getProp('name'),
-      mask: selected.sector && selected.sector.getProp('mask'),
+      name: selected.sector && selected.sector.props('name') as string,
+      mask: selected.sector && selected.sector.props('mask') as boolean,
       radius: selected.point && selected.point.r || 0,
       steps: selected.point && selected.point.steps || 1
     });
@@ -72,7 +72,7 @@ export default class ShapeOptions extends Component<ShapeOptionsProps, ShapeOpti
   handleSetName = (e: Event) => {
     const {value} = (e.target as HTMLInputElement);
     const shape = GLOB.editor.selected.sector;
-    shape.setProps({name: value});
+    shape.props({name: value});
   };
 
   /**
@@ -101,7 +101,7 @@ export default class ShapeOptions extends Component<ShapeOptionsProps, ShapeOpti
   handleMask = (e: Event) => {
     const {checked} = (e.target as HTMLInputElement);
     const shape = GLOB.editor.selected.sector;
-    shape.setProps({mask: checked});
+    shape.props({mask: checked});
     redraw();
   };
 

@@ -202,7 +202,7 @@ function selected_info() {
     status.push(`Area: ${selected.sector.getArea().toFixed(2)}`);
     status.push(`Vertex: ${selected.sector.path.length}`);
   } else {
-    status.push(`Items: ${editor.graphics.items.length}`);
+    status.push(`Items: ${editor.graphics.length}`);
   }
 
   defaultStorage.setState({

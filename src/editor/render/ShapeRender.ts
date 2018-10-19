@@ -6,7 +6,7 @@ export function shapeRender(ctx: CanvasRenderingContext2D, shape: TPath, v: Vec2
   const path = shape.convertPath(shape.path);
   const len = path.length;
 
-  color_fill(ctx, shape.properties.mask ? 'rgba(190,160,160,0.4)' : 'rgba(160,160,190,0.8)');
+  color_fill(ctx, shape.mask ? 'rgba(190,160,160,0.4)' : 'rgba(160,160,190,0.8)');
   poly(ctx, path, v);
   color_fill(ctx, '#F00');
   color_stroke(ctx, '#777');

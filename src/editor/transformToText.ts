@@ -24,7 +24,7 @@ export function pathToText(path: TPath) {
   }
 
   return compact({
-    ...path.properties,
+    ...path.rawProps,
     path: ret
   });
 }

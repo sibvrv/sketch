@@ -35,16 +35,34 @@ export class Collection {
   }
 
   /**
-   * Set/Get Property
+   * Set prop
+   * @param state
+   */
+  props(state: object): void;
+  /**
+   * Set or Get prop
    * @param name
    * @param value
    */
-  props(name: string, value?: PropertyValue): PropertyValue {
-    if (typeof value !== 'undefined') {
-      return this.properties[name] = value;
-    } else {
-      return name in this.properties ? this.properties[name] : null!;
+  props(name: string, value?: PropertyValue): PropertyValue;
+  /**
+   * Set or Get props
+   * @param stateOrName
+   * @param value
+   */
+  props(stateOrName: object | string, value?: PropertyValue): void | PropertyValue {
+    if (typeof stateOrName === 'object') {
+      this.properties = {...this.properties, ...stateOrName};
+      return;
     }
+    if (typeof value !== 'undefined') {
+      return this.properties[stateOrName] = value;
+    }
+    return stateOrName in this.properties ? this.properties[stateOrName] : null!;
+  }
+
+  get rawProps() {
+    return this.properties;
   }
 
   /**

@@ -91,7 +91,7 @@ export class T2DEditor {
     if (!item) {
       return;
     }
-    item.shape.clear();
+    item.shape.clean();
     this.layers.remove(index);
     this.selectLayer(Math.max(0, index - 1));
   }
@@ -113,7 +113,7 @@ export class T2DEditor {
    */
   clearLayer() {
     this.selected.reset();
-    this.layer.shape.clear();
+    this.layer.shape.clean();
   }
 
   /**
@@ -123,7 +123,7 @@ export class T2DEditor {
    * @param {number} t
    */
   select(in_x: number, in_y: number, t?: number) {
-    const shapeItems = this.graphics.items;
+    const shapeItems: TPath[] = this.graphics.rawItems as any;
     t = t || 5;
 
     let sel = this.selected;
@@ -196,7 +196,7 @@ export class T2DEditor {
     } else if (sel.point) {
       sel.sector.deletePoint(sel.point as TPoint);
     } else if (sel.sector) {
-      const sec = this.graphics.items;
+      const sec = this.graphics.rawItems;
       const index = sec.indexOf(sel.sector);
       if (index < 0) {
         return;
@@ -286,7 +286,7 @@ export class T2DEditor {
           }
         }
 
-        p.setProps({
+        p.props({
           name: it.name || '',
           class: it.class || '',
           tags: it.tags || '',

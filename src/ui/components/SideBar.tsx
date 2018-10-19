@@ -155,7 +155,7 @@ export default class SideBar extends Component<SideBarProps, SideBarState> {
    */
   handleLayerItemsCount = () => {
     const {editor} = GLOB;
-    return editor.layers.length + editor.layer.shape.items.length;
+    return editor.layers.length + editor.layer.shape.rawItems.length;
   };
 
   /**
@@ -165,7 +165,7 @@ export default class SideBar extends Component<SideBarProps, SideBarState> {
     const {editor} = GLOB;
 
     const items = editor.layers;
-    const subItems = editor.layer.shape.items;
+    const subItems = editor.layer.shape.rawItems;
 
     const subItemsStart = 1 + items.indexOf(editor.layer);
     const subItemsEnd = subItemsStart + subItems.length;
