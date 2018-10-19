@@ -36,11 +36,8 @@ class CollectionLayer extends Collection {
   }
 }
 
-class CollectionLayers extends Collection {
-}
-
 export class T2DEditor {
-  layers: CollectionLayers = new CollectionLayers('document');
+  layers = new Collection('document');
 
   layer: CollectionLayer = null!;
   graphics: TVectorGraphics = null!;

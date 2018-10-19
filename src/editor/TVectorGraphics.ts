@@ -1,8 +1,16 @@
 import {TPath} from './TPath';
 import {pathToText} from '@editor/transformToText';
+import {Collection} from '@core/Collection';
 
-export class TVectorGraphics {
+export class TVectorGraphics extends Collection {
   items: TPath[] = [];
+
+  /**
+   * TVectorGraphics Constructor
+   */
+  constructor(parent?: Collection) {
+    super('shape', parent);
+  }
 
   clear() {
     this.items.length = 0;
@@ -10,7 +18,7 @@ export class TVectorGraphics {
 
   clone() {
     const ret = new TVectorGraphics();
-    ret.items = new Array(this.items.length);
+    ret.items.length = this.items.length;
     for (let i = this.items.length; --i >= 0;) {
       ret.items[i] = this.items[i].clone();
     }
