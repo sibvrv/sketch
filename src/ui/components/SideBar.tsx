@@ -4,6 +4,7 @@ import {redraw} from '@root/main';
 import defaultStorage from '@store/defaultStorage';
 import VirtualList from '@ui/components/VirtualList/VirtualList';
 import LayerItem from '@ui/components/LayerList/LayerItem';
+import {collectionGetItemsRange} from '@core/CollectionUtils';
 
 /**
  * SideBar Props Interface
@@ -155,7 +156,7 @@ export default class SideBar extends Component<SideBarProps, SideBarState> {
    */
   handleLayerItemsCount = () => {
     const {editor} = GLOB;
-    return editor.layers.length + editor.layer.shape.rawItems.length;
+    return editor.layers.childrenCount;
   };
 
   /**
@@ -163,29 +164,7 @@ export default class SideBar extends Component<SideBarProps, SideBarState> {
    */
   handleLayerItems = (from: number, to: number) => {
     const {editor} = GLOB;
-
-    const items = editor.layers;
-    const subItems = editor.layer.shape.rawItems;
-
-    const subItemsStart = 1 + items.indexOf(editor.layer);
-    const subItemsEnd = subItemsStart + subItems.length;
-
-    const ret: any[] = [];
-    for (let i = from; i < to; i++) {
-      if (i >= subItemsStart) {
-        if (i < subItemsEnd) {
-          ret.push(subItems[i - subItemsStart]);
-        } else {
-          ret.push(items.get(i + 1 - subItemsEnd));
-        }
-      } else if (i >= subItemsEnd) {
-        ret.push(items.get(i - subItemsEnd));
-      } else {
-        ret.push(items.get(i));
-      }
-    }
-    console.log(ret);
-    return ret;
+    return collectionGetItemsRange(editor.layers, from, Math.max(10, to - from));
   };
 
   /**

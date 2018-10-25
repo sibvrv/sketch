@@ -109,7 +109,13 @@ export class Collection {
   }
 
   set(index: number, data: Collection) {
-    return this._items[index] = data;
+    const lengthBefore = this._items.length;
+    if (this._items[index]) {
+      this.childrenCount -= this._items[index].childrenCount;
+    }
+    this._items[index] = data;
+    this.childrenCount += (data ? data.childrenCount : 0) + (this._items.length - lengthBefore);
+    return data;
   }
 
   /**

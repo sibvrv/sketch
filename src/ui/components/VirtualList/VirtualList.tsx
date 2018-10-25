@@ -34,7 +34,7 @@ export default class VirtualList extends Component<VirtualListProps, VirtualList
     cachedItems: 10,
     onGetItemsCount: noop,
     onGetItems: noop,
-    renderItem: () => null!
+    renderItem: noop
   };
 
   /**

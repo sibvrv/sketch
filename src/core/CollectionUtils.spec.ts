@@ -39,7 +39,11 @@ describe('Collection Utils', function () {
 
     dump(doc);
 
-    const items = collectionGetItemsRange(doc, 15562, 15581);
+    const items = collectionGetItemsRange(doc, 15562, 20);
+
+    for (let i = 0; i < items.length; i++) {
+      console.log('found', items[i].type);
+    }
 
   });
 });

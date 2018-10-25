@@ -1,19 +1,32 @@
 import {Collection} from '@core/Collection';
 
-export function collectionGetItemsRange(it: Collection, from: number, limit: number, filter?: (item: Collection) => boolean) {
-  const total = it.childrenCount;
-  const ret: Collection[] = [];
+interface IteratorData {
+  cur: number;
+  from: number;
+  limit: number;
+  filter?: (item: Collection) => boolean;
+}
 
+function collectionGetItemsRangeSlow(it: Collection, result: Collection[], iterator: IteratorData) {
   const items = it.rawItems;
-  const scope = [];
-  let startIndex = 0;
-  for (let current = 0, index = 0; current < total; current += items[index++].childrenCount) {
-    if (current <= from) {
-      startIndex = index;
+  for (let i = 0; i < items.length; i++) {
+    iterator.cur++;
+    if (iterator.cur >= iterator.from) {
+      const count = result.push(items[i]);
+      if (count >= iterator.limit) {
+        return false;
+      }
+    }
+    if (!collectionGetItemsRangeSlow(items[i], result, iterator)) {
+      return false;
     }
   }
+  return true;
+}
 
-  console.log('start Index', startIndex);
-
-  return ret;
+export function collectionGetItemsRange(it: Collection, from: number, limit: number, filter?: (item: Collection) => boolean) {
+  const result: Collection[] = [];
+  const iterator: IteratorData = {cur: -1, from, limit, filter};
+  collectionGetItemsRangeSlow(it, result, iterator);
+  return result;
 }
