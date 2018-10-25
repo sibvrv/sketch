@@ -51,10 +51,6 @@ describe('Collection', function () {
     );
     collection.pop();
 
-    console.log(collectionA);
-    console.log(collectionB);
-    console.log(collection);
-
     expect(collectionA.childrenCount).to.equal(5);
     expect(collectionA.length).to.equal(0);
 

@@ -82,7 +82,7 @@ export class TPath extends Collection {
    */
   clone() {
     const ret = new TPath();
-//    ret.properties = {...this.properties}; todo
+    ret.props(this.rawProps);
     ret.path = new Array(this.path.length);
     for (let i = this.path.length; --i >= 0;) {
       ret.path[i] = this.path[i].clone();
