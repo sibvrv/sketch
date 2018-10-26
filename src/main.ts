@@ -61,7 +61,7 @@ function doMouseDown(event: MouseEvent) {
       if (event.ctrlKey) {
         const {zoom} = editor.view;
 
-        const sec = editor.selected.sector = editor.selected.sector || editor.graphics.Path2D();
+        const sec = editor.selected.sector = editor.selected.sector || editor.layer.Path2D();
         const p = new Vec2(
           -editor.view.position.x + mouse.x / zoom,
           -editor.view.position.y + mouse.y / zoom
@@ -202,7 +202,7 @@ function selected_info() {
     status.push(`Area: ${selected.sector.getArea().toFixed(2)}`);
     status.push(`Vertex: ${selected.sector.path.length}`);
   } else {
-    status.push(`Items: ${editor.graphics.length}`);
+    status.push(`Items: ${editor.layer.length}`);
   }
 
   defaultStorage.setState({

@@ -5,6 +5,7 @@ import {TControllerList} from './TController';
 import {TPath} from './TPath';
 import {isPointInPoly} from '@core/math/isPointInPoly';
 import {Collection} from '@core/Collection';
+import {pathToText} from '@editor/transformToText';
 
 declare global {
   interface Layer {
@@ -24,7 +25,6 @@ declare global {
 
 class CollectionLayer extends Collection {
   name: string;
-  shape = new TVectorGraphics();
   controls = new TControllerList();
 
   /**
@@ -33,6 +33,21 @@ class CollectionLayer extends Collection {
   constructor(parent: Collection) {
     super('layer', parent);
     this.define('name');
+  }
+
+  Path2D(name?: string) {
+    const ret = new TPath(this, name);
+    this.push(ret);
+    return ret;
+  }
+
+  asText() {
+    const raw = this.rawItems;
+    const items = [];
+    for (let i = 0; i < raw.length; i++) {
+      items.push(pathToText(raw[i] as TPath));
+    }
+    return items;
   }
 }
 
@@ -74,8 +89,6 @@ export class T2DEditor {
       this.layers.set(index, new CollectionLayer(this.layers));
     }
     this.layer = this.layers.get(index) as CollectionLayer;
-
-    this.graphics = this.layer.shape;
     this.controls = this.layer.controls;
 
     this.selected.reset();
@@ -91,7 +104,7 @@ export class T2DEditor {
     if (!item) {
       return;
     }
-    item.shape.clean();
+    item.clean();
     this.layers.remove(index);
     this.selectLayer(Math.max(0, index - 1));
   }
@@ -113,7 +126,7 @@ export class T2DEditor {
    */
   clearLayer() {
     this.selected.reset();
-    this.layer.shape.clean();
+    this.layer.clean();
   }
 
   /**
@@ -123,7 +136,7 @@ export class T2DEditor {
    * @param {number} t
    */
   select(in_x: number, in_y: number, t?: number) {
-    const shapeItems: TPath[] = this.graphics.rawItems as any;
+    const shapeItems: TPath[] = this.layer.rawItems as any;
     t = t || 5;
 
     let sel = this.selected;
@@ -196,7 +209,7 @@ export class T2DEditor {
     } else if (sel.point) {
       sel.sector.deletePoint(sel.point as TPoint);
     } else if (sel.sector) {
-      const sec = this.graphics.rawItems;
+      const sec = this.layer.rawItems;
       const index = sec.indexOf(sel.sector);
       if (index < 0) {
         return;
@@ -241,7 +254,7 @@ export class T2DEditor {
     const layers: any[] = [];
 
     this.layers.each((layer: CollectionLayer) => {
-      const shape = layer.shape.asText();
+      const shape = layer.asText();
 
       if (!shape.length) {
         return;
@@ -273,7 +286,7 @@ export class T2DEditor {
       for (const i in shape) {
         const it = shape[i];
         const path = it.path;
-        const p = layer.shape.Path2D();
+        const p = layer.Path2D();
         for (const pt in path) {
           const point = path[+pt];
 

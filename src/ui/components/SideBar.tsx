@@ -5,6 +5,7 @@ import defaultStorage from '@store/defaultStorage';
 import VirtualList from '@ui/components/VirtualList/VirtualList';
 import LayerItem from '@ui/components/LayerList/LayerItem';
 import {collectionGetItemsRange} from '@core/CollectionUtils';
+import {Collection} from '@core/Collection';
 
 /**
  * SideBar Props Interface
@@ -136,14 +137,14 @@ export default class SideBar extends Component<SideBarProps, SideBarState> {
 
   /**
    * Render Layer Item
-   * @param {Layer} item
+   * @param {Collection} item
    * @param {number} index
    * @returns {any}
    */
-  renderLayerItem = (item: Layer, index: number) =>
+  renderLayerItem = (item: Collection, index: number) =>
     <LayerItem
       index={index}
-      name={item.name || ''}
+      name={item.props('name') as string}
       selected={item === GLOB.editor.layer}
       data={item}
       onClick={this.handleLayerClick}

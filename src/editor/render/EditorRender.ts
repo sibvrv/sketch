@@ -25,7 +25,7 @@ export function editorRender(ctx: CanvasRenderingContext2D, editor: T2DEditor, w
   const dy = view.position.y;
   GLOB.canvasScale = view.zoom;
 
-  const sec = editor.graphics.rawItems as TPath[];
+  const sec = editor.layer.rawItems as TPath[];
   for (let i = 0; i < sec.length; ++i) {
     shapeRender(ctx, sec[i], view.position);
   }
