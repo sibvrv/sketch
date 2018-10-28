@@ -14,7 +14,7 @@ module.exports = (env, argv) => {
       filename: 'app.js'
     },
     resolve: {
-      extensions: ['.js', '.ts', '.tsx'],
+      extensions: ['.js', '.ts', '.tsx', '.less'],
       plugins: [
         new TsConfigPathsPlugin()
       ]

@@ -1,5 +1,6 @@
 import {Component, h} from 'preact';
 import {noop} from '@core/common/noop';
+import {Collection} from '@core/Collection';
 
 /**
  * LayerItem Props Interface
@@ -7,7 +8,7 @@ import {noop} from '@core/common/noop';
 interface LayerItemProps {
   index: number;
   name: string;
-  data?: any;
+  data?: Collection;
   collapsible?: boolean;
   selected?: boolean;
   onClick?: (index: number) => void;
@@ -21,6 +22,7 @@ interface LayerItemProps {
  */
 interface LayerItemState {
   inEdit: boolean;
+  level: number;
 }
 
 /**
@@ -35,7 +37,7 @@ export default class LayerItem extends Component<LayerItemProps, LayerItemState>
   static defaultProps: LayerItemProps = {
     index: 0,
     name: '',
-    data: null,
+    data: null!,
     collapsible: false,
     onClick: noop,
     onDblClick: noop,
@@ -53,9 +55,18 @@ export default class LayerItem extends Component<LayerItemProps, LayerItemState>
   constructor(props: LayerItemProps) {
     super(props);
     this.state = {
-      inEdit: false
+      inEdit: false,
+      level: this.getItemLevel(props.data!)
     };
   }
+
+  getItemLevel = (item: Collection) => {
+    let level = 0;
+    for (; item; item = item.parent) {
+      level++;
+    }
+    return level;
+  };
 
   /**
    * LayerItem : Click Handler
@@ -110,10 +121,10 @@ export default class LayerItem extends Component<LayerItemProps, LayerItemState>
   /**
    * Render LayerItem Component
    */
-  render({index, name, selected}: LayerItemProps, {inEdit}: LayerItemState) {
+  render({index, name, selected}: LayerItemProps, {inEdit, level}: LayerItemState) {
     return (
       <div
-        class={['layer-row', selected && 'selected']}
+        class={['layer-row', selected && 'selected', `level_${level}`]}
         onClick={this.handleClick}
         data-id={index}>
         <p

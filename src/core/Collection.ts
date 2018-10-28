@@ -11,10 +11,10 @@ interface CollectionProperties {
  * Collection
  */
 export class Collection {
-  private parent: Collection = null!;
   private _items: Collection[] = [];
   private _childrenCount = 0;
   private properties: CollectionProperties = {};
+  public parent: Collection = null!;
 
   /**
    * Collection Constructor
