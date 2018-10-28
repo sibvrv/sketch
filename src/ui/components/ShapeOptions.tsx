@@ -2,6 +2,7 @@ import {Component, h, PreactDOMAttributes} from 'preact';
 import connectToStores from '@store/connectToStores';
 import GLOB from '@root/types';
 import {redraw} from '@root/main';
+import './ShapeOptions.less';
 
 /**
  * ShapeOptions Props Interface
@@ -110,13 +111,16 @@ export default class ShapeOptions extends Component<ShapeOptionsProps, ShapeOpti
    */
   render({selectedChange}: ShapeOptionsProps & PreactDOMAttributes, {type, name, mask, radius, steps}: ShapeOptionsState) {
     return (
-      <div id="options" class="window">
-        <p><label>Объект <input type="text" value={name} onInput={this.handleSetName} onChange={this.handleSetName}/></label></p>
+      <div class="optionsEditor window">
+        <p><label>Объект <input type="text" value={name} onInput={this.handleSetName}
+                                onChange={this.handleSetName}/></label></p>
         <p><label>Маска <input type="checkbox" checked={mask} onChange={this.handleMask}/></label></p>
 
         {type === 'point' && [
-          <p><label>Радиус <input type="number" step="1" min="0" max="1000" value={radius} onInput={this.handleRadius} onChange={this.handleRadius}/></label></p>,
-          <p><label>Шаг <input type="number" min="0" value={steps} onInput={this.handleSteps} onChange={this.handleSteps}/></label></p>
+          <p><label>Радиус <input type="number" step="1" min="0" max="1000" value={radius} onInput={this.handleRadius}
+                                  onChange={this.handleRadius}/></label></p>,
+          <p><label>Шаг <input type="number" min="0" value={steps} onInput={this.handleSteps}
+                               onChange={this.handleSteps}/></label></p>
         ]}
 
         {/*

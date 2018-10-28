@@ -1,0 +1,27 @@
+:global {
+  .virtual-list {
+    padding: 0;
+    margin: 0;
+    height: 100%;
+
+    .selected {
+      color: #21CCFC;
+    }
+
+    .virtual-list-inner {
+      position: relative;
+      overflow: hidden;
+      width: 100%;
+      min-height: 100%;
+    }
+
+    .virtual-list-content {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+      overflow: visible;
+    }
+  }
+}

@@ -73,31 +73,6 @@ input[type="color"] {
   font: 12px sans-serif;
 }
 
-#options {
-  top: 8px;
-  right: 8px;
-  padding: 0 0 8px 0;
-}
-
-#options p {
-  white-space: nowrap;
-  margin: 10px 15px;
-}
-
-#options input {
-  font-size: 11px;
-  width: 60px;
-  margin-left: 5px;
-  padding: 5px 8px;
-}
-
-#options input[type="text"] {
-  width: 120px;
-  display: block;
-  margin: 0;
-  margin-top: 5px;
-}
-
 /* Menu */
 
 .accordion {
@@ -307,32 +282,6 @@ ul li:hover i {
 #vlist-layers {
   margin: 0;
   padding: 0;
-}
-
-.virtual-list {
-  padding: 0;
-  margin: 0;
-  height: 100%;
-}
-
-.virtual-list .selected {
-  color: #21CCFC;
-}
-
-.virtual-list .virtual-list-inner {
-  position: relative;
-  overflow: hidden;
-  width: 100%;
-  min-height: 100%;
-}
-
-.virtual-list .virtual-list-content {
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: 100%;
-  overflow: visible;
 }
 
 .layers-list {
