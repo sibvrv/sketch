@@ -1,5 +1,6 @@
 import {Component, h} from 'preact';
 import connectToStores from '../../store/connectToStores';
+import * as styles from './StatusBar.less';
 
 /**
  * StatusBar Props Interface
@@ -35,7 +36,7 @@ export default class StatusBar extends Component<StatusBarProps, StatusBarState>
    */
   render({status}: StatusBarProps, {}: StatusBarState) {
     return (
-      <div id="status">{status}</div>
+      <div class={styles.statusBar}>{status}</div>
     );
   }
 }

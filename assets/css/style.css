@@ -26,29 +26,6 @@ body {
   bottom: 20px;
 }
 
-.export_panel {
-  background: #eee;
-  border: solid 1px #666;
-
-  padding: 16px;
-  margin: 0;
-  overflow: hidden;
-  position: absolute;
-  right: 300px;
-  left: 5%;
-  bottom: 5%;
-  top: 5%;
-}
-
-.export_data {
-  display: block;
-  position: absolute;
-  left: 0;
-  width: 100%;
-  top: 64px;
-  bottom: 0;
-}
-
 input[type="checkbox"] {
   position: absolute;
 }
@@ -96,79 +73,6 @@ input[type="color"] {
   font: 12px sans-serif;
 }
 
-#tools {
-  font-size: 0;
-  padding: 2px 0;
-  text-align: center;
-  top: 8px;
-  left: 8px;
-}
-
-#tools button {
-  color: #bbb;
-  font-size: 0;
-  background: linear-gradient(rgba(0, 0, 0, .2), rgba(0, 0, 0, .4));
-  border: 1px solid #181818;
-  margin: 6px 8px;
-  padding: 6px;
-  display: none;
-}
-
-#tools:hover button {
-  display: block;
-}
-
-#tools button:hover {
-  color: #fff;
-  background: linear-gradient(rgba(0, 0, 0, .4), rgba(0, 0, 0, .2));
-}
-
-#tools button:focus {
-  border-color: #2098f5;
-  outline: 0;
-}
-
-#tools button.selected {
-  color: #fff;
-  background: #2098f5;
-  border-color: transparent;
-  display: block;
-}
-
-#tools button.selected:focus {
-  outline: 1px solid;
-  outline-offset: -2px;
-}
-
-#tools svg {
-  width: 18px;
-  height: 18px;
-  pointer-events: none;
-}
-
-#tools svg.fill {
-  fill: currentColor;
-}
-
-#tools svg.stroke {
-  fill: none;
-  stroke: currentColor;
-  stroke-width: 2;
-}
-
-#tools hr {
-  border: 0;
-  border-top: 1px solid #222;
-  margin: 6px 0;
-}
-
-#tools .color {
-  background: currentColor;
-  border: 0;
-  width: 32px;
-  height: 32px;
-}
-
 #options {
   top: 8px;
   right: 8px;
@@ -192,20 +96,6 @@ input[type="color"] {
   display: block;
   margin: 0;
   margin-top: 5px;
-}
-
-#status {
-  background: rgba(0, 0, 0, 0.5);
-  color: #fff;
-  font-size: 12px;
-  height: 18px;
-  line-height: 18px;
-  padding: 0 20px;
-  position: absolute;
-  right: 250px;
-  bottom: 0;
-  left: 0;
-  overflow: hidden;
 }
 
 /* Menu */

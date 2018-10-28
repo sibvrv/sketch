@@ -1,3 +1,5 @@
+declare module '*.less';
+
 /**
  * extends preact HTMLAttributes
  */

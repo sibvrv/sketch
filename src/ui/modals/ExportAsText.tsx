@@ -1,6 +1,7 @@
 import {Component, h, PreactDOMAttributes} from 'preact';
 import defaultStorage from '@store/defaultStorage';
 import GLOB from '@root/types';
+import * as styles from './style.less';
 
 /**
  * ExportAsText Props Interface
@@ -57,9 +58,9 @@ export default class ExportAsText extends Component<ExportAsTextProps, ExportAsT
    */
   render({children}: ExportAsTextProps & PreactDOMAttributes, {data}: ExportAsTextState) {
     return (
-      <div class="export_panel">
+      <div class={styles.export_panel}>
         <div class="btn close" onClick={this.handleClose}>close</div>
-        <textarea class="export_data" value={data}/>
+        <textarea class={styles.export_data} value={data}/>
       </div>
     );
   }

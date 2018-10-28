@@ -1,4 +1,5 @@
 import {Component, h, PreactDOMAttributes} from 'preact';
+import './ToolsBar.less';
 
 /**
  * ToolsBar Props Interface
@@ -63,7 +64,7 @@ export default class ToolsBar extends Component<ToolsBarProps, ToolsBarState> {
    */
   render({children}: ToolsBarProps & PreactDOMAttributes, {}: ToolsBarState) {
     return (
-      <div id="tools" class="window">
+      <div class="tools_bar window">
         <ToolButton name="btn-select" title="Select / transform">
           <svg class="fill">
             <path d="M3,0l11.5,11.5h-5l3,5l-1.5,1l-4.2,-6.2l-3.8,5z"/>
