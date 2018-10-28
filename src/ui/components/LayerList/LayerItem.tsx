@@ -1,6 +1,7 @@
 import {Component, h} from 'preact';
 import {noop} from '@core/common/noop';
 import {Collection} from '@core/Collection';
+import './LayerItem.less';
 
 /**
  * LayerItem Props Interface

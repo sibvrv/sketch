@@ -297,50 +297,6 @@ ul li:hover i {
   overflow: auto;
 }
 
-.layer-row {
-  line-height: 30px;
-  height: 30px;
-  max-height: 30px;
-
-  margin: 0;
-  padding: 0 0 0 10px;
-
-  cursor: pointer;
-
-  border-left: 3px solid #333;
-  position: relative;
-}
-
-.layer-row:hover {
-  border-left: 3px solid #21CCFC;
-}
-
-.layer-row p {
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  border: none;
-  margin: 0;
-}
-
-.layer-row i {
-  position: absolute;
-  opacity: 0;
-  top: 0;
-  right: 20px;
-  line-height: 30px;
-  color: #666;
-  transition: all 0.3s ease-in-out;
-}
-
-.layer-row:hover i {
-  opacity: 1;
-}
-
-.layer-row i:hover {
-  color: #FFF;
-}
-
 .layer-toolbar {
   height: 36px;
   line-height: 36px;

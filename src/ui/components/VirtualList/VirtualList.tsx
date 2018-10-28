@@ -1,5 +1,6 @@
 import {Component, h} from 'preact';
 import {noop} from '@core/common/noop';
+import './VirtualList.less';
 
 /**
  * VirtualList Props Interface
