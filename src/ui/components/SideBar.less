@@ -1,0 +1,105 @@
+:global {
+  .accordion {
+    color: #FFF;
+    width: 100%;
+    font-size: 14px;
+
+    .section {
+      width: 100%;
+      position: relative;
+
+      &:last-of-type {
+        border-bottom: 1px solid #363636;
+      }
+
+      & > label {
+        position: relative;
+        cursor: pointer;
+        padding: 10px 20px;
+        display: table;
+        background: #222;
+        width: 100%;
+        transition: background 0.3s ease-in-out;
+        user-select: none;
+
+        &:before {
+          content: " ";
+          width: 100%;
+          position: absolute;
+          left: 0;
+          top: 0;
+          height: 1px;
+          border-top: 1px solid #363636;
+        }
+
+        &:hover {
+          background: #363636;
+        }
+
+        & > span {
+          display: table-cell;
+          vertical-align: middle;
+        }
+      }
+
+      & > input[type='checkbox'] + label:after {
+        content: "";
+        border-left: 10px solid transparent;
+        border-right: 10px solid transparent;
+        border-top: 10px solid #444;
+        position: absolute;
+        right: 10px;
+        top: 13px;
+        z-index: 999;
+        transform: rotate(-90deg);
+        transition: transform 0.4s;
+      }
+
+      & > input[type='checkbox']:checked + label:after {
+        border-top: 10px solid #777;
+        transform: rotate(0deg);
+      }
+
+      & > input[type='radio'],
+      & > input[type='checkbox'] {
+        display: none;
+      }
+
+      & > input[type='radio']:checked ~ .content,
+      & > input[type='checkbox']:checked ~ .content {
+        padding: 15px;
+      }
+
+      & > input[type='radio']:checked + label,
+      & > input[type='checkbox']:checked + label {
+        background: #363636;
+      }
+
+      & > input[type='radio']:checked + label:before,
+      & > input[type='checkbox']:checked + label:before {
+        content: " ";
+        position: absolute;
+        border-left: 3px solid #21CCFC;
+        height: 100%;
+        left: 0;
+      }
+
+      .content {
+        padding: 0 15px;
+        max-height: 0;
+        transition: all 0.4s;
+        opacity: 0;
+        position: relative;
+        overflow-y: hidden;
+      }
+
+      & > input[type='radio']:checked ~ .content,
+      & > input[type='checkbox']:checked ~ .content {
+        max-height: 100vh;
+        opacity: 1;
+        z-index: 10;
+        overflow-y: auto;
+      }
+    }
+  }
+}

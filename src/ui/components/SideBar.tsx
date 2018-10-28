@@ -6,6 +6,7 @@ import VirtualList from '@ui/components/VirtualList/VirtualList';
 import LayerItem from '@ui/components/LayerList/LayerItem';
 import {collectionGetItemsRange} from '@core/CollectionUtils';
 import {Collection} from '@core/Collection';
+import './SideBar.less';
 
 /**
  * SideBar Props Interface
