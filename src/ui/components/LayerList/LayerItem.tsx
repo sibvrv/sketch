@@ -12,7 +12,7 @@ interface LayerItemProps {
   data?: Collection;
   collapsible?: boolean;
   selected?: boolean;
-  onClick?: (index: number) => void;
+  onClick?: (item: Collection) => void;
   onDblClick?: (index: number) => void;
   onChange?: (index: number, name: string) => void;
   onRemove?: (index: number) => void;
@@ -74,7 +74,7 @@ export default class LayerItem extends Component<LayerItemProps, LayerItemState>
    */
   handleClick = (e: Event) => {
     if (!this.state.inEdit) {
-      this.props.onClick!(this.props.index);
+      this.props.onClick!(this.props.data!);
     }
   };
 
@@ -122,12 +122,13 @@ export default class LayerItem extends Component<LayerItemProps, LayerItemState>
   /**
    * Render LayerItem Component
    */
-  render({index, name, selected}: LayerItemProps, {inEdit, level}: LayerItemState) {
+  render({index, name, selected, data}: LayerItemProps, {inEdit, level}: LayerItemState) {
     return (
       <div
         class={['layer-row', selected && 'selected', `level_${level}`]}
         onClick={this.handleClick}
         data-id={index}>
+        {data && data.type === 'layer' && <i class="fa fa-folder-open"/>}
         <p
           onDblClick={this.handleDblClick}
           onBlur={this.handleBlur}
@@ -137,10 +138,9 @@ export default class LayerItem extends Component<LayerItemProps, LayerItemState>
           ref={this.refInput}
         >{name || `Layer ${1 + index}`}</p>
         {
-          !inEdit && <i
-            class="fa fa-trash-alt"
-            onClick={this.handleRemove}
-          />
+          !inEdit && <span class="icons-frame">
+            <i class="fa fa-trash-alt" onClick={this.handleRemove}/>
+          </span>
         }
       </div>
     );

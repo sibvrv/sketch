@@ -4,6 +4,7 @@ import {Plugins} from '@plugins/Plugins';
 import defaultStorage from '@store/defaultStorage';
 import {editorRender} from '@editor/render/EditorRender';
 import {Vec2} from '@core/math/Vec2';
+import {selected_info} from '@ui/actions/actionsSelect';
 
 declare global {
   interface MouseEvent {
@@ -190,26 +191,6 @@ function doMouseWheel(event: MouseEvent) {
   });
 
   redraw();
-}
-
-function selected_info() {
-  const status: string[] = [];
-
-  const {selected} = editor;
-  const visible = Boolean(selected.sector || selected.point || selected.line);
-
-  if (selected.sector) {
-    status.push(`Area: ${selected.sector.getArea().toFixed(2)}`);
-    status.push(`Vertex: ${selected.sector.path.length}`);
-  } else {
-    status.push(`Items: ${editor.layer.length}`);
-  }
-
-  defaultStorage.setState({
-    status: status.join(' '),
-    selectedChange: Math.random(),
-    shapeOptionsVisible: visible
-  });
 }
 
 function onContextmenu(event: Event) {

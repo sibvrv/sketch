@@ -14,8 +14,10 @@
 
     &:hover {
       border-left: 3px solid #21CCFC;
-      i {
-        opacity: 1;
+      .icons-frame {
+        i {
+          opacity: 1;
+        }
       }
     }
 
@@ -27,17 +29,26 @@
       margin: 0;
     }
 
-    i {
+    &>i {
       position: absolute;
-      opacity: 0;
+      line-height: 30px;
+      left: 10px;
+    }
+
+    .icons-frame {
+      position: absolute;
       top: 0;
       right: 20px;
       line-height: 30px;
-      color: #666;
-      transition: all 0.3s ease-in-out;
 
-      &:hover {
-        color: #FFF;
+      i {
+        opacity: 0;
+        color: #666;
+        transition: all 0.3s ease-in-out;
+
+        &:hover {
+          color: #FFF;
+        }
       }
     }
   }

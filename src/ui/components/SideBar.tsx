@@ -1,12 +1,14 @@
 import {Component, h, PreactDOMAttributes} from 'preact';
 import GLOB from '@root/types';
 import {redraw} from '@root/main';
+import {TPath} from '@editor/TPath';
 import defaultStorage from '@store/defaultStorage';
 import VirtualList from '@ui/components/VirtualList/VirtualList';
 import LayerItem from '@ui/components/LayerList/LayerItem';
 import {collectionGetItemsRange} from '@core/CollectionUtils';
 import {Collection} from '@core/Collection';
 import './SideBar.less';
+import {selected_info} from '@ui/actions/actionsSelect';
 
 /**
  * SideBar Props Interface
@@ -105,11 +107,26 @@ export default class SideBar extends Component<SideBarProps, SideBarState> {
 
   /**
    * SideBar : LayerClick Handler
-   * @param {number} index
+   * @param {Collection} item
    */
-  handleLayerClick = (index: number) => {
+  handleLayerClick = (item: Collection) => {
     const {editor} = GLOB;
-    editor.selectLayer(index);
+
+    let layer = item;
+    while (layer && layer.type !== 'layer') {
+      layer = layer.parent;
+    }
+
+    if (layer) {
+      editor.selectLayer(editor.layers.indexOf(layer));
+    }
+
+    if (item.type === 'path') {
+      editor.selected.reset();
+      editor.selected.sector = item as TPath;
+      selected_info();
+    }
+
     redraw();
     this.setState({});
   };
