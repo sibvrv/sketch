@@ -80,6 +80,17 @@ export class Collection {
   }
 
   /**
+   * Remove item from parent list
+   */
+  detach() {
+    if (this.parent) {
+      this.parent.remove(this.parent.indexOf(this));
+      this.parent.childrenCount -= this.childrenCount;
+    }
+    this.parent = null!;
+  }
+
+  /**
    * Set Children Count
    * @param count
    */

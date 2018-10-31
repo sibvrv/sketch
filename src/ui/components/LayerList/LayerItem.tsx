@@ -9,13 +9,13 @@ import './LayerItem.less';
 interface LayerItemProps {
   index: number;
   name: string;
-  data?: Collection;
+  item: Collection;
   collapsible?: boolean;
   selected?: boolean;
   onClick?: (item: Collection) => void;
-  onDblClick?: (index: number) => void;
-  onChange?: (index: number, name: string) => void;
-  onRemove?: (index: number) => void;
+  onDblClick?: (item: Collection) => void;
+  onChange?: (item: Collection, name: string) => void;
+  onRemove?: (item: Collection) => void;
 }
 
 /**
@@ -38,7 +38,7 @@ export default class LayerItem extends Component<LayerItemProps, LayerItemState>
   static defaultProps: LayerItemProps = {
     index: 0,
     name: '',
-    data: null!,
+    item: null!,
     collapsible: false,
     onClick: noop,
     onDblClick: noop,
@@ -57,7 +57,7 @@ export default class LayerItem extends Component<LayerItemProps, LayerItemState>
     super(props);
     this.state = {
       inEdit: false,
-      level: this.getItemLevel(props.data!)
+      level: this.getItemLevel(props.item)
     };
   }
 
@@ -74,7 +74,7 @@ export default class LayerItem extends Component<LayerItemProps, LayerItemState>
    */
   handleClick = (e: Event) => {
     if (!this.state.inEdit) {
-      this.props.onClick!(this.props.data!);
+      this.props.onClick!(this.props.item);
     }
   };
 
@@ -83,7 +83,7 @@ export default class LayerItem extends Component<LayerItemProps, LayerItemState>
    */
   handleRemove = (e: Event) => {
     e.stopPropagation();
-    this.props.onRemove!(this.props.index);
+    this.props.onRemove!(this.props.item);
   };
 
   /**
@@ -95,7 +95,7 @@ export default class LayerItem extends Component<LayerItemProps, LayerItemState>
     }, () => {
       this.input.focus();
     });
-    this.props.onDblClick!(this.props.index);
+    this.props.onDblClick!(this.props.item);
   };
 
   /**
@@ -106,7 +106,10 @@ export default class LayerItem extends Component<LayerItemProps, LayerItemState>
       inEdit: false
     });
     this.input.scrollLeft = 0;
-    this.props.onChange!(this.props.index, (this.input.textContent || '').trim());
+    const value = (this.input.textContent || '').trim();
+    const {item} = this.props;
+    item.props('name', value);
+    this.props.onChange!(item, value);
   };
 
   /**
@@ -122,8 +125,8 @@ export default class LayerItem extends Component<LayerItemProps, LayerItemState>
   /**
    * Render LayerItem Component
    */
-  render({index, name, selected, data}: LayerItemProps, {inEdit, level}: LayerItemState) {
-    const isLayer = data && data.type === 'layer';
+  render({index, name, selected, item}: LayerItemProps, {inEdit, level}: LayerItemState) {
+    const isLayer = item && item.type === 'layer';
     return (
       <div
         class={['layer-row', selected && 'selected', `level_${level}`, isLayer && 'layer-item']}

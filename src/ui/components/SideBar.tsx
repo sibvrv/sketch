@@ -133,23 +133,28 @@ export default class SideBar extends Component<SideBarProps, SideBarState> {
 
   /**
    * SideBar : LayerRemove Handler
-   * @param {number} index
+   * @param {Collection} item
    */
-  handleLayerRemove = (index: number) => {
+  handleLayerRemove = (item: Collection) => {
     const {editor} = GLOB;
-    editor.removeLayer(index);
+    if (item.type === 'layer') {
+      const index = item.parent.indexOf(item);
+      editor.removeLayer(index);
+    } else {
+      item.clean();
+      item.detach();
+    }
+
     redraw();
     this.setState({});
   };
 
   /**
    * SideBar : RenameLayer Handler
-   * @param {number} index
+   * @param {Collection} item
    * @param {string} name
    */
-  handleRenameLayer = (index: number, name: string) => {
-    const {editor} = GLOB;
-    editor.renameLayer(index, name);
+  handleRenameLayer = (item: Collection, name: string) => {
     this.setState({});
   };
 
@@ -164,7 +169,7 @@ export default class SideBar extends Component<SideBarProps, SideBarState> {
       index={index}
       name={item.props('name') as string}
       selected={item === GLOB.editor.layer}
-      data={item}
+      item={item}
       onClick={this.handleLayerClick}
       onRemove={this.handleLayerRemove}
       onChange={this.handleRenameLayer}
