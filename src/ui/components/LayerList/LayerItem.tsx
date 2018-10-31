@@ -123,12 +123,13 @@ export default class LayerItem extends Component<LayerItemProps, LayerItemState>
    * Render LayerItem Component
    */
   render({index, name, selected, data}: LayerItemProps, {inEdit, level}: LayerItemState) {
+    const isLayer = data && data.type === 'layer';
     return (
       <div
-        class={['layer-row', selected && 'selected', `level_${level}`]}
+        class={['layer-row', selected && 'selected', `level_${level}`, isLayer && 'layer-item']}
         onClick={this.handleClick}
         data-id={index}>
-        {data && data.type === 'layer' && <i class="fa fa-folder-open"/>}
+        {isLayer && <i class="fa fa-folder-open"/>}
         <p
           onDblClick={this.handleDblClick}
           onBlur={this.handleBlur}
