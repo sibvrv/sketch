@@ -1,10 +1,10 @@
 import {Component, h, PreactDOMAttributes} from 'preact';
-import ShapeOptions from '../components/ShapeOptions';
-import ToolsBar from '../components/ToolsBar';
-import ExportAsText from '../modals/ExportAsText';
-import SideBar from '../components/SideBar';
-import connectToStores from '../../store/connectToStores';
-import StatusBar from '../components/StatusBar';
+import ShapeOptions from '@ui/components/ShapeOptions/ShapeOptions';
+import ToolsBar from '@ui/components/ToolsBar';
+import ExportAsText from '@ui/modals/ExportAsText';
+import SideBar from '@ui/components/SideBar';
+import connectToStores from '@store/connectToStores';
+import StatusBar from '@ui/components/StatusBar';
 import VectorEditor from '@ui/VectorEditor';
 import EditorCanvas from '@ui/components/EditorCanvas';
 import ZoomLabel from '@ui/components/ZoomLabel/ZoomLabel';
