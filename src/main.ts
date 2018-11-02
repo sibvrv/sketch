@@ -1,7 +1,6 @@
 import GLOB from './types';
 import {T2DEditor} from '@editor/T2DEditor';
 import {Plugins} from '@plugins/Plugins';
-import defaultStorage from '@store/defaultStorage';
 import {editorRender} from '@editor/render/EditorRender';
 import {Vec2} from '@core/math/Vec2';
 import {selected_info} from '@ui/actions/actionsSelect';
@@ -166,51 +165,6 @@ function doMouseUp(event: MouseEvent) {
   }
 }
 
-function doMouseWheel(event: MouseEvent) {
-  event.preventDefault();
-  event.stopPropagation();
-
-  const mouse = getMouse(event);
-
-  let delta = 0;
-  if (event.wheelDelta !== undefined) {
-    // WebKit / Opera / Explorer 9
-    delta = event.wheelDelta;
-  } else if (event.detail !== undefined) {
-    // Firefox
-    delta = -event.detail;
-  }
-
-  const {view} = editor;
-  delta = Math.sign(delta);
-
-  view.deltaZoom(delta, mouse.x, mouse.y);
-
-  defaultStorage.setState({
-    zoom: view.getZoom()
-  });
-
-  redraw();
-}
-
-function onContextmenu(event: Event) {
-  event.preventDefault();
-  event.stopPropagation();
-}
-
-function onDoubleClick(event: MouseEvent) {
-  event.preventDefault();
-  event.stopPropagation();
-
-  const mouse = getMouse(event);
-
-  let p: any;
-  if (p = editor.splitAt(mouse.x, mouse.y)) {
-    editor.view.snapToGrid(p);
-    redraw();
-  }
-}
-
 function setBackground(url: string) {
   const image = new Image();
   image.onload = function () {
@@ -228,21 +182,14 @@ export function initEditorApplication(canvas: HTMLCanvasElement, ctx: CanvasRend
 
   // setBackground("png/geomorph-2-a.png");
 
-  document.addEventListener('mouseup', doMouseUp, false);
-  document.addEventListener('contextmenu', onContextmenu, false);
-
-  render_canvas.addEventListener('dblclick', onDoubleClick, false);
   render_canvas.addEventListener('mousedown', doMouseDown, false);
   render_canvas.addEventListener('mousemove', doMouseMove, false);
-  render_canvas.addEventListener('mousewheel', doMouseWheel, false);
 
   document.addEventListener('mousedown', function (event) {
     lastDownTarget = event.target as HTMLElement;
   }, false);
+  document.addEventListener('mouseup', doMouseUp, false);
 
-  document.addEventListener('keyup', function (event) {
-
-  }, false);
   document.addEventListener('keydown', function (event) {
 
     switch (event.keyCode) {
