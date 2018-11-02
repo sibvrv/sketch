@@ -20,12 +20,6 @@ body {
   bottom: 0;
 }
 
-#zoom {
-  position: absolute;
-  left: 20px;
-  bottom: 20px;
-}
-
 input[type="checkbox"] {
   position: absolute;
 }

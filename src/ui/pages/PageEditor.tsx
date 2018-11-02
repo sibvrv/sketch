@@ -7,12 +7,12 @@ import connectToStores from '../../store/connectToStores';
 import StatusBar from '../components/StatusBar';
 import VectorEditor from '@ui/VectorEditor';
 import EditorCanvas from '@ui/components/EditorCanvas';
+import ZoomLabel from '@ui/components/ZoomLabel/ZoomLabel';
 
 /**
  * PageEditor Props Interface
  */
 interface PageEditorProps {
-  zoom?: number;
   error?: string;
   dialog?: string;
   shapeOptionsVisible?: boolean;
@@ -29,7 +29,7 @@ interface PageEditorState {
  * @class PageEditor
  * @extends Component
  */
-@connectToStores('zoom, error, dialog, shapeOptionsVisible')
+@connectToStores('error, dialog, shapeOptionsVisible')
 export default class PageEditor extends Component<PageEditorProps, PageEditorState> {
   /**
    * Default Props for PageEditor Component
@@ -48,17 +48,16 @@ export default class PageEditor extends Component<PageEditorProps, PageEditorSta
   /**
    * Render PageEditor Component
    */
-  render({zoom, error, dialog, shapeOptionsVisible}: PageEditorProps & PreactDOMAttributes, {}: PageEditorState) {
+  render({error, dialog, shapeOptionsVisible}: PageEditorProps & PreactDOMAttributes, {}: PageEditorState) {
     return (
       <VectorEditor>
         <div class="draw_2d">
+          <EditorCanvas/>
 
           <ToolsBar/>
           {shapeOptionsVisible && <ShapeOptions/>}
 
-          <div id="zoom">{zoom}</div>
-
-          <EditorCanvas/>
+          <ZoomLabel/>
         </div>
 
         <SideBar/>
