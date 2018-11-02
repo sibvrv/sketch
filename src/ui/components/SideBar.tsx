@@ -7,8 +7,8 @@ import VirtualList from '@ui/components/VirtualList/VirtualList';
 import LayerItem from '@ui/components/LayerList/LayerItem';
 import {collectionGetItemsRange} from '@core/CollectionUtils';
 import {Collection} from '@core/Collection';
-import './SideBar.less';
 import {selected_info} from '@ui/actions/actionsSelect';
+import './SideBar.less';
 
 /**
  * SideBar Props Interface
@@ -124,9 +124,9 @@ export default class SideBar extends Component<SideBarProps, SideBarState> {
     if (item.type === 'path') {
       editor.selected.reset();
       editor.selected.sector = item as TPath;
-      selected_info();
     }
 
+    selected_info();
     redraw();
     this.setState({});
   };
@@ -155,6 +155,7 @@ export default class SideBar extends Component<SideBarProps, SideBarState> {
    * @param {string} name
    */
   handleRenameLayer = (item: Collection, name: string) => {
+    selected_info();
     this.setState({});
   };
 

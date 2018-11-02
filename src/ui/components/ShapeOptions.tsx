@@ -50,6 +50,10 @@ export default class ShapeOptions extends Component<ShapeOptionsProps, ShapeOpti
     this.updateState();
   }
 
+  componentWillReceiveProps() {
+    this.updateState();
+  }
+
   updateState() {
     const {selected} = GLOB.editor;
     const type = (selected.point && 'point') || (selected.line && 'line') || (selected.sector && 'shape') || 'none';
@@ -61,10 +65,6 @@ export default class ShapeOptions extends Component<ShapeOptionsProps, ShapeOpti
       radius: selected.point && selected.point.r || 0,
       steps: selected.point && selected.point.steps || 1
     });
-  }
-
-  componentWillReceiveProps() {
-    this.updateState();
   }
 
   /**
@@ -112,27 +112,27 @@ export default class ShapeOptions extends Component<ShapeOptionsProps, ShapeOpti
   render({selectedChange}: ShapeOptionsProps & PreactDOMAttributes, {type, name, mask, radius, steps}: ShapeOptionsState) {
     return (
       <div class="optionsEditor window">
-        <p><label>Объект <input type="text" value={name} onInput={this.handleSetName}
-                                onChange={this.handleSetName}/></label></p>
-        <p><label>Маска <input type="checkbox" checked={mask} onChange={this.handleMask}/></label></p>
+        <p><label>Name <input type="text" value={name} onInput={this.handleSetName}
+                              onChange={this.handleSetName}/></label></p>
+        <p><label>Mask <input type="checkbox" checked={mask} onChange={this.handleMask}/></label></p>
 
         {type === 'point' && [
-          <p><label>Радиус <input type="number" step="1" min="0" max="1000" value={radius} onInput={this.handleRadius}
+          <p><label>Radius <input type="number" step="1" min="0" max="1000" value={radius} onInput={this.handleRadius}
                                   onChange={this.handleRadius}/></label></p>,
-          <p><label>Шаг <input type="number" min="0" value={steps} onInput={this.handleSteps}
-                               onChange={this.handleSteps}/></label></p>
+          <p><label>Step <input type="number" min="0" value={steps} onInput={this.handleSteps}
+                                onChange={this.handleSteps}/></label></p>
         ]}
 
         {/*
-                <p><label> Заливка: <input type="color" id="opt-fill"/></label></p>
-                <p><label> Обводка: <input type="color" id="opt-stroke"/></label></p>
-                <p><label> Прозрачность: <input type="range" step="0.01" min="0" max="1" value="1" id="opt-stroke-opacity"/></label></p>
+                <p><label> Fill: <input type="color" id="opt-fill"/></label></p>
+                <p><label> Stroke: <input type="color" id="opt-stroke"/></label></p>
+                <p><label> Opacity: <input type="range" step="0.01" min="0" max="1" value="1" id="opt-stroke-opacity"/></label></p>
                 <p><label>
                     Углы:
                     <select id="opt-stroke-linejoin">
-                        <option value="miter">Прямые</option>
-                        <option value="round">Скругленные</option>
-                        <option value="bevel">Обрубленные</option>
+                        <option value="miter">Miter</option>
+                        <option value="round">Round</option>
+                        <option value="bevel">Bevel</option>
                     </select>
                 </label></p>
             */}
