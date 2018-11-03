@@ -71,6 +71,15 @@ export default class SideBar extends Component<SideBarProps, SideBarState> {
   };
 
   /**
+   * SideBar : ImportImage Handler
+   */
+  handleImportImage = () => {
+    defaultStorage.setState({
+      dialog: 'import-image'
+    });
+  };
+
+  /**
    * SideBar : NewLayer Handler
    */
   handleNewLayer = () => {
@@ -201,7 +210,9 @@ export default class SideBar extends Component<SideBarProps, SideBarState> {
         <div class="accordion flex-vertical absolute">
           <div class="section">
             <input type="checkbox" id="sectionFile"
-                   checked={accordion.sectionFile} onChange={this.handleAccordion}/>
+                   checked={accordion.sectionFile}
+                   onChange={this.handleAccordion}
+            />
             <label for="sectionFile"><span>File</span></label>
             <div class="content">
               <ul>
@@ -213,6 +224,9 @@ export default class SideBar extends Component<SideBarProps, SideBarState> {
                 </li>
                 <li onClick={this.handleClearLayer}>
                   <i class="fa fa-trash-alt"/><span>Clear Layer</span>
+                </li>
+                <li onClick={this.handleImportImage}>
+                  <i class="fa fa-file-export"/><span>Import Image</span>
                 </li>
                 <li>
                   <input onChange={this.handleGridClick} id="opt-grid" type="checkbox" checked/>

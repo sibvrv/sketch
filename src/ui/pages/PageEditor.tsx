@@ -8,6 +8,7 @@ import StatusBar from '@ui/components/StatusBar';
 import VectorEditor from '@ui/VectorEditor';
 import EditorCanvas from '@ui/components/EditorCanvas';
 import ZoomLabel from '@ui/components/ZoomLabel/ZoomLabel';
+import ImportImage from '@ui/components/ImportImage/ImportImage';
 
 /**
  * PageEditor Props Interface
@@ -64,6 +65,8 @@ export default class PageEditor extends Component<PageEditorProps, PageEditorSta
         <StatusBar/>
 
         {dialog === 'export-as-text' && <ExportAsText/>}
+        {dialog === 'import-image' && <ImportImage/>}
+
         {error && <div class="error_message noSelect" style="font-weight: bold">{error}</div>}
       </VectorEditor>
     );
