@@ -92,9 +92,9 @@ export default class EditorCanvas extends Component<EditorCanvasProps, EditorCan
   }
 
   /**
-   * EditorCanvas : KeyPress Handler
+   * EditorCanvas : KeyDown Handler
    */
-  handleKeyPress = (event: KeyboardEvent) => {
+  handleKeyDown = (event: KeyboardEvent) => {
     const {editor} = GLOB;
 
     switch (event.keyCode) {
@@ -312,7 +312,7 @@ export default class EditorCanvas extends Component<EditorCanvasProps, EditorCan
         onMouseDown={this.handleMouseDown}
         onMouseMove={this.handleMouseMove}
         onContextMenu={this.handleContextMenu}
-        onKeyPress={this.handleKeyPress}
+        onKeyDown={this.handleKeyDown}
       >
         Your browser doesn't support the canvas element!
       </canvas>
