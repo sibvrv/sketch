@@ -2,7 +2,6 @@ import GLOB from './types';
 import {T2DEditor} from '@editor/T2DEditor';
 import {Plugins} from '@plugins/Plugins';
 import {editorRender} from '@editor/render/EditorRender';
-import {Vec2} from '@core/math/Vec2';
 import {selected_info} from '@ui/actions/actionsSelect';
 
 declare global {
@@ -13,156 +12,12 @@ declare global {
 
 let render_canvas: HTMLCanvasElement;
 let render_ctx: CanvasRenderingContext2D = null!;
-let editor: T2DEditor;
-let lastDownTarget: HTMLElement = null!;
 
 export function redraw() {
   render_canvas.width = render_canvas.offsetWidth;
   render_canvas.height = render_canvas.offsetHeight;
 
-  editorRender(render_ctx, editor, render_canvas.width, render_canvas.height);
-}
-
-const drag = {
-  position: new Vec2(0, 0),
-  position_offset: new Vec2(0, 0),
-  position_prev: new Vec2(0, 0),
-
-  active: false,
-  point: null,
-  sector: null,
-  hits: null! as Selected,
-  screen: {
-    active: false,
-    x: 0,
-    y: 0
-  }
-};
-
-function getMouse(event: MouseEvent) {
-  const rect = render_canvas.getBoundingClientRect();
-  return (new Vec2(event.clientX - rect.left, event.clientY - rect.top)).round();
-}
-
-function doMouseDown(event: MouseEvent) {
-  lastDownTarget = event.target as HTMLElement;
-
-  event.preventDefault();
-  event.stopPropagation();
-
-  const mouse = getMouse(event);
-
-  switch (event.button) {
-    case 0:
-      drag.position = mouse.clone();
-      drag.position_offset.zero();
-      drag.position_prev.zero();
-
-      if (event.ctrlKey) {
-        const {zoom} = editor.view;
-
-        const sec = editor.selected.sector = editor.selected.sector || editor.layer.Path2D();
-        const p = new Vec2(
-          -editor.view.position.x + mouse.x / zoom,
-          -editor.view.position.y + mouse.y / zoom
-        );
-        editor.view.snapToGrid(p);
-        sec.Point(p.x, p.y);
-
-        redraw();
-        return;
-      }
-
-      editor.select(mouse.x, mouse.y);
-
-      const hit = drag.hits = editor.selected;
-      drag.active = Boolean(hit.point || hit.line || hit.sector);
-
-      selected_info();
-
-      redraw();
-      break;
-    case 1:
-
-      break;
-    case 2:
-      drag.screen.active = true;
-      drag.screen.x = mouse.x;
-      drag.screen.y = mouse.y;
-      break;
-  }
-
-}
-
-function doMouseMove(event: MouseEvent) {
-  event.preventDefault();
-  event.stopPropagation();
-
-  const mouse = getMouse(event);
-
-  if (drag.screen.active) {
-    editor.view.translate(mouse.x - drag.screen.x, mouse.y - drag.screen.y);
-
-    drag.screen.x = mouse.x;
-    drag.screen.y = mouse.y;
-
-    redraw();
-  }
-
-  if (!drag.active) {
-    return;
-  }
-
-  const {zoom} = editor.view;
-
-  const p = mouse.clone();
-  let pos = p.clone().sub(drag.position).divf(zoom);
-  drag.position = p;
-
-  pos = drag.position_offset.add(pos).clone();
-  editor.view.snapToGrid(pos);
-
-  const {x, y} = drag.position_prev.neg().add(pos);
-  drag.position_prev = pos;
-
-  const h = drag.hits;
-
-  if (h.point) {
-    h.point.translate(x, y);
-
-  } else if (h.line) {
-    h.line.A.translate(x, y);
-    h.line.B.translate(x, y);
-  } else if (h.sector) {
-    h.sector.translate(x, y);
-  }
-
-  if (h.sector) {
-    h.sector.fixWinding();
-  }
-
-  redraw();
-}
-
-function doMouseUp(event: MouseEvent) {
-  if (lastDownTarget !== render_canvas) {
-    return;
-  }
-
-  event.preventDefault();
-  event.stopPropagation();
-
-  switch (event.button) {
-    case 0:
-      drag.active = false;
-
-      drag.point = null;
-      drag.sector = null;
-      break;
-    case 2:
-      drag.screen.active = false;
-      break;
-  }
+  editorRender(render_ctx, GLOB.editor, render_canvas.width, render_canvas.height);
 }
 
 function setBackground(url: string) {
@@ -174,7 +29,7 @@ function setBackground(url: string) {
   image.src = url;
 }
 
-editor = GLOB.editor = new T2DEditor(); // todo
+GLOB.editor = new T2DEditor(); // todo
 
 export function initEditorApplication(canvas: HTMLCanvasElement, ctx: CanvasRenderingContext2D) {
   render_canvas = canvas;
@@ -182,31 +37,8 @@ export function initEditorApplication(canvas: HTMLCanvasElement, ctx: CanvasRend
 
   // setBackground("png/geomorph-2-a.png");
 
-  render_canvas.addEventListener('mousedown', doMouseDown, false);
-  render_canvas.addEventListener('mousemove', doMouseMove, false);
-
-  document.addEventListener('mousedown', function (event) {
-    lastDownTarget = event.target as HTMLElement;
-  }, false);
-  document.addEventListener('mouseup', doMouseUp, false);
-
-  document.addEventListener('keydown', function (event) {
-
-    switch (event.keyCode) {
-      case 46:
-        if (lastDownTarget === render_canvas) {
-          editor.delete_selected();
-          redraw();
-          selected_info();
-        }
-        break;
-    }
-
-  }, false);
-  window.addEventListener('resize', redraw, false);
-
   /* Load */
-  editor.doLoad(JSON.parse(localStorage.editor2d || '{}'));
+  GLOB.editor.doLoad(JSON.parse(localStorage.editor2d || '{}'));
 
   redraw();
   selected_info();
