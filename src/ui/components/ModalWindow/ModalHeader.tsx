@@ -1,5 +1,6 @@
 import {Component, h} from 'preact';
 import * as styles from './ModalHeader.less';
+import defaultStorage from '@store/defaultStorage';
 
 /**
  * ModalHeader Props Interface
@@ -39,6 +40,15 @@ export default class ModalHeader extends Component<ModalHeaderProps, ModalHeader
   }
 
   /**
+   * ModalHeader : Close Handler
+   */
+  handleClose = () => {
+    defaultStorage.setState({
+      dialog: ''
+    });
+  };
+
+  /**
    * Render ModalHeader Component
    */
   render({title, closeButton}: ModalHeaderProps, {}: ModalHeaderState) {
@@ -46,7 +56,7 @@ export default class ModalHeader extends Component<ModalHeaderProps, ModalHeader
       <div class={styles.modal_header}>
         <h5 class={styles.modal_title}>{title}</h5>
         {closeButton &&
-        <button type="button" class={styles.modal_close} aria-label="Close">
+        <button onClick={this.handleClose} type="button" class={styles.modal_close} aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>}
       </div>

@@ -1,7 +1,10 @@
 import {Component, h, PreactDOMAttributes} from 'preact';
 import defaultStorage from '@store/defaultStorage';
 import GLOB from '@root/types';
-import * as styles from './style.less';
+import * as styles from './ExportAsText.less';
+import ModalWindow from '@ui/components/ModalWindow/ModalWindow';
+import ModalHeader from '@ui/components/ModalWindow/ModalHeader';
+import ModalBody from '@ui/components/ModalWindow/ModalBody';
 
 /**
  * ExportAsText Props Interface
@@ -58,10 +61,14 @@ export default class ExportAsText extends Component<ExportAsTextProps, ExportAsT
    */
   render({children}: ExportAsTextProps & PreactDOMAttributes, {data}: ExportAsTextState) {
     return (
-      <div class={styles.export_panel}>
-        <div class="btn close" onClick={this.handleClose}>close</div>
-        <textarea class={styles.export_data} value={data}/>
-      </div>
+      <ModalWindow>
+        <ModalHeader title="Export as Text"/>
+        <ModalBody>
+          <div class={styles.export_data} tabIndex={0} contentEditable={true}>
+            {data}
+          </div>
+        </ModalBody>
+      </ModalWindow>
     );
   }
 }

@@ -1,7 +1,7 @@
 import {Component, h, PreactDOMAttributes} from 'preact';
 import ShapeOptions from '@ui/components/ShapeOptions/ShapeOptions';
 import ToolsBar from '@ui/components/ToolsBar';
-import ExportAsText from '@ui/modals/ExportAsText';
+import ExportAsText from '@ui/modals/ExportAsText/ExportAsText';
 import SideBar from '@ui/components/SideBar';
 import connectToStores from '@store/connectToStores';
 import StatusBar from '@ui/components/StatusBar';

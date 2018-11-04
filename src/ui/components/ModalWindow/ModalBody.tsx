@@ -1,4 +1,5 @@
 import {Component, h, PreactDOMAttributes} from 'preact';
+import * as styles from './ModalBody.less';
 
 /**
  * ModalBody Props Interface
@@ -37,7 +38,9 @@ export default class ModalBody extends Component<ModalBodyProps, ModalBodyState>
    */
   render({children}: ModalBodyProps & PreactDOMAttributes, {}: ModalBodyState) {
     return (
-      <div>{children}</div>
-    )
+      <div class={styles.modal_body}>
+        {children}
+      </div>
+    );
   }
 }
