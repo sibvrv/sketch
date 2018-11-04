@@ -1,4 +1,5 @@
 import {Component, h, PreactDOMAttributes} from 'preact';
+import * as styles from './ModalWindow.less';
 
 /**
  * ModalWindow Props Interface
@@ -37,7 +38,7 @@ export default class ModalWindow extends Component<ModalWindowProps, ModalWindow
    */
   render({children}: ModalWindowProps & PreactDOMAttributes, {}: ModalWindowState) {
     return (
-      <div>
+      <div class={styles.modal_window}>
         {children}
       </div>
     );
