@@ -1,4 +1,5 @@
 import {Component, h} from 'preact';
+import * as styles from './ModalHeader.less';
 
 /**
  * ModalHeader Props Interface
@@ -42,10 +43,10 @@ export default class ModalHeader extends Component<ModalHeaderProps, ModalHeader
    */
   render({title, closeButton}: ModalHeaderProps, {}: ModalHeaderState) {
     return (
-      <div>
-        <h5>{title}</h5>
+      <div class={styles.modal_header}>
+        <h5 class={styles.modal_title}>{title}</h5>
         {closeButton &&
-        <button type="button" class="close" aria-label="Close">
+        <button type="button" class={styles.modal_close} aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>}
       </div>
