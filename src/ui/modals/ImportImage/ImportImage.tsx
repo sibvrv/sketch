@@ -1,5 +1,9 @@
 import {Component, h} from 'preact';
 import * as style from './ImportImage.less';
+import ModalWindow from '@ui/components/ModalWindow/ModalWindow';
+import ModalHeader from '@ui/components/ModalWindow/ModalHeader';
+import ModalFooter from '@ui/components/ModalWindow/ModalFooter';
+import ModalBody from '@ui/components/ModalWindow/ModalBody';
 
 /**
  * ImportImage Props Interface
@@ -56,12 +60,18 @@ export default class ImportImage extends Component<ImportImageProps, ImportImage
    */
   render({}: ImportImageProps, {}: ImportImageState) {
     return (
-      <div class={style.importImageDialog}>
-        <h4>Preview:</h4>
-        <canvas ref={this.handleCanvas} width="400" height="300" id="canvas"/>
-        <h4>File:</h4>
-        <input ref={this.handleFileLoader} type="file" id="input" onChange={this.handleChangeFile}/>
-      </div>
+      <ModalWindow>
+        <ModalHeader title="Import Image"/>
+        <ModalBody>
+          <div class={style.importImageDialog}>
+            <h4>Preview:</h4>
+            <canvas ref={this.handleCanvas} width="400" height="300" id="canvas"/>
+            <h4>File:</h4>
+            <input ref={this.handleFileLoader} type="file" id="input" onChange={this.handleChangeFile}/>
+          </div>
+        </ModalBody>
+        <ModalFooter/>
+      </ModalWindow>
     );
   }
 }

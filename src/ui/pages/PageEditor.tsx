@@ -8,7 +8,7 @@ import StatusBar from '@ui/components/StatusBar';
 import VectorEditor from '@ui/VectorEditor';
 import EditorCanvas from '@ui/components/EditorCanvas';
 import ZoomLabel from '@ui/components/ZoomLabel/ZoomLabel';
-import ImportImage from '@ui/components/ImportImage/ImportImage';
+import ImportImage from '@ui/modals/ImportImage/ImportImage';
 
 /**
  * PageEditor Props Interface
