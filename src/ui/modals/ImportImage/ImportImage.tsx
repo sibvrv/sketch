@@ -70,7 +70,9 @@ export default class ImportImage extends Component<ImportImageProps, ImportImage
             <input ref={this.handleFileLoader} type="file" id="input" onChange={this.handleChangeFile}/>
           </div>
         </ModalBody>
-        <ModalFooter/>
+        <ModalFooter>
+
+        </ModalFooter>
       </ModalWindow>
     );
   }

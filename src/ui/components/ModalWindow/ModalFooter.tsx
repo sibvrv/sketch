@@ -1,4 +1,5 @@
 import {Component, h, PreactDOMAttributes} from 'preact';
+import * as styles from './ModalFooter.less';
 
 /**
  * ModalFooter Props Interface
@@ -37,7 +38,9 @@ export default class ModalFooter extends Component<ModalFooterProps, ModalFooter
    */
   render({children}: ModalFooterProps & PreactDOMAttributes, {}: ModalFooterState) {
     return (
-      <div>{children}</div>
-    )
+      <div class={styles.modal_footer}>
+        {children}
+      </div>
+    );
   }
 }
