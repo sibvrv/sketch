@@ -1,10 +1,10 @@
 import {Component, h, PreactDOMAttributes} from 'preact';
 import ShapeOptions from '@ui/components/ShapeOptions/ShapeOptions';
-import ToolsBar from '@ui/components/ToolsBar';
+import ToolBar from '@ui/components/ToolBar/ToolBar';
 import ExportAsText from '@ui/modals/ExportAsText/ExportAsText';
-import SideBar from '@ui/components/SideBar';
+import SideBar from '@ui/components/SideBar/SideBar';
 import connectToStores from '@store/connectToStores';
-import StatusBar from '@ui/components/StatusBar';
+import StatusBar from '@ui/components/StatusBar/StatusBar';
 import VectorEditor from '@ui/VectorEditor';
 import EditorCanvas from '@ui/components/EditorCanvas';
 import ZoomLabel from '@ui/components/ZoomLabel/ZoomLabel';
@@ -55,7 +55,7 @@ export default class PageEditor extends Component<PageEditorProps, PageEditorSta
         <div class="draw_2d">
           <EditorCanvas/>
 
-          <ToolsBar/>
+          <ToolBar/>
           {shapeOptionsVisible && <ShapeOptions/>}
 
           <ZoomLabel/>

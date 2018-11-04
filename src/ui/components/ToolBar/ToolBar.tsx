@@ -1,16 +1,16 @@
 import {Component, h, PreactDOMAttributes} from 'preact';
-import './ToolsBar.less';
+import './ToolBar.less';
 
 /**
- * ToolsBar Props Interface
+ * ToolBar Props Interface
  */
-interface ToolsBarProps {
+interface ToolBarProps {
 }
 
 /**
- * ToolsBar State Interface
+ * ToolBar State Interface
  */
-interface ToolsBarState {
+interface ToolBarState {
   selected: string;
 }
 
@@ -24,21 +24,21 @@ const ToolButton = ({name, title, children}: ToolButtonProps, {selected, onClick
   <button id={name} title={title} class={[selected === name && 'selected']} onClick={onClick}>{children}</button>;
 
 /**
- * ToolsBar
- * @class ToolsBar
+ * ToolBar
+ * @class ToolBar
  * @extends Component
  */
-export default class ToolsBar extends Component<ToolsBarProps, ToolsBarState> {
+export default class ToolBar extends Component<ToolBarProps, ToolBarState> {
   /**
-   * Default Props for ToolsBar Component
+   * Default Props for ToolBar Component
    */
-  static defaultProps: ToolsBarProps = {};
+  static defaultProps: ToolBarProps = {};
 
   /**
-   * ToolsBar Component Constructor
-   * @param {ToolsBarProps} props
+   * ToolBar Component Constructor
+   * @param {ToolBarProps} props
    */
-  constructor(props: ToolsBarProps) {
+  constructor(props: ToolBarProps) {
     super(props);
     this.state = {
       selected: 'btn-select'
@@ -50,7 +50,7 @@ export default class ToolsBar extends Component<ToolsBarProps, ToolsBarState> {
   }
 
   /**
-   * ToolsBar : Click Handler
+   * ToolBar : Click Handler
    */
   handleClick = (e: Event) => {
     e.preventDefault();
@@ -60,9 +60,9 @@ export default class ToolsBar extends Component<ToolsBarProps, ToolsBarState> {
   };
 
   /**
-   * Render ToolsBar Component
+   * Render ToolBar Component
    */
-  render({children}: ToolsBarProps & PreactDOMAttributes, {}: ToolsBarState) {
+  render({children}: ToolBarProps & PreactDOMAttributes, {}: ToolBarState) {
     return (
       <div class="tools_bar window">
         <ToolButton name="btn-select" title="Select / transform">

@@ -1,5 +1,5 @@
 import {Component, h} from 'preact';
-import connectToStores from '../../store/connectToStores';
+import connectToStores from '@store/connectToStores';
 import * as styles from './StatusBar.less';
 
 /**
