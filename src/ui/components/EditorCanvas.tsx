@@ -84,6 +84,9 @@ export default class EditorCanvas extends Component<EditorCanvasProps, EditorCan
     document.addEventListener('mouseup', this.handleMouseUp, false);
 
     window.addEventListener('resize', redraw, false);
+    window.addEventListener('load', function (event) {
+      redraw();
+    });
 
     this.context.editor.onCanvasReady(canvas, ctx);
     this.setState({

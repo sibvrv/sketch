@@ -5,7 +5,7 @@ import ExportAsText from '@ui/modals/ExportAsText/ExportAsText';
 import SideBar from '@ui/components/SideBar/SideBar';
 import connectToStores from '@store/connectToStores';
 import StatusBar from '@ui/components/StatusBar/StatusBar';
-import VectorEditor from '@ui/VectorEditor';
+import VectorEditor from '@ui/components/VectorEditor';
 import EditorCanvas from '@ui/components/EditorCanvas';
 import ZoomLabel from '@ui/components/ZoomLabel/ZoomLabel';
 import ImportImage from '@ui/modals/ImportImage/ImportImage';
