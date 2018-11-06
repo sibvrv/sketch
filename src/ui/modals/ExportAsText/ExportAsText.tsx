@@ -41,15 +41,6 @@ export default class ExportAsText extends Component<ExportAsTextProps, ExportAsT
     };
   }
 
-  /**
-   * ExportAsText : Close Handler
-   */
-  handleClose = () => {
-    defaultStorage.setState({
-      dialog: ''
-    });
-  };
-
   componentDidMount() {
     this.setState({
       data: GLOB.editor.doExport()

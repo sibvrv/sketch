@@ -8,7 +8,7 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 
 module.exports = (env, argv) => {
-  const CSS_MAPS = argv.mode !== 'production';
+  const sourceMap = argv.mode !== 'production';
 
   return {
     entry: [
@@ -46,7 +46,7 @@ module.exports = (env, argv) => {
                 loader: 'css-loader',
                 options: {
                   modules: true,
-                  sourceMap: CSS_MAPS,
+                  sourceMap,
                   importLoaders: 1,
                   minimize: true
                 }
@@ -54,7 +54,7 @@ module.exports = (env, argv) => {
               {
                 loader: `postcss-loader`,
                 options: {
-                  sourceMap: CSS_MAPS,
+                  sourceMap,
                   plugins: () => {
                     autoprefixer({browsers: ['last 2 versions']});
                   }
@@ -62,7 +62,9 @@ module.exports = (env, argv) => {
               },
               {
                 loader: 'less-loader',
-                options: {sourceMap: CSS_MAPS}
+                options: {
+                  sourceMap
+                }
               }
             ]
           })

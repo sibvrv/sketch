@@ -47,6 +47,15 @@ export default class PageEditor extends Component<PageEditorProps, PageEditorSta
   }
 
   /**
+   * PageEditor : DialogsOverlayClick Handler
+   */
+  handleDialogsOverlayClick = (e: Event) => {
+    this.setState({
+      dialog: ''
+    });
+  };
+
+  /**
    * Render PageEditor Component
    */
   render({error, dialog, shapeOptionsVisible}: PageEditorProps & PreactDOMAttributes, {}: PageEditorState) {
@@ -64,8 +73,12 @@ export default class PageEditor extends Component<PageEditorProps, PageEditorSta
         <SideBar/>
         <StatusBar/>
 
-        {dialog === 'export-as-text' && <ExportAsText/>}
-        {dialog === 'import-image' && <ImportImage/>}
+        {dialog &&
+        <div class="dialogs_overlay noSelect" onClick={this.handleDialogsOverlayClick}>
+          {dialog === 'export-as-text' && <ExportAsText/>}
+          {dialog === 'import-image' && <ImportImage/>}
+        </div>
+        }
 
         {error && <div class="error_message noSelect" style="font-weight: bold">{error}</div>}
       </VectorEditor>

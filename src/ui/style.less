@@ -34,7 +34,8 @@
     display: block;
   }
 
-  input {
+  input[type="text"],
+  input[type="number"] {
     color: #fff;
     background: rgba(0, 0, 0, .3);
     border: 1px solid rgba(0, 0, 0, .2);
@@ -185,5 +186,15 @@
 
   .inEdit {
     text-overflow: initial !important;
+  }
+
+  .dialogs_overlay {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    pointer-events: all;
+    background: rgba(0, 0, 0, 0.5);
   }
 }
