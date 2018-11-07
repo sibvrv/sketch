@@ -6,6 +6,7 @@ import defaultStorage from '@store/defaultStorage';
  * ModalOverlay Props Interface
  */
 interface ModalOverlayProps {
+  dialog?: string;
 }
 
 /**
@@ -19,7 +20,7 @@ interface ModalOverlayState {
  * @class ModalOverlay
  * @extends Component
  */
-@connectToStores('dialogs')
+@connectToStores('dialog')
 export default class ModalOverlay extends Component<ModalOverlayProps, ModalOverlayState> {
   /**
    * Default Props for ModalOverlay Component
@@ -35,13 +36,45 @@ export default class ModalOverlay extends Component<ModalOverlayProps, ModalOver
     this.state = {};
   }
 
+  componentDidMount() {
+    document.addEventListener('keydown', this.handleKeyDown, false);
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener('keydown', this.handleKeyDown, false);
+  }
+
+  hideDialogs = () => {
+    defaultStorage.setState({
+      dialog: ''
+    });
+  };
+
   /**
    * ModalOverlay : OverlayClick Handler
    */
   handleOverlayClick = () => {
-    defaultStorage.setState({
-      dialog: ''
-    });
+    this.hideDialogs();
+  };
+
+  /**
+   * ModalOverlay : KeyDown Handler
+   */
+  handleKeyDown = (event: KeyboardEvent) => {
+    if (event.defaultPrevented || !this.props.dialog) {
+      return;
+    }
+
+    const elememt = (event.target as HTMLElement);
+    const tag = elememt.tagName.toLowerCase();
+
+    const contentEditable = elememt.nodeType !== 3 ? Boolean(elememt.getAttribute('contenteditable')) : false;
+
+    if (!event.altKey && !event.ctrlKey && !event.shiftKey && tag !== 'input' && tag !== 'textarea' && !contentEditable && event.key === 'Escape') {
+      event.preventDefault();
+      event.stopPropagation();
+      this.hideDialogs();
+    }
   };
 
   /**
