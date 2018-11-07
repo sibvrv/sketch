@@ -34,11 +34,18 @@ export default class ModalWindow extends Component<ModalWindowProps, ModalWindow
   }
 
   /**
+   * ModalWindow : Click Handler
+   */
+  handleClick = (e: Event) => {
+    e.stopPropagation();
+  };
+
+  /**
    * Render ModalWindow Component
    */
   render({children}: ModalWindowProps & PreactDOMAttributes, {}: ModalWindowState) {
     return (
-      <div class={styles.modal_window}>
+      <div class={styles.modal_window} onClick={this.handleClick}>
         {children}
       </div>
     );

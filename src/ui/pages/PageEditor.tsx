@@ -9,6 +9,7 @@ import VectorEditor from '@ui/components/VectorEditor';
 import EditorCanvas from '@ui/components/EditorCanvas';
 import ZoomLabel from '@ui/components/ZoomLabel/ZoomLabel';
 import ImportImage from '@ui/modals/ImportImage/ImportImage';
+import ModalOverlay from '@ui/containers/ModalOverlay/ModalOverlay';
 
 /**
  * PageEditor Props Interface
@@ -47,15 +48,6 @@ export default class PageEditor extends Component<PageEditorProps, PageEditorSta
   }
 
   /**
-   * PageEditor : DialogsOverlayClick Handler
-   */
-  handleDialogsOverlayClick = (e: Event) => {
-    this.setState({
-      dialog: ''
-    });
-  };
-
-  /**
    * Render PageEditor Component
    */
   render({error, dialog, shapeOptionsVisible}: PageEditorProps & PreactDOMAttributes, {}: PageEditorState) {
@@ -74,10 +66,10 @@ export default class PageEditor extends Component<PageEditorProps, PageEditorSta
         <StatusBar/>
 
         {dialog &&
-        <div class="dialogs_overlay noSelect" onClick={this.handleDialogsOverlayClick}>
+        <ModalOverlay>
           {dialog === 'export-as-text' && <ExportAsText/>}
           {dialog === 'import-image' && <ImportImage/>}
-        </div>
+        </ModalOverlay>
         }
 
         {error && <div class="error_message noSelect" style="font-weight: bold">{error}</div>}
