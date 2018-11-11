@@ -1,5 +1,4 @@
 import {Component, h, PreactDOMAttributes} from 'preact';
-import defaultStorage from '@store/defaultStorage';
 import GLOB from '@root/types';
 import * as styles from './ExportAsText.less';
 import ModalWindow from '@ui/components/ModalWindow/ModalWindow';

@@ -1,6 +1,7 @@
 import {Component, h, PreactDOMAttributes} from 'preact';
 import connectToStores from '@store/connectToStores';
 import defaultStorage from '@store/defaultStorage';
+import {loopv} from '@core/common/loops';
 
 /**
  * ModalOverlay Props Interface
@@ -80,11 +81,15 @@ export default class ModalOverlay extends Component<ModalOverlayProps, ModalOver
   /**
    * Render ModalOverlay Component
    */
-  render({children}: ModalOverlayProps & PreactDOMAttributes, {}: ModalOverlayState) {
-    return (
+  render({children, dialog}: ModalOverlayProps & PreactDOMAttributes, {}: ModalOverlayState) {
+    const elements = loopv(children as JSX.Element[], (item) => {
+      return item.attributes.name === dialog ? item : null;
+    });
+
+    return dialog ? (
       <div class="dialogs_overlay noSelect" onClick={this.handleOverlayClick}>
-        {children}
+        {elements}
       </div>
-    );
+    ) : null;
   }
 }
