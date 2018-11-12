@@ -1,4 +1,5 @@
 import '@root/polyfills';
+import 'normalize.css';
 import '@ui/style.less';
 import {h, render} from 'preact';
 import PageEditor from './ui/pages/PageEditor';

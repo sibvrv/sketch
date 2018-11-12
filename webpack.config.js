@@ -6,7 +6,6 @@ const TsConfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 const autoprefixer = require('autoprefixer');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
-
 module.exports = (env, argv) => {
   const sourceMap = argv.mode !== 'production';
 
@@ -69,6 +68,46 @@ module.exports = (env, argv) => {
             ]
           })
         },
+        {
+          test: /\.(less|css)$/,
+          exclude: [
+            path.resolve(__dirname, './src/ui')
+          ],
+          use: ExtractTextPlugin.extract({
+            fallback: 'style-loader',
+            use: [
+              {
+                loader: 'css-loader',
+                options: {sourceMap, importLoaders: 1, minimize: true}
+              },
+              {
+                loader: `postcss-loader`,
+                options: {
+                  sourceMap,
+                  plugins: () => {
+                    autoprefixer({browsers: ['last 2 versions']});
+                  }
+                }
+              },
+              {
+                loader: 'less-loader',
+                options: {sourceMap}
+              }
+            ]
+          })
+        },
+        {
+          test: /\.json$/,
+          use: 'json-loader'
+        },
+        {
+          test: /\.(xml|html|txt|md)$/,
+          use: 'raw-loader'
+        },
+        {
+          test: /\.(svg|woff2?|ttf|eot|jpe?g|png|gif)(\?.*)?$/i,
+          use: argv.mode === 'production' ? 'file-loader' : 'url-loader'
+        }
       ]
     },
     plugins: [
