@@ -24,6 +24,7 @@ interface ImportImageState {
   mimeType: string;
   imageURL: string;
   imageType: string;
+  isUsed: boolean;
 }
 
 /**
@@ -43,8 +44,11 @@ export default class ImportImage extends Component<ImportImageProps, ImportImage
     mimeType: '',
     size: 0,
     imageURL: '',
-    imageType: ''
+    imageType: '',
+    isUsed: false
   };
+
+  fileUID = Math.random().toFixed(10).substr(2);
 
   refFileLoader: HTMLInputElement;
   handleFileLoader = (element: HTMLInputElement) => this.refFileLoader = element;
@@ -56,6 +60,13 @@ export default class ImportImage extends Component<ImportImageProps, ImportImage
   constructor(props: ImportImageProps) {
     super(props);
     this.state = {...ImportImage.defaultState};
+  }
+
+  componentWillUnmount() {
+    if (!this.state.isUsed && this.state.imageURL) {
+      URL.revokeObjectURL(this.state.imageURL);
+      this.setState({...ImportImage.defaultState});
+    }
   }
 
   /**
@@ -89,6 +100,9 @@ export default class ImportImage extends Component<ImportImageProps, ImportImage
    * ImportImage : DoImport Handler
    */
   handleDoImport = () => {
+    this.setState({
+      isUsed: true
+    });
     this.props.onImport!(this.state.imageURL);
   };
 
@@ -106,12 +120,12 @@ export default class ImportImage extends Component<ImportImageProps, ImportImage
             </div>}
 
             <div class={style.imagePreviewContent}>
-              <img src={imageURL}/>
+              {imageURL && <img src={imageURL}/>}
             </div>
           </div>
         </ModalBody>
         <ModalFooter>
-          <input ref={this.handleFileLoader} type="file" id="input" onChange={this.handleChangeFile}/>
+          <input key={this.fileUID} ref={this.handleFileLoader} type="file" id="input" onChange={this.handleChangeFile}/>
           {imageURL && size && <Button type="primary" onClick={this.handleDoImport}>Import</Button>}
         </ModalFooter>
       </ModalWindow>
