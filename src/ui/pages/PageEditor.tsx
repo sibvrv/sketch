@@ -11,6 +11,7 @@ import ZoomLabel from '@ui/components/ZoomLabel/ZoomLabel';
 import ImportImage from '@ui/modals/ImportImage/ImportImage';
 import ModalOverlay from '@ui/containers/ModalOverlay/ModalOverlay';
 import ModalSection from '@ui/containers/ModalSection/ModalSection';
+import GLOB from '@root/types';
 
 /**
  * PageEditor Props Interface
@@ -48,6 +49,13 @@ export default class PageEditor extends Component<PageEditorProps, PageEditorSta
   }
 
   /**
+   * PageEditor : ImportImage Handler
+   */
+  handleImportImage = (url: string) => {
+    GLOB.editor.layer.Image(url);
+  };
+
+  /**
    * Render PageEditor Component
    */
   render({error, shapeOptionsVisible}: PageEditorProps & PreactDOMAttributes, {}: PageEditorState) {
@@ -70,7 +78,7 @@ export default class PageEditor extends Component<PageEditorProps, PageEditorSta
             <ExportAsText/>
           </ModalSection>
           <ModalSection name="import-image">
-            <ImportImage/>
+            <ImportImage onImport={this.handleImportImage}/>
           </ModalSection>
         </ModalOverlay>
 

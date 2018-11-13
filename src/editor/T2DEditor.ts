@@ -41,6 +41,13 @@ class CollectionLayer extends Collection {
     return ret;
   }
 
+  Image(url: string) {
+    const image = new Collection('image', this);
+    image.props({src: url, name: `Image: ${url}`});
+    this.push(image);
+    return image;
+  }
+
   asText() {
     const raw = this.rawItems;
     const items = [];
