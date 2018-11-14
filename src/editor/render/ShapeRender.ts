@@ -4,6 +4,10 @@ import {Vec2} from '@core/math/Vec2';
 import {ImagesManager} from '@editor/ImagesManager';
 
 export function shapeRender(ctx: CanvasRenderingContext2D, shape: TPath, v: Vec2) {
+  if (shape.path.length <= 1) {
+    return;
+  }
+
   const path = shape.convertPath(shape.path);
 
   const fill = shape.mask ? 'rgba(190,160,160,0.4)' : 'rgba(160,160,190,0.8)';
