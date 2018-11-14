@@ -5,6 +5,7 @@ import {TPath} from './TPath';
 import {isPointInPoly} from '@core/math/isPointInPoly';
 import {Collection} from '@core/Collection';
 import {pathToText} from '@editor/transformToText';
+import {ImagesManager} from '@editor/ImagesManager';
 
 declare global {
   interface Layer {
@@ -47,13 +48,16 @@ class CollectionLayer extends Collection {
   /**
    * Create New Image
    * @param name
-   * @param url
+   * @param src
    * @constructor
    */
-  Image(name: string, url: string) {
+  Image(name: string, src: string) {
     const image = new TPath(this, name);
     image.type = 'image';
-    image.props({src: url});
+    image.props({src});
+    ImagesManager.instance.imageGetMeta(src, (url, meta) => {
+      image.Rect(0, 0, meta.width, meta.height);
+    });
     this.push(image);
     return image;
   }

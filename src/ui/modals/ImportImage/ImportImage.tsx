@@ -7,6 +7,7 @@ import ModalFooter from '@ui/components/ModalWindow/ModalFooter';
 import ModalBody from '@ui/components/ModalWindow/ModalBody';
 import Button from '@root/ui/components/Button/Button';
 import {formatBytes} from '@core/string/formatBytes';
+import {ImagesManager} from '@editor/ImagesManager';
 
 /**
  * ImportImage Props Interface
@@ -103,7 +104,10 @@ export default class ImportImage extends Component<ImportImageProps, ImportImage
     this.setState({
       isUsed: true
     });
-    this.props.onImport!(this.state.name, this.state.imageURL);
+
+    ImagesManager.instance.loadImage(this.state.imageURL, () => {
+      this.props.onImport!(this.state.name, this.state.imageURL);
+    });
   };
 
   /**
