@@ -40,5 +40,4 @@ export function poly(ctx: CanvasRenderingContext2D, pts: TPoint[], v: Vec2) {
   }
   // ctx.quadraticCurveTo(20,100,200,20);
   ctx.closePath();
-  ctx.fill('evenodd');
 }

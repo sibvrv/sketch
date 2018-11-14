@@ -47,7 +47,7 @@ function EllipseCurve(aX: number, aY: number, xRadius: number, yRadius: number, 
     deltaAngle = samePoints ? 0 : twoPi;
   }
 
-  if (aClockwise === true && !samePoints) {
+  if (aClockwise && !samePoints) {
     deltaAngle = deltaAngle === twoPi ? -twoPi : deltaAngle - twoPi;
   }
 
