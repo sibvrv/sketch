@@ -133,18 +133,6 @@ export class T2DEditor {
   }
 
   /**
-   * Rename Layer
-   * @param {number} index
-   * @param {string} name
-   */
-  renameLayer = (index: number, name: string) => {
-    const item = this.layers.get(index);
-    if (item) {
-      item.props('name', name);
-    }
-  };
-
-  /**
    * Clear Layer
    */
   clearLayer() {
