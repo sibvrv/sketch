@@ -12,7 +12,7 @@ import {formatBytes} from '@core/string/formatBytes';
  * ImportImage Props Interface
  */
 interface ImportImageProps {
-  onImport?: (url: string) => any;
+  onImport?: (name: string, url: string) => any;
 }
 
 /**
@@ -103,7 +103,7 @@ export default class ImportImage extends Component<ImportImageProps, ImportImage
     this.setState({
       isUsed: true
     });
-    this.props.onImport!(this.state.imageURL);
+    this.props.onImport!(this.state.name, this.state.imageURL);
   };
 
   /**
@@ -125,7 +125,13 @@ export default class ImportImage extends Component<ImportImageProps, ImportImage
           </div>
         </ModalBody>
         <ModalFooter>
-          <input key={this.fileUID} ref={this.handleFileLoader} type="file" id="input" onChange={this.handleChangeFile}/>
+          <input
+            key={this.fileUID}
+            ref={this.handleFileLoader}
+            type="file"
+            id="input"
+            onChange={this.handleChangeFile}
+          />
           {imageURL && size && <Button type="primary" onClick={this.handleDoImport}>Import</Button>}
         </ModalFooter>
       </ModalWindow>

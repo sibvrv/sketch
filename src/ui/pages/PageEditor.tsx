@@ -12,6 +12,8 @@ import ImportImage from '@ui/modals/ImportImage/ImportImage';
 import ModalOverlay from '@ui/containers/ModalOverlay/ModalOverlay';
 import ModalSection from '@ui/containers/ModalSection/ModalSection';
 import GLOB from '@root/types';
+import defaultStorage from '@store/defaultStorage';
+import {redraw} from '@root/main';
 
 /**
  * PageEditor Props Interface
@@ -51,8 +53,10 @@ export default class PageEditor extends Component<PageEditorProps, PageEditorSta
   /**
    * PageEditor : ImportImage Handler
    */
-  handleImportImage = (url: string) => {
-    GLOB.editor.layer.Image(url);
+  handleImportImage = (name: string, url: string) => {
+    GLOB.editor.layer.Image(name, url);
+    defaultStorage.setState({dialog: ''});
+    redraw();
   };
 
   /**

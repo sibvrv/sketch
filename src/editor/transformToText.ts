@@ -18,6 +18,7 @@ function pointToText(point: TPoint) {
 export function pathToText(path: TPath) {
   let ret = [] as any;
   let prev = new TPoint();
+
   for (let i = 0; i < path.path.length; i++) {
     ret = ret.concat(pointToText(path.path[i]));
     prev = path.path[i];

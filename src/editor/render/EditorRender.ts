@@ -25,9 +25,12 @@ export function editorRender(ctx: CanvasRenderingContext2D, editor: T2DEditor, w
   const dy = view.position.y;
   GLOB.canvasScale = view.zoom;
 
-  const sec = editor.layer.rawItems as TPath[];
-  for (let i = 0; i < sec.length; ++i) {
-    shapeRender(ctx, sec[i], view.position);
+  const items = editor.layer.rawItems as TPath[];
+  for (let i = 0; i < items.length; ++i) {
+    const item = items[i];
+    if (item.type === 'path') {
+      shapeRender(ctx, items[i], view.position);
+    }
   }
 
   if (selected.sector) {

@@ -1,6 +1,5 @@
 import {TViewPort} from './TViewPort';
 import {TPoint} from './TPoint';
-import {TVectorGraphics} from './TVectorGraphics';
 import {TControllerList} from './TController';
 import {TPath} from './TPath';
 import {isPointInPoly} from '@core/math/isPointInPoly';
@@ -10,7 +9,6 @@ import {pathToText} from '@editor/transformToText';
 declare global {
   interface Layer {
     name?: string;
-    shape: TVectorGraphics;
     controls: TControllerList;
   }
 
@@ -35,19 +33,34 @@ class CollectionLayer extends Collection {
     this.define('name');
   }
 
+  /**
+   * Create New Path
+   * @param name
+   * @constructor
+   */
   Path2D(name?: string) {
     const ret = new TPath(this, name);
     this.push(ret);
     return ret;
   }
 
-  Image(url: string) {
-    const image = new Collection('image', this);
-    image.props({src: url, name: `Image: ${url}`});
+  /**
+   * Create New Image
+   * @param name
+   * @param url
+   * @constructor
+   */
+  Image(name: string, url: string) {
+    const image = new TPath(this, name);
+    image.type = 'image';
+    image.props({src: url});
     this.push(image);
     return image;
   }
 
+  /**
+   * Convert To Text
+   */
   asText() {
     const raw = this.rawItems;
     const items = [];
@@ -62,7 +75,6 @@ export class T2DEditor {
   layers = new Collection('document');
 
   layer: CollectionLayer = null!;
-  graphics: TVectorGraphics = null!;
   controls: TControllerList = null!;
 
   selected: Selected = {
