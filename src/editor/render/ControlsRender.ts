@@ -1,8 +1,7 @@
-import {color_fill, color_stroke, disk, line} from '@editor/render/canvas';
+import {color_fill, color_stroke, line} from '@editor/render/canvas';
 import {TPath} from '@editor/TPath';
-import {Vec2} from '@core/math/Vec2';
 
-export function controlsRender(ctx: CanvasRenderingContext2D, shape: TPath, v: Vec2) {
+export function controlsRender(ctx: CanvasRenderingContext2D, shape: TPath, scale: number) {
   const path = shape.path;
   const len = path.length;
 
@@ -12,12 +11,20 @@ export function controlsRender(ctx: CanvasRenderingContext2D, shape: TPath, v: V
     const a = path[i];
     const b = path[(i + 1) % len];
 
-    line(ctx, v.x + a.x, v.y + a.y, v.x + b.x, v.y + b.y);
+    line(ctx, a.x, a.y, b.x, b.y);
   }
 
-  color_fill(ctx, '#369');
+  color_fill(ctx, '#FFF');
+  color_stroke(ctx, '#00F');
+
+  const size = 7 / scale;
+  const hsize = size / 2;
+
+  ctx.beginPath();
   for (let i = 0; i < len; i++) {
     const p = path[i];
-    disk(ctx, v.x + p.x, v.y + p.y, 4);
+    ctx.rect(p.x - hsize, p.y - hsize, size, size);
   }
+  ctx.fill();
+  ctx.stroke();
 }

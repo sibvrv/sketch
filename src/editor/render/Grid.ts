@@ -11,8 +11,8 @@ import {color_stroke, line} from '@editor/render/canvas';
 export function DrawGrid(editor: T2DEditor, ctx: CanvasRenderingContext2D, width: number, height: number) {
   const {zoom, zoomInt} = editor.view;
 
-  const x = editor.view.position.x * zoom;
-  const y = editor.view.position.y * zoom;
+  let x = editor.view.position.x * zoom;
+  let y = editor.view.position.y * zoom;
 
   ctx.translate(0.5, 0.5);
 
@@ -35,12 +35,12 @@ export function DrawGrid(editor: T2DEditor, ctx: CanvasRenderingContext2D, width
   let div = 10 * gzoom;
 
   for (let i = Math.round(width / div); --i >= 0;) {
-    const d = x % div + i * div;
+    const d = Math.round(x % div + i * div);
     line(ctx, d, 0, d, height);
   }
 
   for (let i = Math.round(height / div); --i >= 0;) {
-    const d = y % div + i * div;
+    const d = Math.round(y % div + i * div);
     line(ctx, 0, d, width, d);
   }
 
@@ -49,12 +49,12 @@ export function DrawGrid(editor: T2DEditor, ctx: CanvasRenderingContext2D, width
   color_stroke(ctx, '#dde');
 
   for (let i = Math.round(width / div); --i >= 0;) {
-    const dx = x % div + i * div;
+    const dx = Math.round(x % div + i * div);
     line(ctx, dx, 0, dx, height);
   }
 
   for (let i = Math.round(height / div); --i >= 0;) {
-    const d = y % div + i * div;
+    const d = Math.round(y % div + i * div);
     line(ctx, 0, d, width, d);
   }
 
@@ -62,14 +62,17 @@ export function DrawGrid(editor: T2DEditor, ctx: CanvasRenderingContext2D, width
   color_stroke(ctx, '#bbc');
 
   for (let i = Math.round(width / div); --i >= 0;) {
-    const dx = x % div + i * div;
+    const dx = Math.round(x % div + i * div);
     line(ctx, dx, 0, dx, height);
   }
 
   for (let i = Math.round(height / div); --i >= 0;) {
-    const d = y % div + i * div;
+    const d = Math.round(y % div + i * div);
     line(ctx, 0, d, width, d);
   }
+
+  x = Math.round(x);
+  y = Math.round(y);
 
   color_stroke(ctx, '#888');
   line(ctx, 0, y, width, y);

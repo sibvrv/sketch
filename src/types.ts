@@ -6,8 +6,6 @@ declare global {
 
     img_background: HTMLImageElement | HTMLCanvasElement | HTMLVideoElement | ImageBitmap | null;
 
-    canvasScale: number;
-
     setState: (state: GLOBALValues) => void;
   }
 }
@@ -16,8 +14,6 @@ const GLOB: GLOBALValues = {
   editor: null!,
 
   img_background: null,
-
-  canvasScale: 1,
 
   setState(state: GLOBALValues) {
     for (const i in state) {

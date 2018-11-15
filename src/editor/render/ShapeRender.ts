@@ -18,16 +18,19 @@ export function shapeRender(ctx: CanvasRenderingContext2D, shape: TPath, v: Vec2
     if (meta) {
       meta.pattern = meta.pattern || ctx.createPattern(meta.image, 'repeat');
     }
+    ctx.save();
+
     ctx.fillStyle = meta.pattern || fill;
 
     // todo zoom, image scale, rotate
     const offset = v.clone().add(path[0]);
+
     ctx.translate(offset.x, offset.y);
 
     poly(ctx, path, path[0].clone().neg());
     ctx.fill('evenodd');
 
-    ctx.setTransform(1, 0, 0, 1, 0, 0);
+    ctx.restore();
   } else {
     color_fill(ctx, fill);
 
