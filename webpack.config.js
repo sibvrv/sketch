@@ -53,10 +53,7 @@ module.exports = (env, argv) => {
               {
                 loader: `postcss-loader`,
                 options: {
-                  sourceMap,
-                  plugins: () => {
-                    autoprefixer({browsers: ['last 2 versions']});
-                  }
+                  sourceMap
                 }
               },
               {
@@ -83,10 +80,7 @@ module.exports = (env, argv) => {
               {
                 loader: `postcss-loader`,
                 options: {
-                  sourceMap,
-                  plugins: () => {
-                    autoprefixer({browsers: ['last 2 versions']});
-                  }
+                  sourceMap
                 }
               },
               {
