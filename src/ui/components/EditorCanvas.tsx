@@ -2,8 +2,8 @@ import {Component, h} from 'preact';
 import defaultStorage from '@store/defaultStorage';
 import {redraw} from '@root/main';
 import {Vec2} from '@core/math/Vec2';
-import GLOB from '@root/types';
 import {selected_info} from '@ui/actions/actionsSelect';
+import {T2DEditor} from '@editor/T2DEditor';
 
 /**
  * EditorCanvas Props Interface
@@ -88,17 +88,24 @@ export default class EditorCanvas extends Component<EditorCanvasProps, EditorCan
       redraw();
     });
 
-    this.context.editor.onCanvasReady(canvas, ctx);
+    this.context.editorContext.onCanvasReady(canvas, ctx);
     this.setState({
       ready: true
     });
   }
 
   /**
+   * Get Current Editor Instance
+   */
+  get editor(): T2DEditor {
+    return this.context.editor;
+  }
+
+  /**
    * EditorCanvas : KeyDown Handler
    */
   handleKeyDown = (event: KeyboardEvent) => {
-    const {editor} = GLOB;
+    const editor = this.editor;
 
     switch (event.keyCode) {
       case 46:
@@ -119,7 +126,7 @@ export default class EditorCanvas extends Component<EditorCanvasProps, EditorCan
    * EditorCanvas : MouseDown Handler
    */
   handleMouseDown = (event: MouseEvent) => {
-    const {editor} = GLOB;
+    const editor = this.editor;
     lastDownTarget = event.target as HTMLElement;
 
     const mouse = this.getMouse(event);
@@ -169,7 +176,7 @@ export default class EditorCanvas extends Component<EditorCanvasProps, EditorCan
    * EditorCanvas : MouseMove Handler
    */
   handleMouseMove = (event: MouseEvent) => {
-    const {editor} = GLOB;
+    const editor = this.editor;
     event.preventDefault();
     event.stopPropagation();
 
@@ -256,7 +263,7 @@ export default class EditorCanvas extends Component<EditorCanvasProps, EditorCan
    * VectorEditor : DoubleClick Handler
    */
   handleDoubleClick = (event: MouseEvent) => {
-    const {editor} = GLOB;
+    const editor = this.editor;
     event.preventDefault();
     event.stopPropagation();
 
@@ -273,7 +280,7 @@ export default class EditorCanvas extends Component<EditorCanvasProps, EditorCan
    * EditorCanvas : MouseWheel Handler
    */
   handleMouseWheel = (event: MouseEvent) => {
-    const {editor} = GLOB;
+    const editor = this.editor;
 
     event.preventDefault();
     event.stopPropagation();

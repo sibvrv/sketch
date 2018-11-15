@@ -1,5 +1,4 @@
 import {Component, h, PreactDOMAttributes} from 'preact';
-import GLOB from '@root/types';
 import {redraw} from '@root/main';
 import {TPath} from '@editor/TPath';
 import defaultStorage from '@store/defaultStorage';
@@ -9,6 +8,7 @@ import {collectionGetItemsRange} from '@core/CollectionUtils';
 import {Collection} from '@core/Collection';
 import {selected_info} from '@ui/actions/actionsSelect';
 import './SideBar.less';
+import {T2DEditor} from '@editor/T2DEditor';
 
 /**
  * SideBar Props Interface
@@ -51,6 +51,13 @@ export default class SideBar extends Component<SideBarProps, SideBarState> {
   }
 
   /**
+   * Get Current Editor Instance
+   */
+  get editor(): T2DEditor {
+    return this.context.editor;
+  }
+
+  /**
    * SideBar : Accordion Handler
    * @param {Event} e
    */
@@ -83,7 +90,7 @@ export default class SideBar extends Component<SideBarProps, SideBarState> {
    * SideBar : NewLayer Handler
    */
   handleNewLayer = () => {
-    const {editor} = GLOB;
+    const editor = this.editor;
 
     editor.selectLayer(editor.layers.length);
     redraw();
@@ -94,7 +101,8 @@ export default class SideBar extends Component<SideBarProps, SideBarState> {
    * SideBar : Save Handler
    */
   handleSave = () => {
-    localStorage.editor2d = JSON.stringify(GLOB.editor.doSave());
+    const editor = this.editor;
+    localStorage.editor2d = JSON.stringify(editor.doSave());
   };
 
   /**
@@ -102,7 +110,9 @@ export default class SideBar extends Component<SideBarProps, SideBarState> {
    * @param {Event} e
    */
   handleGridClick = (e: Event) => {
-    GLOB.drawGrid = (e.currentTarget as HTMLInputElement).checked;
+    defaultStorage.setState({
+      drawGrid: (e.currentTarget as HTMLInputElement).checked
+    });
     redraw();
   };
 
@@ -110,8 +120,11 @@ export default class SideBar extends Component<SideBarProps, SideBarState> {
    * SideBar : ClearLayer Handler
    */
   handleClearLayer = () => {
-    GLOB.editor.clearLayer();
+    const editor = this.editor;
+
+    editor.clearLayer();
     redraw();
+    this.setState({});
   };
 
   /**
@@ -119,7 +132,7 @@ export default class SideBar extends Component<SideBarProps, SideBarState> {
    * @param {Collection} item
    */
   handleLayerClick = (item: Collection) => {
-    const {editor} = GLOB;
+    const editor = this.editor;
 
     let layer = item;
     while (layer && layer.type !== 'layer') {
@@ -145,7 +158,8 @@ export default class SideBar extends Component<SideBarProps, SideBarState> {
    * @param {Collection} item
    */
   handleLayerRemove = (item: Collection) => {
-    const {editor} = GLOB;
+    const editor = this.editor;
+
     if (item.type === 'layer') {
       const index = item.parent.indexOf(item);
       editor.removeLayer(index);
@@ -178,7 +192,7 @@ export default class SideBar extends Component<SideBarProps, SideBarState> {
     <LayerItem
       index={index}
       name={item.props('name') as string}
-      selected={item === GLOB.editor.layer}
+      selected={item === this.editor.layer}
       item={item}
       onClick={this.handleLayerClick}
       onRemove={this.handleLayerRemove}
@@ -189,7 +203,7 @@ export default class SideBar extends Component<SideBarProps, SideBarState> {
    * SideBar : LayerItemsCount Handler
    */
   handleLayerItemsCount = () => {
-    const {editor} = GLOB;
+    const editor = this.editor;
     return editor.layers.childrenCount;
   };
 
@@ -197,7 +211,7 @@ export default class SideBar extends Component<SideBarProps, SideBarState> {
    * SideBar : LayerItems Handler
    */
   handleLayerItems = (from: number, to: number) => {
-    const {editor} = GLOB;
+    const editor = this.editor;
     return collectionGetItemsRange(editor.layers, from, Math.max(10, to - from));
   };
 
@@ -241,11 +255,11 @@ export default class SideBar extends Component<SideBarProps, SideBarState> {
                    checked={accordion.sectionLayers}
                    onChange={this.handleAccordion}/>
             <label for="sectionLayers"> <span>Layer</span></label>
-            <div class="content grow flex-vertical" id="vlist-layers">
-              <ul class="layer-toolbar">
+            <div class="vlist-layers content grow flex-vertical">
+              <ul class="collection-toolbar">
                 <li onClick={this.handleNewLayer}><i class="fa fa-plus"/><span>New</span></li>
               </ul>
-              <div class="layers-list grow">
+              <div class="collection-items grow">
                 <VirtualList
                   itemHeight={30}
                   onGetItemsCount={this.handleLayerItemsCount}

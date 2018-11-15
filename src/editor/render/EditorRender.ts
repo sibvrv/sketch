@@ -8,7 +8,11 @@ import {Vec2, vec2_normalize} from '@core/math/Vec2';
 import {DrawGrid} from '@editor/render/Grid';
 import {TPath} from '@editor/TPath';
 
-export function editorRender(ctx: CanvasRenderingContext2D, editor: T2DEditor, width: number, height: number) {
+interface EditorRenderOptions {
+  drawGrid: boolean;
+}
+
+export function editorRender(ctx: CanvasRenderingContext2D, editor: T2DEditor, width: number, height: number, options: EditorRenderOptions) {
   const {view, selected} = editor;
 
   ctx.fillStyle = 'white';
@@ -17,7 +21,7 @@ export function editorRender(ctx: CanvasRenderingContext2D, editor: T2DEditor, w
   if (GLOB.img_background) {
     DrawBackground(editor, ctx, width, height);
   }
-  if (GLOB.drawGrid) {
+  if (options.drawGrid) {
     DrawGrid(editor, ctx, width, height);
   }
 

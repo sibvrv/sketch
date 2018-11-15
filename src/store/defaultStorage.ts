@@ -10,6 +10,7 @@ declare global {
     dialog: string;
     selectedChange: number;
     shapeOptionsVisible: boolean;
+    drawGrid: boolean;
   }
 }
 
@@ -19,7 +20,8 @@ const defaultStates: DefaultStorage = {
   error: '',
   dialog: '',
   selectedChange: 0,
-  shapeOptionsVisible: true
+  shapeOptionsVisible: true,
+  drawGrid: true
 };
 
 /**

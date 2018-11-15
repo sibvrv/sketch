@@ -1,5 +1,6 @@
 import {Component, h, PreactDOMAttributes} from 'preact';
 import {initEditorApplication} from '@root/main';
+import GLOB from '@root/types';
 
 /**
  * VectorEditor Props Interface
@@ -40,7 +41,8 @@ export default class VectorEditor extends Component<VectorEditorProps, VectorEdi
 
   getChildContext() {
     return {
-      editor: this.editorContext
+      editor: GLOB.editor,
+      editorContext: this.editorContext
     };
   }
 

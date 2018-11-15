@@ -4,8 +4,6 @@ declare global {
   interface GLOBALValues {
     editor: T2DEditor;
 
-    drawGrid: boolean;
-
     img_background: HTMLImageElement | HTMLCanvasElement | HTMLVideoElement | ImageBitmap | null;
 
     canvasScale: number;
@@ -16,8 +14,6 @@ declare global {
 
 const GLOB: GLOBALValues = {
   editor: null!,
-
-  drawGrid: true,
 
   img_background: null,
 
