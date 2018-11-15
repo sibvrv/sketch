@@ -3,7 +3,6 @@ const webpack = require('webpack');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const TsConfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
-const autoprefixer = require('autoprefixer');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = (env, argv) => {
