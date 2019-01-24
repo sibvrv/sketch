@@ -1,6 +1,5 @@
 import createStore from 'unistore';
-// @ts-ignore
-import * as devtools from 'unistore/devtools';
+import unistoreDevTools from 'unistore/devtools';
 
 declare global {
   interface DefaultStorage {
@@ -27,5 +26,5 @@ const defaultStates: DefaultStorage = {
 /**
  * Default Storage
  */
-const defaultStorage = __DEV__ ? devtools(createStore(defaultStates)) : createStore(defaultStates);
+const defaultStorage = __DEV__ ? unistoreDevTools(createStore(defaultStates)) : createStore(defaultStates);
 export default defaultStorage;
