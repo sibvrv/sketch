@@ -279,13 +279,19 @@ export default class EditorCanvas extends Component<EditorCanvasProps, EditorCan
   /**
    * EditorCanvas : MouseWheel Handler
    */
-  handleMouseWheel = (event: MouseEvent) => {
+  handleMouseWheel = (event: WheelEvent) => {
     const editor = this.editor;
 
     event.preventDefault();
     event.stopPropagation();
 
     const mouse = this.getMouse(event);
+
+    if (!event.ctrlKey && (event.deltaX || event.deltaY)) {
+      editor.view.translate(-event.deltaX, -event.deltaY);
+      redraw();
+      return;
+    }
 
     let delta = 0;
     if (event.wheelDelta !== undefined) {
