@@ -1,4 +1,5 @@
 import {Component, h, PreactDOMAttributes} from 'preact';
+import * as style from './PageEditor.less';
 import ShapeOptions from '@ui/components/ShapeOptions/ShapeOptions';
 import ToolBar from '@ui/components/ToolBar/ToolBar';
 import ExportAsText from '@ui/modals/ExportAsText/ExportAsText';
@@ -65,7 +66,7 @@ export default class PageEditor extends Component<PageEditorProps, PageEditorSta
   render({error, shapeOptionsVisible}: PageEditorProps & PreactDOMAttributes, {}: PageEditorState) {
     return (
       <VectorEditor>
-        <div class="draw_2d">
+        <div class={style.editorArea}>
           <EditorCanvas/>
 
           <ToolBar/>
