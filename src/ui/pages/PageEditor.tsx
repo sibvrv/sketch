@@ -15,12 +15,14 @@ import ModalSection from '@ui/containers/ModalSection/ModalSection';
 import GLOB from '@root/types';
 import defaultStorage from '@store/defaultStorage';
 import {redraw} from '@root/main';
+import ErrorModal from '@ui/modals/ErrorModal/ErrorModal';
 
 /**
  * PageEditor Props Interface
  */
 interface PageEditorProps {
   error?: string;
+  dialog?: string;
   shapeOptionsVisible?: boolean;
 }
 
@@ -35,7 +37,7 @@ interface PageEditorState {
  * @class PageEditor
  * @extends Component
  */
-@connectToStores('error, shapeOptionsVisible')
+@connectToStores('dialog, error, shapeOptionsVisible')
 export default class PageEditor extends Component<PageEditorProps, PageEditorState> {
   /**
    * Default Props for PageEditor Component
@@ -63,22 +65,29 @@ export default class PageEditor extends Component<PageEditorProps, PageEditorSta
   /**
    * Render PageEditor Component
    */
-  render({error, shapeOptionsVisible}: PageEditorProps & PreactDOMAttributes, {}: PageEditorState) {
+  render({dialog, error, shapeOptionsVisible}: PageEditorProps & PreactDOMAttributes, {}: PageEditorState) {
     return (
-      <VectorEditor>
-        <div class={style.editorArea}>
-          <EditorCanvas/>
+      <div class={style.pageLayout}>
+        <div class={[style.pageContext, dialog || error ? style.pageBlur : '']}>
+          <VectorEditor>
+            <div class={style.editorArea}>
+              <EditorCanvas/>
 
-          <ToolBar/>
-          {shapeOptionsVisible && <ShapeOptions/>}
+              <ToolBar/>
+              {shapeOptionsVisible && <ShapeOptions/>}
 
-          <ZoomLabel/>
+              <ZoomLabel/>
+            </div>
+
+            <SideBar/>
+            <StatusBar/>
+          </VectorEditor>
         </div>
 
-        <SideBar/>
-        <StatusBar/>
-
         <ModalOverlay>
+          <ModalSection name="error">
+            <ErrorModal/>
+          </ModalSection>
           <ModalSection name="export-as-text">
             <ExportAsText/>
           </ModalSection>
@@ -86,9 +95,7 @@ export default class PageEditor extends Component<PageEditorProps, PageEditorSta
             <ImportImage onImport={this.handleImportImage}/>
           </ModalSection>
         </ModalOverlay>
-
-        {error && <div class="error_message noSelect" style="font-weight: bold">{error}</div>}
-      </VectorEditor>
+      </div>
     );
   }
 }

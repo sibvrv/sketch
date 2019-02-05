@@ -44,7 +44,8 @@ export default class ModalHeader extends Component<ModalHeaderProps, ModalHeader
    */
   handleClose = () => {
     defaultStorage.setState({
-      dialog: ''
+      dialog: '',
+      error: ''
     });
   };
 

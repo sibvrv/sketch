@@ -1,13 +1,13 @@
 import {Component, h, PreactDOMAttributes} from 'preact';
 import connectToStores from '@store/connectToStores';
 import defaultStorage from '@store/defaultStorage';
-import {loopv} from '@core/common/loops';
 
 /**
  * ModalOverlay Props Interface
  */
 interface ModalOverlayProps {
   dialog?: string;
+  error?: string;
 }
 
 /**
@@ -21,7 +21,7 @@ interface ModalOverlayState {
  * @class ModalOverlay
  * @extends Component
  */
-@connectToStores('dialog')
+@connectToStores('error, dialog')
 export default class ModalOverlay extends Component<ModalOverlayProps, ModalOverlayState> {
   /**
    * Default Props for ModalOverlay Component
@@ -47,7 +47,8 @@ export default class ModalOverlay extends Component<ModalOverlayProps, ModalOver
 
   hideDialogs = () => {
     defaultStorage.setState({
-      dialog: ''
+      dialog: '',
+      error: ''
     });
   };
 
@@ -62,7 +63,7 @@ export default class ModalOverlay extends Component<ModalOverlayProps, ModalOver
    * ModalOverlay : KeyDown Handler
    */
   handleKeyDown = (event: KeyboardEvent) => {
-    if (event.defaultPrevented || !this.props.dialog) {
+    if (event.defaultPrevented || !(this.props.dialog || this.props.error)) {
       return;
     }
 
@@ -81,12 +82,19 @@ export default class ModalOverlay extends Component<ModalOverlayProps, ModalOver
   /**
    * Render ModalOverlay Component
    */
-  render({children, dialog}: ModalOverlayProps & PreactDOMAttributes, {}: ModalOverlayState) {
-    const elements = loopv(children as JSX.Element[], (item) => {
-      return item.attributes.name === dialog ? item : null;
+  render(
+    {
+      children,
+      dialog,
+      error
+    }: Readonly<ModalOverlayProps & PreactDOMAttributes>,
+    {}: Readonly<ModalOverlayState>) {
+    const searchName = error && 'error' || dialog;
+    const elements = (children as JSX.Element[]).filter((item) => {
+      return item.attributes.name === searchName ? item : null;
     });
 
-    return dialog ? (
+    return elements.length ? (
       <div class="dialogs_overlay noSelect" onClick={this.handleOverlayClick}>
         {elements}
       </div>
