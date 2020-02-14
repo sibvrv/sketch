@@ -4,6 +4,8 @@ import {redraw} from '@root/main';
 import {Vec2} from '@core/math/Vec2';
 import {selected_info} from '@ui/actions/actionsSelect';
 import {T2DEditor} from '@editor/T2DEditor';
+import connectToStores from '@store/connectToStores';
+import {viewActions} from '@ui/actions/vewActions';
 
 /**
  * EditorCanvas Props Interface
@@ -40,6 +42,7 @@ const drag = {
  * @class EditorCanvas
  * @extends Component
  */
+@connectToStores('', null!, viewActions)
 export default class EditorCanvas extends Component<EditorCanvasProps, EditorCanvasState> {
   /**
    * Default Props for EditorCanvas Component
@@ -84,7 +87,7 @@ export default class EditorCanvas extends Component<EditorCanvasProps, EditorCan
     document.addEventListener('mouseup', this.handleMouseUp, false);
 
     window.addEventListener('resize', redraw, false);
-    window.addEventListener('load', function (event) {
+    window.addEventListener('load', function () {
       redraw();
     });
 
@@ -269,9 +272,9 @@ export default class EditorCanvas extends Component<EditorCanvasProps, EditorCan
 
     const mouse = this.getMouse(event);
 
-    let p: any;
-    if (p = editor.splitAt(mouse.x, mouse.y)) {
-      editor.view.snapToGrid(p);
+    const point = editor.splitAt(mouse.x, mouse.y);
+    if (point) {
+      editor.view.snapToGrid(point);
       redraw();
     }
   };

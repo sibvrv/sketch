@@ -1,11 +1,12 @@
 import {Component, h} from 'preact';
 import connectToStores from '@store/connectToStores';
 import * as style from './ZoomLabel.less';
+import {viewActions, ViewActionsInterface} from '@ui/actions/vewActions';
 
 /**
  * ZoomLabel Props Interface
  */
-interface ZoomLabelProps {
+interface ZoomLabelProps extends ViewActionsInterface {
   zoom?: number;
 }
 
@@ -20,7 +21,7 @@ interface ZoomLabelState {
  * @class ZoomLabel
  * @extends Component
  */
-@connectToStores('zoom')
+@connectToStores('zoom', null!, viewActions)
 export default class ZoomLabel extends Component<ZoomLabelProps, ZoomLabelState> {
   /**
    * Default Props for ZoomLabel Component
@@ -37,11 +38,18 @@ export default class ZoomLabel extends Component<ZoomLabelProps, ZoomLabelState>
   }
 
   /**
+   * ZoomLabel : Reset Handler
+   */
+  handleReset = () => {
+    this.props.setZoom!(1);
+  };
+
+  /**
    * Render ZoomLabel Component
    */
   render({zoom}: ZoomLabelProps, {}: ZoomLabelState) {
     return (
-      <div class={style.zoom_label}>
+      <div class={style.zoom_label} onClick={this.handleReset}>
         {zoom}
       </div>
     );

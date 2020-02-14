@@ -18,8 +18,7 @@ export class TViewPort {
 
   reset() {
     this.position.set(0, 0);
-    this.zoomInt = 0;
-    this.zoom = 1;
+    this.resetZoom();
   }
 
   translate(x: number, y: number) {
@@ -58,6 +57,11 @@ export class TViewPort {
   getZoom() {
     const zoom = 1 + Math.abs(this.zoomInt);
     return (this.zoomInt < 0) ? `1:${zoom}` : `${zoom}:1`;
+  }
+
+  resetZoom() {
+    this.zoomInt = 0;
+    this.zoom = 1;
   }
 
   getViewport(width: number, height: number) {

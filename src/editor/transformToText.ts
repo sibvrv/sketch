@@ -3,10 +3,10 @@ import {TPath} from '@editor/TPath';
 import {compact} from '@core/common/compact';
 
 function pointToText(point: TPoint) {
-  const ret = {
+  const ret: any = {
     x: point.x,
     y: point.y
-  } as any;
+  };
 
   if (point.r) {
     ret['r'] = point.r;
