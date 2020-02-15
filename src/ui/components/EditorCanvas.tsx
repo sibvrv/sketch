@@ -274,6 +274,7 @@ export default class EditorCanvas extends Component<EditorCanvasProps, EditorCan
 
     const point = editor.splitAt(mouse.x, mouse.y);
     if (point) {
+      editor.selected.selectPoint(point); // todo
       editor.view.snapToGrid(point);
       redraw();
     }

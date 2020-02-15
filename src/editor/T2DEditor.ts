@@ -19,6 +19,10 @@ declare global {
     point: TPoint;
 
     reset(): void;
+
+    resetInner(): void;
+
+    selectPoint(point: TPoint): void;
   }
 }
 
@@ -89,6 +93,14 @@ export class T2DEditor {
       this.sector = null;
       this.point = null;
       this.line = null;
+    },
+    resetInner() {
+      this.point = null;
+      this.line = null;
+    },
+    selectPoint(point: TPoint) {
+      this.line = null;
+      this.point = point;
     }
   };
 
@@ -217,8 +229,10 @@ export class T2DEditor {
     if (sel.line) {
       sel.sector.deletePoint(sel.line.A as TPoint);
       sel.sector.deletePoint(sel.line.B as TPoint);
+      this.selected.resetInner();
     } else if (sel.point) {
       sel.sector.deletePoint(sel.point as TPoint);
+      this.selected.resetInner();
     } else if (sel.sector) {
       const sec = this.layer.rawItems;
       const index = sec.indexOf(sel.sector);
@@ -226,9 +240,8 @@ export class T2DEditor {
         return;
       }
       sec.splice(index, 1);
+      this.selected.reset();
     }
-
-    this.selected.reset();
   }
 
   /**
