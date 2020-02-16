@@ -62,6 +62,8 @@ export class TViewPort {
   resetZoom() {
     this.zoomInt = 0;
     this.zoom = 1;
+    this.grid = 10;
+    this.zoomFactorPow2 = 1;
   }
 
   getViewport(width: number, height: number) {
