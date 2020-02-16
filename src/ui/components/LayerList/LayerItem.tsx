@@ -2,6 +2,7 @@ import {Component, h} from 'preact';
 import {noop} from '@core/common/noop';
 import {Collection} from '@core/Collection';
 import './LayerItem.less';
+import {stringCapitalize} from '@core/string/stringCapitalize';
 
 /**
  * LayerItem Props Interface
@@ -140,7 +141,7 @@ export default class LayerItem extends Component<LayerItemProps, LayerItemState>
           contentEditable={inEdit}
           class={inEdit ? 'inEdit' : ''}
           ref={this.refInput}
-        >{name || `Layer ${1 + index}`}</p>
+        >{name || `${stringCapitalize(item.type)} ${1 + index}`}</p>
         {
           !inEdit && <span class="icons-frame">
             <i class="fa fa-trash-alt" onClick={this.handleRemove}/>

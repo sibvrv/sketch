@@ -142,6 +142,7 @@ export default class EditorCanvas extends Component<EditorCanvasProps, EditorCan
 
         if (event.ctrlKey) {
           const {zoom} = editor.view;
+          const prev = editor.selected.sector;
 
           const sec = editor.selected.sector = editor.selected.sector || editor.layer.Path2D();
           const p = new Vec2(
@@ -150,6 +151,10 @@ export default class EditorCanvas extends Component<EditorCanvasProps, EditorCan
           );
           editor.view.snapToGrid(p);
           sec.Point(p.x, p.y);
+
+          if (prev !== editor.selected.sector) {
+            selected_info();
+          }
 
           redraw();
           return;
