@@ -2,6 +2,9 @@ import {Component, h} from 'preact';
 import connectToStores from '@store/connectToStores';
 import * as style from './ZoomLabel.less';
 import {viewActions, ViewActionsInterface} from '@ui/actions/vewActions';
+import {redraw} from '@root/main';
+import {T2DEditor} from '@editor/T2DEditor';
+import defaultStorage from '@store/defaultStorage';
 
 /**
  * ZoomLabel Props Interface
@@ -37,11 +40,23 @@ export default class ZoomLabel extends Component<ZoomLabelProps, ZoomLabelState>
     this.state = {};
   }
 
+  get editor(): T2DEditor {
+    return this.context.editor;
+  }
+
   /**
    * ZoomLabel : Reset Handler
    */
   handleReset = () => {
-    this.props.setZoom!(1);
+    const {view} = this.editor;
+
+    view.resetZoom();
+
+    defaultStorage.setState({
+      zoom: view.getZoom()
+    });
+
+    redraw();
   };
 
   /**
