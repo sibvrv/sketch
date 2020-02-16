@@ -71,7 +71,9 @@ export class TPath extends Collection {
       name: name || '',
       class: '',
       tags: '',
-      mask: false
+      mask: false,
+      fill: '',
+      stroke: '',
     });
     this.define<boolean>('mask');
   }

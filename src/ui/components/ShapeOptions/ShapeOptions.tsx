@@ -107,6 +107,26 @@ export default class ShapeOptions extends Component<ShapeOptionsProps, ShapeOpti
   };
 
   /**
+   * ShapeOptions : Fill Handler
+   */
+  handleFill = (e: Event) => {
+    const {value} = (e.target as HTMLInputElement);
+    const shape = GLOB.editor.selected.sector;
+    shape.props({fill: value});
+    redraw();
+  };
+
+  /**
+   * ShapeOptions : Stroke Handler
+   */
+  handleStroke = (e: Event) => {
+    const {value} = (e.target as HTMLInputElement);
+    const shape = GLOB.editor.selected.sector;
+    shape.props({stroke: value});
+    redraw();
+  };
+
+  /**
    * Render ShapeOptions Component
    */
   render({selectedChange}: ShapeOptionsProps & PreactDOMAttributes, {type, name, mask, radius, steps}: ShapeOptionsState) {
@@ -123,9 +143,16 @@ export default class ShapeOptions extends Component<ShapeOptionsProps, ShapeOpti
                                 onChange={this.handleSteps}/></label></p>
         ]}
 
+        {type === 'shape' &&
+        <p>
+          Colours
+          <div>
+            <input type="color" id="opt-fill" title="Fill" onInput={this.handleFill} onChange={this.handleFill}/>
+            <input type="color" id="opt-stroke" title="Stroke" onInput={this.handleStroke} onChange={this.handleStroke}/>
+          </div>
+        </p>
+        }
         {/*
-                <p><label> Fill: <input type="color" id="opt-fill"/></label></p>
-                <p><label> Stroke: <input type="color" id="opt-stroke"/></label></p>
                 <p><label> Opacity: <input type="range" step="0.01" min="0" max="1" value="1" id="opt-stroke-opacity"/></label></p>
                 <p><label>
                     Углы:

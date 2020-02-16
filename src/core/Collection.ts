@@ -3,17 +3,17 @@ type PropertyValue = string | number | boolean;
 /**
  * Collection Properties Interface
  */
-interface CollectionProperties {
+interface CollectionProperties<Props> {
   [key: string]: PropertyValue;
 }
 
 /**
  * Collection
  */
-export class Collection {
+export class Collection<TProps = {}> {
   private _items: Collection[] = [];
   private _childrenCount = 0;
-  private properties: CollectionProperties = {};
+  private properties: CollectionProperties<TProps> = {};
   public parent: Collection = null!;
 
   /**
