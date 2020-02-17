@@ -1,4 +1,4 @@
-import {Component, h, PreactDOMAttributes} from 'preact';
+import {Component, h} from 'preact';
 import connectToStores from '@store/connectToStores';
 import GLOB from '@root/types';
 import {redraw} from '@root/main';
@@ -20,6 +20,8 @@ interface ShapeOptionsState {
   mask: boolean;
   radius: number;
   steps: number;
+  fill: string;
+  stroke: string;
 }
 
 /**
@@ -45,7 +47,9 @@ export default class ShapeOptions extends Component<ShapeOptionsProps, ShapeOpti
       type: '',
       mask: false,
       radius: 0,
-      steps: 1
+      steps: 1,
+      fill: '',
+      stroke: ''
     };
     this.updateState();
   }
@@ -60,10 +64,12 @@ export default class ShapeOptions extends Component<ShapeOptionsProps, ShapeOpti
 
     this.setState({
       type,
-      name: selected.sector && selected.sector.props('name') as string,
-      mask: selected.sector && selected.sector.props('mask') as boolean,
+      name: selected.sector?.props('name') as string,
+      mask: selected.sector?.props('mask') as boolean,
       radius: selected.point && selected.point.r || 0,
-      steps: selected.point && selected.point.steps || 1
+      steps: selected.point && selected.point.steps || 1,
+      fill: selected.sector?.props('fill') as string,
+      stroke: selected.sector?.props('stroke') as string
     });
   }
 
@@ -129,7 +135,11 @@ export default class ShapeOptions extends Component<ShapeOptionsProps, ShapeOpti
   /**
    * Render ShapeOptions Component
    */
-  render({selectedChange}: ShapeOptionsProps & PreactDOMAttributes, {type, name, mask, radius, steps}: ShapeOptionsState) {
+  render() {
+
+    const {selectedChange} = this.props;
+    const {type, name, mask, radius, steps, fill, stroke} = this.state;
+
     return (
       <div class="optionsEditor window">
         <p><label>Name <input type="text" value={name} onInput={this.handleSetName}
@@ -147,8 +157,8 @@ export default class ShapeOptions extends Component<ShapeOptionsProps, ShapeOpti
         <p>
           Colours
           <div>
-            <input type="color" id="opt-fill" title="Fill" onInput={this.handleFill} onChange={this.handleFill}/>
-            <input type="color" id="opt-stroke" title="Stroke" onInput={this.handleStroke} onChange={this.handleStroke}/>
+            <input type="color" title="Fill" value={fill} onInput={this.handleFill} onChange={this.handleFill}/>
+            <input type="color" title="Stroke" value={stroke} onInput={this.handleStroke} onChange={this.handleStroke}/>
           </div>
         </p>
         }
