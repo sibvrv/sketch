@@ -16,6 +16,7 @@ import GLOB from '@root/types';
 import defaultStorage from '@store/defaultStorage';
 import {redraw} from '@root/main';
 import ErrorModal from '@ui/modals/ErrorModal/ErrorModal';
+import ToolBarSettings from '@ui/components/ToolBar/ToolBarSettings';
 
 /**
  * PageEditor Props Interface
@@ -74,6 +75,8 @@ export default class PageEditor extends Component<PageEditorProps, PageEditorSta
               <EditorCanvas/>
 
               <ToolBar/>
+              <ToolBarSettings/>
+
               {shapeOptionsVisible && <ShapeOptions/>}
 
               <ZoomLabel/>

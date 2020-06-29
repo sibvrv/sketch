@@ -136,7 +136,6 @@ export default class ShapeOptions extends Component<ShapeOptionsProps, ShapeOpti
    * Render ShapeOptions Component
    */
   render() {
-
     const {selectedChange} = this.props;
     const {type, name, mask, radius, steps, fill, stroke} = this.state;
 

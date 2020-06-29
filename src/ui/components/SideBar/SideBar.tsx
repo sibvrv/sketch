@@ -242,10 +242,6 @@ export default class SideBar extends Component<SideBarProps, SideBarState> {
                 <li onClick={this.handleImportImage}>
                   <i class="fa fa-file-export"/><span>Import Image</span>
                 </li>
-                <li>
-                  <input onChange={this.handleGridClick} id="opt-grid" type="checkbox" checked/>
-                  <label for="opt-grid">Show Grid</label>
-                </li>
               </ul>
             </div>
           </div>
