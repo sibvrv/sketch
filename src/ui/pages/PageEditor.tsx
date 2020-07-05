@@ -1,4 +1,4 @@
-import {Component, h, PreactDOMAttributes} from 'preact';
+import {Component, h} from 'preact';
 import * as style from './PageEditor.less';
 import ShapeOptions from '@ui/components/ShapeOptions/ShapeOptions';
 import ToolBar from '@ui/components/ToolBar/ToolBar';
@@ -17,6 +17,8 @@ import defaultStorage from '@store/defaultStorage';
 import {redraw} from '@root/main';
 import ErrorModal from '@ui/modals/ErrorModal/ErrorModal';
 import ToolBarSettings from '@ui/components/ToolBar/ToolBarSettings';
+import MainMenu from '@ui/components/MainMenu/MainMenu';
+import {IMainMenuStore} from '@store/MainMenuStore';
 
 /**
  * PageEditor Props Interface
@@ -25,6 +27,7 @@ interface PageEditorProps {
   error?: string;
   dialog?: string;
   shapeOptionsVisible?: boolean;
+  mainMenu?: IMainMenuStore;
 }
 
 /**
@@ -38,13 +41,8 @@ interface PageEditorState {
  * @class PageEditor
  * @extends Component
  */
-@connectToStores('dialog, error, shapeOptionsVisible')
+@connectToStores('dialog, error, shapeOptionsVisible, mainMenu')
 export default class PageEditor extends Component<PageEditorProps, PageEditorState> {
-  /**
-   * Default Props for PageEditor Component
-   */
-  static defaultProps: PageEditorProps = {};
-
   /**
    * PageEditor Component Constructor
    * @param {PageEditorProps} props
@@ -66,11 +64,20 @@ export default class PageEditor extends Component<PageEditorProps, PageEditorSta
   /**
    * Render PageEditor Component
    */
-  render({dialog, error, shapeOptionsVisible}: PageEditorProps & PreactDOMAttributes, {}: PageEditorState) {
+  render() {
+    const {
+      dialog,
+      error,
+      shapeOptionsVisible,
+      mainMenu
+    } = this.props;
+
     return (
       <div class={style.pageLayout}>
         <div class={[style.pageContext, dialog || error ? style.pageBlur : '']}>
           <VectorEditor>
+            <MainMenu items={mainMenu?.items}/>
+
             <div class={style.editorArea}>
               <EditorCanvas/>
 

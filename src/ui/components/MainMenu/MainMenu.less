@@ -1,0 +1,171 @@
+:global {
+  .appNav {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 30px;
+    z-index: 100;
+    user-select: none;
+
+    ul {
+      width: auto;
+    }
+
+    & > .topMenu {
+      position: relative;
+      background-color: #444;
+      width: 100%;
+      height: 30px;
+    }
+
+    & .burgerButton {
+      height: 12px;
+      width: 12px;
+    }
+
+    & .burgerButton line {
+      stroke: #bbb;
+    }
+
+    & .topMenu li:hover .burgerButton line {
+      stroke: #fff;
+    }
+
+    & .topMenu > li {
+      float: left;
+      position: relative;
+      box-sizing: border-box;
+      height: 30px;
+      padding: 7px 14px;
+      cursor: default;
+      white-space: nowrap;
+      background-color: #444;
+      color: #bbb;
+    }
+
+    & .topMenu > li.empty {
+      color: #777;
+    }
+
+
+    & .topMenu > li:not(.empty).active,
+    & .topMenu > li:not(.empty):hover {
+      color: #fff;
+    }
+
+    li.halfWidth {
+      display: inline-block;
+      width: 49%;
+    }
+
+    li.halfWidth + li.halfWidth {
+      border-left: 1px solid #555;
+    }
+
+    li.space {
+      margin: 0;
+      padding: 0;
+      height: 0;
+      border: 0;
+      border-top: 1px solid #555;
+    }
+
+    li:first-of-type.space {
+      display: none;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+      cursor: default;
+    }
+  }
+
+  .sub-menu.level-1 {
+    display: none;
+    position: absolute;
+    z-index: -1;
+    top: 30px;
+    left: -1px;
+    background-color: #444;
+    border-top: 2px solid #444;
+    box-shadow: 1px 1px 2px 1px rgba(0, 0, 0, 0.2);
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;
+    max-height: calc(100vh - 40px);
+    overflow-y: auto;
+    overflow-x: hidden;
+    min-width: 200px;
+  }
+
+  & .open .sub-menu {
+    display: block;
+  }
+
+  .sub-menu {
+    & > li {
+      position: relative;
+      padding: 10px 20px;
+      color: #bbb;
+      cursor: default;
+    }
+
+    & > li:last-child {
+      padding-bottom: 14px;
+
+    }
+
+    & > li:not(.title):hover {
+      background-color: #444;
+      color: #fff;
+    }
+
+    & > li.title {
+      color: #888;
+      font-size: 0.7em;
+    }
+
+    & > li.title:not(:first-child) {
+      border-top: 1px solid #555;
+      margin-top: 1em;
+    }
+
+    & > li > .note {
+      color: #888;
+      font-size: 0.85em;
+      display: inline-block;
+      margin-left: 1em;
+    }
+  }
+
+  .sub-menu:not(.level-1) {
+    display: none;
+    position: relative;
+    margin: 10px 10px 0 10px;
+  }
+
+  .sub-menu .open {
+    display: block;
+    color: inherit;
+  }
+
+  .sub-menu:not(.level-1) > li {
+    position: relative;
+    padding: 6px 0;
+  }
+
+  .sub-menu:not(.level-1) > li:hover {
+    color: #fff;
+  }
+
+  .fileUploadInput,
+  .fileURLInput {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 180px;
+    height: 35px;
+    opacity: 0;
+  }
+}

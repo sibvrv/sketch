@@ -1,5 +1,6 @@
 import createStore from 'unistore';
 import unistoreDevTools from 'unistore/devtools';
+import {IMainMenuStore, mainMenuStore} from '@store/MainMenuStore';
 
 declare global {
   interface DefaultStorage {
@@ -10,6 +11,8 @@ declare global {
     selectedChange: number;
     shapeOptionsVisible: boolean;
     drawGrid: boolean;
+
+    mainMenu: IMainMenuStore;
   }
 }
 
@@ -20,7 +23,9 @@ const defaultStates: DefaultStorage = {
   dialog: '',
   selectedChange: 0,
   shapeOptionsVisible: true,
-  drawGrid: true
+  drawGrid: true,
+
+  mainMenu: mainMenuStore()
 };
 
 /**
