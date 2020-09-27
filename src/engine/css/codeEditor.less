@@ -1,0 +1,88 @@
+:global {
+
+  .codeEditorContainer {
+    position: absolute;
+    top: 30px;
+    right: 0;
+    z-index: 80;
+    border-radius: 4px;
+    width: 50%;
+    min-width: 240px;
+    height: calc(100vh - 32px);
+  }
+
+  .codeEditorButtons {
+    position: relative;
+  }
+
+  .codeEditorArea {
+    display: block;
+    position: relative;
+    width: 100%;
+    height: calc(80% - 40px);
+    margin: 0;
+    padding: 20px;
+    border: 0;
+    background-color: #eee;
+    font-family: Courier;
+    outline: none;
+    resize: none;
+    -moz-tab-size: 4;
+    -o-tab-size: 4;
+    tab-size: 4;
+  }
+
+
+  .closeScriptButton {
+    float: right;
+  }
+
+  .consoleOutput {
+    position: relative;
+    bottom: 20px;
+    display: block;
+    height: 20%;
+    overflow-y: auto;
+    background-color: #ddd;
+  }
+
+  .consoleOutput span {
+    display: block;
+    padding: 4px 10px;
+    font-family: Courier;
+    color: #888;
+
+    border-top: 1px solid #eee;
+  }
+
+  .consoleOutput span.error {
+    background-color: red;
+    color: white;
+    border-top: 0;
+    border-bottom: 0;
+  }
+
+  .clearConsoleButton {
+    position: absolute;
+    top: 1px;
+    right: 0;
+    padding: 10px;
+    color: #888;
+    cursor: default;
+    background-color: #ddd;
+  }
+
+  .clearConsoleButton:hover {
+    color: #444;
+  }
+
+  .appNav .topMenu > li.scriptExamplesDropdown {
+    padding: 3px 0;
+  }
+
+  .scriptExamplesDropdown select {
+    text-align: right;
+    max-width: 50vw;
+  }
+
+}

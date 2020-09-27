@@ -32,6 +32,11 @@ module.exports = (env, argv) => {
           }
         },
         {
+          test: /\.js$/,
+          include: /legacy_lib/,
+          use: [ 'script-loader' ]
+        },
+        {
           // Transform our own .(less|css) files with PostCSS and CSS-modules
           test: /\.(less|css)$/,
           include: [

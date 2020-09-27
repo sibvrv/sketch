@@ -329,15 +329,19 @@ export default class EditorCanvas extends Component<EditorCanvasProps, EditorCan
   render() {
     return (
       <canvas
+        id="paperCanvas"
+        data-paper-resize="false"
+        data-paper-hidpi="off"
+
         width="100" height="100"
         tabIndex={0}
         style={{width: '100%', height: '100%'}}
-        onDblClick={this.handleDoubleClick}
+/*      onDblClick={this.handleDoubleClick}
         onWheel={this.handleMouseWheel}
         onMouseDown={this.handleMouseDown}
         onMouseMove={this.handleMouseMove}
         onContextMenu={this.handleContextMenu}
-        onKeyDown={this.handleKeyDown}
+        onKeyDown={this.handleKeyDown}*/
       >
         Your browser doesn't support the canvas element!
       </canvas>
