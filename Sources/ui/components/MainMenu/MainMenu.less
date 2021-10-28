@@ -1,10 +1,8 @@
 :global {
   .appNav {
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 30px;
+    top: 4px;
+    left: 4px;
     z-index: 100;
     user-select: none;
 
@@ -16,7 +14,6 @@
       position: relative;
       background-color: #444;
       width: 100%;
-      height: 30px;
     }
 
     & .burgerButton {
@@ -30,6 +27,14 @@
 
     & .topMenu li:hover .burgerButton line {
       stroke: #fff;
+    }
+
+    & .topMenu > li:first-child {
+      border-radius: 6px 0 0 6px;
+    }
+
+    & .topMenu > li:last-child {
+      border-radius: 0 6px 6px 0;
     }
 
     & .topMenu > li {
@@ -48,9 +53,13 @@
       color: #777;
     }
 
-
     & .topMenu > li:not(.empty).active,
     & .topMenu > li:not(.empty):hover {
+      color: #fff;
+    }
+
+    & .menu-item.level-1.open {
+      background: #2b323a;
       color: #fff;
     }
 
@@ -104,6 +113,8 @@
   }
 
   .sub-menu {
+    border-radius: 6px;
+
     & > li {
       position: relative;
       padding: 10px 20px;

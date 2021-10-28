@@ -4,7 +4,7 @@ import {isPointInPoly} from '@Framework/math/isPointInPoly';
 import {Collection} from '@Framework/Collection';
 import {pathToText} from '@editor/transformToText';
 import {ImagesManager} from '@editor/ImagesManager';
-import {TPath} from '@editor/Shapes/TPath';
+import {TLine, TPath} from '@editor/Shapes/TPath';
 import {TPoint} from '@editor/Shapes/TPoint';
 
 declare global {

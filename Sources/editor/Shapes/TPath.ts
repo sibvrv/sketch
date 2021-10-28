@@ -6,11 +6,9 @@ import {getArea} from '@Framework/path/getArea';
 import {Collection} from '@Framework/Collection';
 import {EllipseCurve} from '@editor/Shapes/EllipseCurve';
 
-declare global {
-  interface TLine {
-    A: TPoint;
-    B: TPoint;
-  }
+export interface TLine {
+  A: TPoint;
+  B: TPoint;
 }
 
 function asVec(p: TPoint, pp: TPoint, v: any) {
