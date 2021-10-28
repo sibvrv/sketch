@@ -1,4 +1,4 @@
-import {Collection} from '@core/Collection';
+import {Collection} from './/Collection';
 
 interface IteratorData {
   cur: number;

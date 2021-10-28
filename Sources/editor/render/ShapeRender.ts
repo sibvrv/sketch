@@ -1,6 +1,6 @@
 import {color_fill, color_stroke, poly} from '@editor/render/canvas';
 import {TPath} from '@editor/TPath';
-import {Vec2} from '@core/math/Vec2';
+import {Vec2} from '@Framework/math/Vec2';
 import {ImagesManager} from '@editor/ImagesManager';
 
 export function shapeRender(ctx: CanvasRenderingContext2D, shape: TPath, v: Vec2) {

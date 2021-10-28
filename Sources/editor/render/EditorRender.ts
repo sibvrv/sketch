@@ -4,7 +4,7 @@ import {DrawBackground} from 'editor/render/Background';
 import {shapeRender} from '@editor/render/ShapeRender';
 import {controlsRender} from '@editor/render/ControlsRender';
 import {color_fill, color_stroke, line} from '@editor/render/canvas';
-import {Vec2, vec2_normalize} from '@core/math/Vec2';
+import {Vec2, vec2_normalize} from '@Framework/math/Vec2';
 import {DrawGrid} from '@editor/render/Grid';
 import {TPath} from '@editor/TPath';
 

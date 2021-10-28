@@ -1,5 +1,5 @@
-import {collectionGetItemsRange} from '@core/CollectionUtils';
-import {Collection} from '@core/Collection';
+import {collectionGetItemsRange} from './/CollectionUtils';
+import {Collection} from './/Collection';
 
 function pad(text: string, size: number) {
   let s = '';

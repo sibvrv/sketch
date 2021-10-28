@@ -1,4 +1,4 @@
-import {Vec2} from '@core/math/Vec2';
+import {Vec2} from '@Framework/math/Vec2';
 
 export function isClockwise(path: Vec2[]) { // has some errors
   let sum = 0.0;

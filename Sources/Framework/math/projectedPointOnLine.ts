@@ -1,4 +1,4 @@
-import {Vec2} from 'core/math/Vec2';
+import {Vec2} from 'Framework/math/Vec2';
 
 export function projectedPointOnLineFast(v1: Vec2, v2: Vec2, p: Vec2) {
   // get dot product of e1, e2

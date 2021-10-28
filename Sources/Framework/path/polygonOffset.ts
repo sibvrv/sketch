@@ -1,6 +1,6 @@
-import {Vec2} from '@core/math/Vec2';
-import {isClockwise} from '@core/path/isClockwise';
-import {checkLineIntersection} from '@core/math/checkLineIntersection';
+import {Vec2} from '@Framework/math/Vec2';
+import {isClockwise} from '@Framework/path/isClockwise';
+import {checkLineIntersection} from '@Framework/math/checkLineIntersection';
 
 export function polygonOffset(points: Vec2[], dist: number) {
   if (isClockwise(points)) {

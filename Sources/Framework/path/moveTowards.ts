@@ -1,4 +1,4 @@
-import {Vec2} from '@core/math/Vec2';
+import {Vec2} from '@Framework/math/Vec2';
 
 /**
  * Move Towards Length

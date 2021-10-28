@@ -1,8 +1,8 @@
 import {Component, h} from 'preact';
-import {noop} from '@core/common/noop';
-import {Collection} from '@core/Collection';
+import {noop} from '@Framework/common/noop';
+import {Collection} from '@Framework/Collection';
 import './LayerItem.less';
-import {stringCapitalize} from '@core/string/stringCapitalize';
+import {stringCapitalize} from '@Framework/string/stringCapitalize';
 
 /**
  * LayerItem Props Interface

@@ -1,6 +1,6 @@
 import {TViewPort} from '@editor/TViewPort';
 import {expect} from 'chai';
-import {Vec2} from '@core/math/Vec2';
+import {Vec2} from '@Framework/math/Vec2';
 import '@root/polyfills';
 
 describe('TViewPort', function () {

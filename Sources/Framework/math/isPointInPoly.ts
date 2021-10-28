@@ -1,4 +1,4 @@
-import {Vec2} from '@core/math/Vec2';
+import {Vec2} from '@Framework/math/Vec2';
 
 export function isPointInPoly(x: number, y: number, vs: Vec2[]) { // ray-casting algorithm based on http://www.ecse.rpi.edu/Homepages/wrf/Research/Short_Notes/pnpoly.html
   let inside = false;

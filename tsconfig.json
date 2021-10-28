@@ -20,8 +20,8 @@
       "@root/*": [
         "*"
       ],
-      "@core/*": [
-        "core/*"
+      "@Framework/*": [
+        "Framework/*"
       ],
       "@editor/*": [
         "editor/*"

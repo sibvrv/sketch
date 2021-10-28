@@ -1,7 +1,7 @@
 import {Component, h} from 'preact';
 import {Store} from 'unistore';
-import {loopv} from '@core/common/loops';
-import {getDescendantProp} from '@core/common/getDescendantProp';
+import {loopv} from '@Framework/common/loops';
+import {getDescendantProp} from '@Framework/common/getDescendantProp';
 
 export interface IStoresObject {
   [storeName: string]: Store<any>;

@@ -1,12 +1,12 @@
 import {Component, h} from 'preact';
-import {noop} from '@core/common/noop';
+import {noop} from '@Framework/common/noop';
 import * as style from './ImportImage.less';
 import ModalWindow from '@ui/components/ModalWindow/ModalWindow';
 import ModalHeader from '@ui/components/ModalWindow/ModalHeader';
 import ModalFooter from '@ui/components/ModalWindow/ModalFooter';
 import ModalBody from '@ui/components/ModalWindow/ModalBody';
 import Button from '@root/ui/components/Button/Button';
-import {formatBytes} from '@core/string/formatBytes';
+import {formatBytes} from '@Framework/string/formatBytes';
 import {ImagesManager} from '@editor/ImagesManager';
 
 /**

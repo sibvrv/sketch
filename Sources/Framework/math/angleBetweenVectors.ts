@@ -1,5 +1,5 @@
-import {Vec2} from 'core/math/Vec2';
-import {angleDistanceDeg} from 'core/math/angleDistanceDeg';
+import {Vec2} from 'Framework/math/Vec2';
+import {angleDistanceDeg} from 'Framework/math/angleDistanceDeg';
 
 /**
  * Find the angle between two points

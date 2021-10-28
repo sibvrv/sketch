@@ -1,9 +1,9 @@
 import {TPoint} from './TPoint';
-import {Vec2} from '@core/math/Vec2';
-import {distToLineSegment} from '@core/math/distLine';
-import {isClockwise} from '@core/path/isClockwise';
-import {getArea} from '@core/path/getArea';
-import {Collection} from '@core/Collection';
+import {Vec2} from '@Framework/math/Vec2';
+import {distToLineSegment} from '@Framework/math/distLine';
+import {isClockwise} from '@Framework/path/isClockwise';
+import {getArea} from '@Framework/path/getArea';
+import {Collection} from '@Framework/Collection';
 
 declare global {
   interface TLine {

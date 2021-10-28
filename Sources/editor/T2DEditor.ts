@@ -2,8 +2,8 @@ import {TViewPort} from './TViewPort';
 import {TPoint} from './TPoint';
 import {TControllerList} from './TController';
 import {TPath} from './TPath';
-import {isPointInPoly} from '@core/math/isPointInPoly';
-import {Collection} from '@core/Collection';
+import {isPointInPoly} from '@Framework/math/isPointInPoly';
+import {Collection} from '@Framework/Collection';
 import {pathToText} from '@editor/transformToText';
 import {ImagesManager} from '@editor/ImagesManager';
 

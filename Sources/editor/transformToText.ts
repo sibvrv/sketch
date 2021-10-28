@@ -1,6 +1,6 @@
 import {TPoint} from '@editor/TPoint';
 import {TPath} from '@editor/TPath';
-import {compact} from '@core/common/compact';
+import {compact} from '@Framework/common/compact';
 
 function pointToText(point: TPoint) {
   const ret: any = {

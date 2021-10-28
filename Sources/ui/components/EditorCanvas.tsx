@@ -1,7 +1,7 @@
 import {Component, h} from 'preact';
 import defaultStorage from '@store/defaultStorage';
 import {redraw} from '@root/main';
-import {Vec2} from '@core/math/Vec2';
+import {Vec2} from '@Framework/math/Vec2';
 import {selected_info} from '@ui/actions/actionsSelect';
 import {T2DEditor} from '@editor/T2DEditor';
 import connectToStores from '@store/connectToStores';

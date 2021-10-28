@@ -1,5 +1,5 @@
 ﻿import {classMix} from './classMix';
-import {compact} from '@core/common/compact';
+import {compact} from '@Framework/common/compact';
 
 declare global {
   type TCSSSelectors = string | string[] | object;
