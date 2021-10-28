@@ -6,7 +6,7 @@ import {controlsRender} from '@editor/render/ControlsRender';
 import {color_fill, color_stroke, line} from '@editor/render/canvas';
 import {Vec2, vec2_normalize} from '@Framework/math/Vec2';
 import {DrawGrid} from '@editor/render/Grid';
-import {TPath} from '@editor/TPath';
+import {TPath} from '@editor/Shapes/TPath';
 
 interface EditorRenderOptions {
   drawGrid: boolean;

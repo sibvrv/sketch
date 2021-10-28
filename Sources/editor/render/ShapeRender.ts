@@ -1,5 +1,5 @@
 import {color_fill, color_stroke, poly} from '@editor/render/canvas';
-import {TPath} from '@editor/TPath';
+import {TPath} from '@editor/Shapes/TPath';
 import {Vec2} from '@Framework/math/Vec2';
 import {ImagesManager} from '@editor/ImagesManager';
 

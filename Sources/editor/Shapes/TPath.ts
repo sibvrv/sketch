@@ -4,6 +4,7 @@ import {distToLineSegment} from '@Framework/math/distLine';
 import {isClockwise} from '@Framework/path/isClockwise';
 import {getArea} from '@Framework/path/getArea';
 import {Collection} from '@Framework/Collection';
+import {EllipseCurve} from '@editor/Shapes/EllipseCurve';
 
 declare global {
   interface TLine {
@@ -25,37 +26,6 @@ function asVec(p: TPoint, pp: TPoint, v: any) {
     v.ny = 0;
     v.ang = 0;
   }
-}
-
-const EPSILON = 0.00001;
-
-function EllipseCurve(aX: number, aY: number, xRadius: number, yRadius: number, aStartAngle: number, aEndAngle: number, aClockwise: boolean, t: number) {
-
-  const twoPi = Math.PI * 2;
-  let deltaAngle = aEndAngle - aStartAngle;
-  const samePoints = Math.abs(deltaAngle) < EPSILON;
-
-  // ensures that deltaAngle is 0 .. 2 PI
-  while (deltaAngle < 0) {
-    deltaAngle += twoPi;
-  }
-  while (deltaAngle > twoPi) {
-    deltaAngle -= twoPi;
-  }
-
-  if (deltaAngle < EPSILON) {
-    deltaAngle = samePoints ? 0 : twoPi;
-  }
-
-  if (aClockwise && !samePoints) {
-    deltaAngle = deltaAngle === twoPi ? -twoPi : deltaAngle - twoPi;
-  }
-
-  const angle = aStartAngle + t * deltaAngle;
-  const x = aX + xRadius * Math.cos(angle);
-  const y = aY + yRadius * Math.sin(angle);
-
-  return new TPoint(x, y);
 }
 
 export class TPath extends Collection {

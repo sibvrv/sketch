@@ -1,5 +1,6 @@
-import {TPoint} from '@editor/TPoint';
-import {TPath} from '@editor/TPath';
+import {TPoint} from '@editor/Shapes/TPoint';
+import {TPath} from '@editor/Shapes/TPath';
+
 import {compact} from '@Framework/common/compact';
 
 function pointToText(point: TPoint) {

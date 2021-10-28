@@ -1,4 +1,4 @@
-import {TPoint} from 'editor/TPoint';
+import {TPoint} from 'editor/Shapes/TPoint';
 import {Vec2} from '@Framework/math/Vec2';
 
 export function disk(ctx: CanvasRenderingContext2D, x: number, y: number, radius: number) {

@@ -1,5 +1,5 @@
 import {color_fill, color_stroke, line} from '@editor/render/canvas';
-import {TPath} from '@editor/TPath';
+import {TPath} from '@editor/Shapes/TPath';
 
 export function controlsRender(ctx: CanvasRenderingContext2D, shape: TPath, scale: number) {
   const path = shape.path;

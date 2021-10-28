@@ -1,6 +1,6 @@
 import {Component, h, PreactDOMAttributes} from 'preact';
 import {redraw} from '@root/main';
-import {TPath} from '@editor/TPath';
+import {TPath} from '@editor/Shapes/TPath';
 import defaultStorage from '@store/defaultStorage';
 import VirtualList from '@ui/components/VirtualList/VirtualList';
 import LayerItem from '@ui/components/LayerList/LayerItem';
