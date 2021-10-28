@@ -14,96 +14,97 @@ export const mainMenuStore = (): IMainMenuStore => ({
       title: <span class="fa fa-bars burgerButton"/>,
       items: [
         {
-          title: 'New'
+          title: 'New',
         },
         {
-          title: 'Clear Layer'
+          title: 'Clear Layer',
         },
         {
-          title: 'Open'
+          title: 'Open',
         },
         {
-          title: 'Save'
+          title: 'Save',
         },
         {
-          title: '', class: 'space'
+          title: '', class: 'space',
         },
         {
-          title: 'Undo', class: 'halfWidth'
+          title: 'Undo', class: 'halfWidth',
         },
         {
-          title: 'Redo', class: 'halfWidth'
+          title: 'Redo', class: 'halfWidth',
         },
         {
-          title: '', class: 'space'
+          title: '', class: 'space',
         },
         {
           title: 'Import',
           items: [
             {
-              title: <span>Image<input id="fileUploadImage" class="fileUploadInput" type="file" accept=".gif, .jpg, .jpeg, .png"/></span>
+              title: <span>Image<input id="fileUploadImage" class="fileUploadInput" type="file"
+                                       accept=".gif, .jpg, .jpeg, .png"/></span>,
             },
             {
-              title: <span>SVG<input id="fileUploadSVG" class="fileUploadInput" type="file" accept=".svg"/></span>
+              title: <span>SVG<input id="fileUploadSVG" class="fileUploadInput" type="file" accept=".svg"/></span>,
             },
             {
-              title: 'SVG from URL'
-            }
-          ]
+              title: 'SVG from URL',
+            },
+          ],
         },
         {
           title: 'Export',
           items: [
             {
-              title: 'Image'
+              title: 'Image',
             },
             {
-              title: 'SVG'
-            }
-          ]
+              title: 'SVG',
+            },
+          ],
         },
         {
-          title: '', class: 'space'
+          title: '', class: 'space',
         },
         {
-          title: 'Layers'
+          title: 'Layers',
         },
         {
-          title: 'Script Editor'
+          title: 'Script Editor',
         },
         {
-          title: '', class: 'space'
+          title: '', class: 'space',
         },
         {
           title: 'View',
           items: [
             {
-              title: 'Zoom in'
+              title: 'Zoom in',
             },
             {
-              title: 'Zoom out'
+              title: 'Zoom out',
             },
             {
-              title: 'Reset zoom'
+              title: 'Reset zoom',
             },
             {
-              title: 'Reset pan'
-            }
-          ]
+              title: 'Reset pan',
+            },
+          ],
         },
         {
-          title: '', class: 'space'
+          title: '', class: 'space',
         },
         {
-          title: 'Reset settings'
+          title: 'Reset settings',
         },
         {
-          title: '', class: 'space'
+          title: '', class: 'space',
         },
         {
-          title: 'About'
-        }
-      ]
+          title: 'About',
+        },
+      ],
     },
     {
       title: 'Tool',
@@ -112,124 +113,133 @@ export const mainMenuStore = (): IMainMenuStore => ({
           title: 'Edit',
           items: [
             {
-              title: 'Copy'
+              title: 'Copy',
             },
             {
-              title: 'Paste'
+              title: 'Paste',
             },
             {
-              title: 'Delete'
-            }
-          ]
+              title: 'Delete',
+            },
+          ],
         },
         {
-          title: '', class: 'space'
+          title: '', class: 'space',
         },
         {
           title: 'Select',
           items: [
             {
-              title: 'Select all'
+              title: 'Select all',
             },
             {
-              title: 'Deselect all'
+              title: 'Deselect all',
             },
             {
-              title: 'Invert selection'
+              title: 'Invert selection',
             },
             {
-              title: 'Random items'
-            }
-          ]
+              title: 'Random items',
+            },
+          ],
         },
         {
-          title: '', class: 'space'
+          title: '', class: 'space',
         },
         {
           title: 'Group',
           items: [
             {
-              title: 'Group'
+              title: 'Group',
             },
             {
-              title: 'Ungroup'
-            }
-          ]
+              title: 'Ungroup',
+            },
+          ],
         },
         {
-          title: '', class: 'space'
+          title: '', class: 'space',
         },
         {
           title: 'Layer',
           items: [
             {
-              title: 'Move to active Layer'
-            }
-          ]
+              title: 'Move to active Layer',
+            },
+          ],
         },
         {
-          title: '', class: 'space'
+          title: '', class: 'space',
         },
         {
           title: 'Order',
           items: [
             {
-              title: 'Bring to front'
+              title: 'Bring to front',
             },
             {
-              title: 'Send to back'
-            }
-          ]
+              title: 'Send to back',
+            },
+          ],
         },
         {
-          title: '', class: 'space'
+          title: '', class: 'space',
         },
         {
           title: 'Compound path',
           items: [
             {
-              title: 'Create compound path'
+              title: 'Create compound path',
             },
             {
-              title: 'Release compound path'
-            }
-          ]
+              title: 'Release compound path',
+            },
+          ],
         },
         {
-          title: '', class: 'space'
+          title: '', class: 'space',
         },
         {
           title: 'Boolean operations',
           items: [
             {
-              title: 'Unite'
+              title: 'Unite',
             },
             {
-              title: 'Intersect'
+              title: 'Intersect',
             },
             {
-              title: 'Subtract'
+              title: 'Subtract',
             },
             {
-              title: 'Exclude'
+              title: 'Exclude',
             },
             {
-              title: 'Divide'
-            }
-          ]
+              title: 'Divide',
+            },
+          ],
         },
         {
-          title: '', class: 'space'
+          title: '', class: 'space',
         },
         {
           title: 'Text',
           items: [
             {
-              title: 'Text to outlines'
-            }
-          ]
-        }
-      ]
-    }
-  ]
+              title: 'Text to outlines',
+            },
+          ],
+        },
+      ],
+    },
+    {
+      title: 'View',
+      items: [
+        {
+          id: 'view.grid.toggle',
+          title: 'Toggle Grid',
+        },
+      ],
+    },
+  ],
 });

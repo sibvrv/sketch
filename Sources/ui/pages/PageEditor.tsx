@@ -16,7 +16,6 @@ import GLOB from '@root/types';
 import defaultStorage from '@store/defaultStorage';
 import {redraw} from '@root/main';
 import ErrorModal from '@ui/modals/ErrorModal/ErrorModal';
-import ToolBarSettings from '@ui/components/ToolBar/ToolBarSettings';
 import MainMenu from '@ui/components/MainMenu/MainMenu';
 import {IMainMenuStore} from '@store/MainMenuStore';
 
@@ -61,6 +60,16 @@ export default class PageEditor extends Component<PageEditorProps, PageEditorSta
     redraw();
   };
 
+  onMenuClick = (id: string) => {
+    if (id === 'view.grid.toggle') {
+      const {drawGrid} = defaultStorage.getState();
+      defaultStorage.setState({
+        drawGrid: !drawGrid,
+      });
+      redraw();
+    }
+  };
+
   /**
    * Render PageEditor Component
    */
@@ -69,20 +78,19 @@ export default class PageEditor extends Component<PageEditorProps, PageEditorSta
       dialog,
       error,
       shapeOptionsVisible,
-      mainMenu
+      mainMenu,
     } = this.props;
 
     return (
       <div class={style.pageLayout}>
         <div class={[style.pageContext, dialog || error ? style.pageBlur : '']}>
           <VectorEditor>
-            <MainMenu items={mainMenu?.items}/>
+            <MainMenu items={mainMenu?.items} onItemClick={this.onMenuClick}/>
 
             <div class={style.editorArea}>
               <EditorCanvas/>
 
               <ToolBar/>
-              <ToolBarSettings/>
 
               {shapeOptionsVisible && <ShapeOptions/>}
 

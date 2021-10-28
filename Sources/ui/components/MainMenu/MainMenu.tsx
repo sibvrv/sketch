@@ -1,5 +1,6 @@
 import {Component, h, PreactDOMAttributes} from 'preact';
 import './MainMenu.less';
+import {noop} from '@Framework/common/noop';
 
 export interface IMenuItem {
   id?: string;
@@ -14,6 +15,7 @@ export interface IMenuItem {
  */
 interface IMainMenuProps extends PreactDOMAttributes {
   items: IMenuItem[];
+  onItemClick: (id: string) => void;
 }
 
 /**
@@ -35,7 +37,9 @@ export default class MainMenu extends Component<IMainMenuProps, IMainMenuState> 
   /**
    * Default Props for MainMenu Component
    */
-  public static defaultProps: Partial<IMainMenuProps> = {};
+  public static defaultProps: Partial<IMainMenuProps> = {
+    onItemClick: noop,
+  };
 
   /**
    * MainMenu Component Constructor
@@ -45,7 +49,7 @@ export default class MainMenu extends Component<IMainMenuProps, IMainMenuState> 
     super(props);
     this.state = {
       menu: [],
-      active: {}
+      active: {},
     };
 
     this.updateMenu(props.items);
@@ -56,9 +60,9 @@ export default class MainMenu extends Component<IMainMenuProps, IMainMenuState> 
       return;
     }
     this.setState({
-      active: {}
+      active: {},
     });
-  }
+  };
 
   componentWillMount() {
     window.addEventListener('click', this.outsideClick, false);
@@ -84,7 +88,7 @@ export default class MainMenu extends Component<IMainMenuProps, IMainMenuState> 
     menu.forEach(item => walk(item));
 
     this.setState({
-      menu
+      menu,
     });
   }
 
@@ -105,8 +109,10 @@ export default class MainMenu extends Component<IMainMenuProps, IMainMenuState> 
       it = it.parent!;
     }
 
+    this.props.onItemClick(item.id!);
+
     this.setState({
-      active
+      active,
     });
   };
 
@@ -123,7 +129,8 @@ export default class MainMenu extends Component<IMainMenuProps, IMainMenuState> 
         e.stopPropagation();
         this.handleMenuClick(level, item);
       }}>
-        {item.title}{isOpen && items.length ? <ul class={[`sub-menu level-${level}`, isOpen && `open`]}>{items}</ul> : null}
+        {item.title}{isOpen && items.length ?
+        <ul class={[`sub-menu level-${level}`, isOpen && `open`]}>{items}</ul> : null}
       </li>
     );
   }
