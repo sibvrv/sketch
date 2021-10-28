@@ -10,7 +10,7 @@ module.exports = (env, argv) => {
 
   return {
     entry: [
-      './src/app'
+      './Sources/app'
     ],
     output: {
       path: path.resolve(__dirname, './dist'),
@@ -35,7 +35,7 @@ module.exports = (env, argv) => {
           // Transform our own .(less|css) files with PostCSS and CSS-modules
           test: /\.(less|css)$/,
           include: [
-            path.resolve(__dirname, './src/ui')
+            path.resolve(__dirname, './Sources/ui')
           ],
           use: ExtractTextPlugin.extract({
             fallback: 'style-loader',
@@ -67,7 +67,7 @@ module.exports = (env, argv) => {
         {
           test: /\.(less|css)$/,
           exclude: [
-            path.resolve(__dirname, './src/ui')
+            path.resolve(__dirname, './Sources/ui')
           ],
           use: ExtractTextPlugin.extract({
             fallback: 'style-loader',
@@ -106,8 +106,8 @@ module.exports = (env, argv) => {
     plugins: [
       new CleanWebpackPlugin('dist', {}),
       new webpack.DefinePlugin({
-        '__DEV__': JSON.stringify(argv.mode !== 'production'),
-        '__PROD__': JSON.stringify(argv.mode === 'production')
+        __DEV__: JSON.stringify(argv.mode !== 'production'),
+        __PROD__: JSON.stringify(argv.mode === 'production')
       }),
       new ExtractTextPlugin({
         filename: 'style.css',
@@ -115,7 +115,7 @@ module.exports = (env, argv) => {
         disable: argv.mode !== 'production'
       }),
       new HtmlWebpackPlugin({
-        template: path.resolve(__dirname, './src/index.html')
+        template: path.resolve(__dirname, './Sources/index.html')
       })
     ]
   };

@@ -11,8 +11,8 @@
     "strictNullChecks": true,
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
-    "baseUrl": "src",
-    "rootDir": "./src/",
+    "baseUrl": "Sources",
+    "rootDir": "./Sources/",
     "typeRoots": [
       "./node_modules/@types"
     ],

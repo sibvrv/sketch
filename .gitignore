@@ -1,5 +1,5 @@
 .idea
-dist
-node_modules
+/dist
+/node_modules
 .unused
 package-lock.json
