@@ -8,7 +8,7 @@ export function shapeRender(ctx: CanvasRenderingContext2D, shape: TPath, v: Vec2
     return;
   }
 
-  const path = shape.convertPath(shape.path);
+  const path = shape.getAsPoints(shape.path);
   const fillColour = (shape.props('fill') as string) || 'rgba(160,160,190,0.8)';
 
   const fill = shape.mask ? 'rgba(190,160,160,0.4)' : fillColour;

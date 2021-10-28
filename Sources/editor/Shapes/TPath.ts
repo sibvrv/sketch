@@ -251,8 +251,8 @@ export class TPath extends Collection {
   }
   */
 
-  convertPath(in_path = this.path) {
-    const path: TPoint[] = [];
+  getAsPoints(in_path = this.path) {
+    const result: TPoint[] = [];
 
     const v1: any = {};
     const v2: any = {};
@@ -276,7 +276,7 @@ export class TPath extends Collection {
         asVec(p1, p2, v2);
 
         if (v1.nx + v2.nx === 0 && v1.ny + v2.ny === 0) {
-          path.push(point);
+          result.push(point);
           continue;
         }
 
@@ -325,13 +325,13 @@ export class TPath extends Collection {
             drawDirection,
             i / steps
           );
-          path.push(cp);
+          result.push(cp);
         }
 
       } else {
-        path.push(point);
+        result.push(point);
       }
     }
-    return path;
+    return result;
   }
 }
