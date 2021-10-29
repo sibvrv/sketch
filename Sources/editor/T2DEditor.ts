@@ -263,14 +263,6 @@ export class T2DEditor {
   }
 
   /**
-   * Export to Text
-   * @returns {string}
-   */
-  doExport() {
-    return JSON.stringify(this.doSave(), null, '\t');
-  }
-
-  /**
    * Convert To Object
    * @returns {any[]}
    */

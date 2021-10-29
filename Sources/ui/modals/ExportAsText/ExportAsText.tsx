@@ -4,6 +4,7 @@ import * as styles from './ExportAsText.less';
 import ModalWindow from '@ui/components/ModalWindow/ModalWindow';
 import ModalHeader from '@ui/components/ModalWindow/ModalHeader';
 import ModalBody from '@ui/components/ModalWindow/ModalBody';
+import {exportAsJSON} from '@editor/Export/ExportAsJSON';
 
 /**
  * ExportAsText Props Interface
@@ -42,7 +43,7 @@ export default class ExportAsText extends Component<ExportAsTextProps, ExportAsT
 
   componentDidMount() {
     this.setState({
-      data: GLOB.editor.doExport()
+      data: exportAsJSON(GLOB.editor)
     });
   }
 
