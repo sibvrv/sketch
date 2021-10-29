@@ -76,23 +76,6 @@ export const mainMenuStore = (): IMainMenuStore => ({
           title: '', class: 'space',
         },
         {
-          title: 'View',
-          items: [
-            {
-              title: 'Zoom in',
-            },
-            {
-              title: 'Zoom out',
-            },
-            {
-              title: 'Reset zoom',
-            },
-            {
-              title: 'Reset pan',
-            },
-          ],
-        },
-        {
           title: '', class: 'space',
         },
         {
@@ -235,6 +218,21 @@ export const mainMenuStore = (): IMainMenuStore => ({
     {
       title: 'View',
       items: [
+        {
+          title: 'Zoom in',
+        },
+        {
+          title: 'Zoom out',
+        },
+        {
+          title: 'Reset zoom',
+        },
+        {
+          title: 'Reset pan',
+        },
+        {
+          title: '', class: 'space',
+        },
         {
           id: 'view.grid.toggle',
           title: 'Toggle Grid',

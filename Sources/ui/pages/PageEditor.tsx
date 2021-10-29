@@ -54,13 +54,13 @@ export default class PageEditor extends Component<PageEditorProps, PageEditorSta
   /**
    * PageEditor : ImportImage Handler
    */
-  handleImportImage = (name: string, url: string) => {
+  private handleImportImage = (name: string, url: string) => {
     GLOB.editor.layer.Image(name, url);
     defaultStorage.setState({dialog: ''});
     redraw();
   };
 
-  onMenuClick = (id: string) => {
+  private onMenuClick = (id: string) => {
     if (id === 'view.grid.toggle') {
       const {drawGrid} = defaultStorage.getState();
       defaultStorage.setState({
@@ -73,7 +73,7 @@ export default class PageEditor extends Component<PageEditorProps, PageEditorSta
   /**
    * Render PageEditor Component
    */
-  render() {
+  public render() {
     const {
       dialog,
       error,
