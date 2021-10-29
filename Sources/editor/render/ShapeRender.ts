@@ -10,6 +10,7 @@ export function shapeRender(ctx: CanvasRenderingContext2D, shape: TPath, v: Vec2
 
   const path = shape.getAsPoints(shape.path);
   const fillColour = (shape.props('fill') as string) || 'rgba(160,160,190,0.8)';
+  const strokeColour = (shape.props('stroke') as string) || '#777';
 
   const fill = shape.mask ? 'rgba(190,160,160,0.4)' : fillColour;
 
@@ -40,8 +41,7 @@ export function shapeRender(ctx: CanvasRenderingContext2D, shape: TPath, v: Vec2
     ctx.fill('evenodd');
   }
 
-  color_fill(ctx, '#F00');
-  color_stroke(ctx, '#777');
+  color_stroke(ctx, strokeColour);
 
   poly(ctx, path, v);
   ctx.stroke();
