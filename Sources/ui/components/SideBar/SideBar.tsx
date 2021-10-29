@@ -168,6 +168,8 @@ export default class SideBar extends Component<SideBarProps, SideBarState> {
       item.detach();
     }
 
+    editor.selected.reset();
+    selected_info();
     redraw();
     this.setState({});
   };

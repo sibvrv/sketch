@@ -112,7 +112,7 @@ export default class EditorCanvas extends Component<EditorCanvasProps, EditorCan
 
     switch (event.keyCode) {
       case 46:
-        editor.delete_selected();
+        editor.deleteSelected();
         redraw();
         selected_info();
         break;

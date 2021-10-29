@@ -224,7 +224,7 @@ export class T2DEditor {
   /**
    * Delete Selected
    */
-  delete_selected() {
+  public deleteSelected() {
     const sel = this.selected;
     if (sel.line) {
       sel.sector.deletePoint(sel.line.A as TPoint);
@@ -251,7 +251,7 @@ export class T2DEditor {
    * @param {number} tr
    * @returns {any}
    */
-  splitAt(in_x: number, in_y: number, tr?: number) {
+  public splitAt(in_x: number, in_y: number, tr?: number) {
     const x = in_x / this.view.zoom - this.view.position.x;
     const y = in_y / this.view.zoom - this.view.position.y;
 
