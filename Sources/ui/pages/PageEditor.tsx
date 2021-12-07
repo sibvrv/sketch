@@ -61,12 +61,20 @@ export default class PageEditor extends Component<PageEditorProps, PageEditorSta
   };
 
   private onMenuClick = (id: string) => {
-    if (id === 'view.grid.toggle') {
-      const {drawGrid} = defaultStorage.getState();
-      defaultStorage.setState({
-        drawGrid: !drawGrid,
-      });
-      redraw();
+    switch (id) {
+      case 'view.grid.toggle':
+        const {drawGrid} = defaultStorage.getState();
+        defaultStorage.setState({
+          drawGrid: !drawGrid,
+        });
+        redraw();
+
+        break;
+      case 'export.json':
+        defaultStorage.setState({
+          dialog: 'export-as-text'
+        });
+        break;
     }
   };
 

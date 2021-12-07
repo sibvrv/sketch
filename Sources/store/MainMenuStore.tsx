@@ -56,6 +56,10 @@ export const mainMenuStore = (): IMainMenuStore => ({
           title: 'Export',
           items: [
             {
+              id: 'export.json',
+              title: 'JSON',
+            },
+            {
               title: 'Image',
             },
             {
