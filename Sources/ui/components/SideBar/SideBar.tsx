@@ -69,15 +69,6 @@ export default class SideBar extends Component<SideBarProps, SideBarState> {
   };
 
   /**
-   * SideBar : ExportAsText Handler
-   */
-  handleExportAsText = () => {
-    defaultStorage.setState({
-      dialog: 'export-as-text'
-    });
-  };
-
-  /**
    * SideBar : ImportImage Handler
    */
   handleImportImage = () => {
@@ -232,9 +223,6 @@ export default class SideBar extends Component<SideBarProps, SideBarState> {
             <label for="sectionFile"><span>File</span></label>
             <div class="content">
               <ul>
-                <li onClick={this.handleExportAsText}>
-                  <i class="fa fa-file-export"/><span>Export</span>
-                </li>
                 <li onClick={this.handleSave}>
                   <i class="fa fa-save"/><span>Save</span>
                 </li>
